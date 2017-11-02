@@ -1,30 +1,33 @@
-@prefix : <http://lod-data.nationaalarchief.nl/terms/> .
+@prefix : <http://www.europeana.eu/schemas/edm/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix hg: <http://rdf.histograph.io/> .
+@prefix abc: <http://metadata.net/harmony/abc#> .
 @prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
 @prefix edm: <http://www.europeana.eu/schemas/edm/> .
 @prefix ore: <http://www.openarchives.org/ore/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix lode: <http://linkedevents.org/ontology/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix frbroo: <http://iflastandards.info/ns/fr/frbr/frbroo/> .
+@prefix radion: <http://www.w3.org/ns/radion#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@base <http://lod-data.nationaalarchief.nl/terms/> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix frbr_core: <http://purl.org/vocab/frbr/core#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix DOLCE-Lite: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
+@base <http://www.europeana.eu/schemas/edm/> .
 
-<http://lod-data.nationaalarchief.nl/terms/> rdf:type owl:Ontology ;
-                                              owl:imports <http://www.opengis.net/ont/geosparql> ,
-                                                          sem: ,
-                                                          <http://www.w3.org/2006/time> ,
-                                                          <http://www.w3.org/ns/prov> ;
-                                              owl:versionInfo "5.2.4" ;
-                                              dcterms:issued "2010-03-25"^^xsd:date ;
-                                              <http://purl.org/vocab/vann/preferredNamespaceUri> "http://www.europeana.eu/schemas/edm/" ;
-                                              <http://purl.org/vocab/vann/changes> """
+<http://www.europeana.eu/schemas/edm/> rdf:type owl:Ontology ;
+                                        owl:versionInfo "5.2.4" ;
+                                        dcterms:issued "2010-03-25"^^xsd:date ;
+                                        vann:preferredNamespaceUri "http://www.europeana.eu/schemas/edm/" ;
+                                        vann:changes """
 =======
 Changes between ontology file EDM version 5.2.4 (edm, was once EDM-v524-120820)
 and ontology file EDM version 5.2.3 (EDM-v523-120123)
@@ -41,10 +44,10 @@ and ontology file EDM version 5.2.3 (EDM-v523-120123)
 10. updated CRM namespace and CRM class and property identifiers
 11. added FRBRoo mappings
       """@en ;
-                                              dc:modified "2013-05-20"^^xsd:date ;
-                                              <http://www.w3.org/ns/adms#relatedWebPage> <http://europeanalabs.eu/wiki/EDMPrototypingTask11> ;
-                                              <http://www.w3.org/ns/radion#versionNotes> "The present specification is based on the document \"Definition of the Europeana Data Model elements\", originally edited by Carlo Meghini. It is aligned with the version 5.2.4 of these EDM Definitions."@en ;
-                                              <http://purl.org/vocommons/voaf#toDoList> """
+                                        dc:modified "2013-05-20"^^xsd:date ;
+                                        adms:relatedWebPage <http://europeanalabs.eu/wiki/EDMPrototypingTask11> ;
+                                        radion:versionNotes "The present specification is based on the document \"Definition of the Europeana Data Model elements\", originally edited by Carlo Meghini. It is aligned with the version 5.2.4 of these EDM Definitions."@en ;
+                                        voaf:toDoList """
 =======
 Remaining TODOs for ontology file EDM version 5.2.4
 =======
@@ -53,16 +56,20 @@ Remaining TODOs for ontology file EDM version 5.2.4
 - continue adding documentation values (skos:scopeNote, skos:example, etc, according to 1.), starting from edm:InformationResource. Add all Europeana examples and rationale notes for non-EDM constructs
 - use specific EDM-doc properties for \"rationale\" and \"obligation and occurrence\". Use skos:definition for \"Europeana definition\", skos:example for \"Example\", skos:note for \"Europeana note\"
       """@en ;
-                                              <http://purl.org/vocab/vann/example> <http://data.europeana.eu> ;
-                                              dc:description "The Europeana Data Model (EDM) is aimed at being an integration medium for collecting, connecting and enriching the descriptions provided by Europeana data providers. The RDF vocabulary for http://www.europeana.eu/schemas/edm/ defines the elements introduced by EDM (as opposed to the ones EDM re-uses from other namespaces)."@en ;
-                                              <http://purl.org/vocab/vann/example> <http://pro.europeana.eu/case-studies-edm> ;
-                                              foaf:homepage <http://pro.europeana.eu/edm-documentation> ;
-                                              <http://purl.org/vocab/vann/preferredNamespacePrefix> "edm" ;
-                                              dc:title "Europeana Data Model (EDM) vocabulary"@en .
+                                        vann:example <http://data.europeana.eu> ;
+                                        dc:description "The Europeana Data Model (EDM) is aimed at being an integration medium for collecting, connecting and enriching the descriptions provided by Europeana data providers. The RDF vocabulary for http://www.europeana.eu/schemas/edm/ defines the elements introduced by EDM (as opposed to the ones EDM re-uses from other namespaces)."@en ;
+                                        vann:example <http://pro.europeana.eu/case-studies-edm> ;
+                                        foaf:homepage <http://pro.europeana.eu/edm-documentation> ;
+                                        vann:preferredNamespacePrefix "edm" ;
+                                        dc:title "Europeana Data Model (EDM) vocabulary"@en .
 
 #################################################################
 #    Annotation properties
 #################################################################
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
 
 ###  http://purl.org/dc/terms/provenance
 dcterms:provenance rdf:type owl:AnnotationProperty .
@@ -72,14 +79,14 @@ dcterms:provenance rdf:type owl:AnnotationProperty .
 dcterms:temporal rdf:type owl:AnnotationProperty .
 
 
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#P12_occurred_in_the_presence_of
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#P12_occurred_in_the_presence_of> rdf:type owl:AnnotationProperty .
+###  http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of
+<http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> rdf:type owl:AnnotationProperty .
 
 
 ###  http://www.europeana.eu/schemas/edm/country
 edm:country rdfs:label "Country"@en ;
             rdf:type owl:AnnotationProperty ;
-            rdfs:subPropertyOf <http://www.cidoc-crm.org/rdfs/cidoc-crm#P12_occurred_in_the_presence_of> .
+            rdfs:subPropertyOf <http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of> .
 
 
 ###  http://www.europeana.eu/schemas/edm/dataProvider
@@ -102,24 +109,20 @@ born digital object."""@en ;
          rdfs:subPropertyOf dcterms:temporal .
 
 
-###  http://www.w3.org/2004/02/skos/core#broadMatch
-skos:broadMatch rdf:type owl:AnnotationProperty .
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
 
 
-###  http://www.w3.org/2004/02/skos/core#closeMatch
-skos:closeMatch rdf:type owl:AnnotationProperty .
+###  http://www.w3.org/2004/02/skos/core#example
+skos:example rdf:type owl:AnnotationProperty .
 
 
-###  http://www.w3.org/2004/02/skos/core#exactMatch
-skos:exactMatch rdf:type owl:AnnotationProperty .
+###  http://www.w3.org/2004/02/skos/core#note
+skos:note rdf:type owl:AnnotationProperty .
 
 
-###  http://www.w3.org/2004/02/skos/core#narrowMatch
-skos:narrowMatch rdf:type owl:AnnotationProperty .
-
-
-###  http://www.w3.org/2004/02/skos/core#relatedMatch
-skos:relatedMatch rdf:type owl:AnnotationProperty .
+###  http://www.w3.org/2004/02/skos/core#scopeNote
+skos:scopeNote rdf:type owl:AnnotationProperty .
 
 
 ###  http://xmlns.com/foaf/0.1/name
@@ -217,213 +220,22 @@ dcterms:tableOfContents rdf:type owl:ObjectProperty ;
                         rdfs:subPropertyOf edm:hasView .
 
 
-###  http://rdf.histograph.io/absorbed
-hg:absorbed rdf:type owl:ObjectProperty ;
-            rdfs:domain hg:PlaceInTime ;
-            rdfs:range hg:PlaceInTime .
+###  http://www.cidoc-crm.org/cidoc-crm/P129_is_about
+<http://www.cidoc-crm.org/cidoc-crm/P129_is_about> rdf:type owl:ObjectProperty .
 
 
-###  http://rdf.histograph.io/absorbedBy
-hg:absorbedBy rdf:type owl:ObjectProperty ;
-              rdfs:domain hg:PlaceInTime ;
-              rdfs:range hg:PlaceInTime .
+###  http://www.cidoc-crm.org/cidoc-crm/P138_represents
+<http://www.cidoc-crm.org/cidoc-crm/P138_represents> rdf:type owl:ObjectProperty .
 
 
-###  http://rdf.histograph.io/contains
-hg:contains rdf:type owl:ObjectProperty ;
-            rdfs:domain hg:PlaceInTime ;
-            rdfs:range hg:PlaceInTime .
-
-
-###  http://rdf.histograph.io/containsHgConcept
-hg:containsHgConcept rdf:type owl:ObjectProperty ;
-                     rdfs:domain hg:PlaceInTime ;
-                     rdfs:range hg:PlaceInTime .
-
-
-###  http://rdf.histograph.io/intersectsHgConcept
-hg:intersectsHgConcept rdf:type owl:ObjectProperty ;
-                       rdfs:domain hg:PlaceInTime ;
-                       rdfs:range hg:PlaceInTime .
-
-
-###  http://rdf.histograph.io/liesIn
-hg:liesIn rdf:type owl:ObjectProperty ;
-          rdfs:domain hg:PlaceInTime ;
-          rdfs:range hg:PlaceInTime .
-
-
-###  http://rdf.histograph.io/originated
-hg:originated rdf:type owl:ObjectProperty ;
-              rdfs:domain hg:PlaceInTime ;
-              rdfs:range hg:PlaceInTime .
-
-
-###  http://rdf.histograph.io/originatedFrom
-hg:originatedFrom rdf:type owl:ObjectProperty ;
-                  rdfs:domain hg:PlaceInTime ;
-                  rdfs:range hg:PlaceInTime .
-
-
-###  http://rdf.histograph.io/sameHgConcept
-hg:sameHgConcept rdf:type owl:ObjectProperty ;
-                 rdfs:domain hg:PlaceInTime ;
-                 rdfs:range hg:PlaceInTime .
-
-
-###  http://rdf.histograph.io/withinHgConcept
-hg:withinHgConcept rdf:type owl:ObjectProperty ;
-                   rdfs:domain hg:PlaceInTime ;
-                   rdfs:range hg:PlaceInTime .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/accordingTo
-sem:accordingTo rdf:type owl:ObjectProperty ;
-                rdfs:domain sem:View ;
-                rdfs:range sem:Authority ;
-                rdfs:comment "According to is used to state which Authority sais that a property constrained by the View Constraint is true." ;
-                rdfs:label "according to" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/actorType
-sem:actorType rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf sem:type ;
-              rdfs:domain sem:Actor ;
-              rdfs:range sem:ActorType ;
-              rdfs:comment "Has actor type is used to assign a type to an actor." ;
-              rdfs:label "has actor type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/eventProperty
-sem:eventProperty rdf:type owl:ObjectProperty ;
-                  rdfs:comment "Event properties connect Events to other SEM Core entities." ;
-                  rdfs:label "event property" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/eventType
-sem:eventType rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf sem:type ;
-              rdfs:domain sem:Event ;
-              rdfs:range sem:EventType ;
-              rdfs:comment "Has event type is used to assign a type to an event." ;
-              rdfs:label "has event type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasActor
-sem:hasActor rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf sem:eventProperty ;
-             rdfs:range sem:Actor ;
-             rdfs:comment "Has actor is used to state which Actors or Objects participate in an Event." ;
-             rdfs:label "has Actor" ;
-             skos:exactMatch lode:involved ;
-             skos:narrowMatch <http://www.kulttuurisampo.fi/ebkr/agent> .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasPlace
-sem:hasPlace rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf sem:eventProperty ;
-             rdfs:range sem:Place ;
-             rdfs:comment "Has place is used to state in which Place(s) an Event happened. Coordinates can be attached to the Place with the W3C Geospatial Vocabulary (http://www.w3.org/2005/Incubator/geo/XGR-geo-20071023/)." ;
-             rdfs:label "has Place" ;
-             skos:exactMatch <http://www.kulttuurisampo.fi/ebkr/place> ;
-             skos:narrowMatch lode:inSpace .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasSubEvent
-sem:hasSubEvent rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf sem:eventProperty ;
-                owl:inverseOf sem:subEventOf ;
-                rdfs:domain sem:Event ;
-                rdfs:range sem:Event ;
-                rdfs:comment "Has subevent connects an Event to other Events that belong to it. This is a very generic property that does not mean the subevents fully define the superconcept or that there is any causal relationship." ;
-                rdfs:label "has subevent" ;
-                skos:exactMatch <http://purl.org/NET/c4dm/event.owl#sub_event> .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasSubType
-sem:hasSubType rdf:type owl:ObjectProperty ;
-               owl:inverseOf sem:subTypeOf ;
-               rdfs:domain sem:Type ;
-               rdfs:range sem:Type ;
-               rdfs:comment "Has sub type is used to state that a type falls under another type. This is a generic aggregation relation that is used to generalize over various hierarchical relations that can exist between types." ;
-               rdfs:label "has subtype" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasTime
-sem:hasTime rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf sem:eventProperty ;
-            rdfs:range sem:Time ;
-            rdfs:comment "Has time is used to indicate at which time an Event took place or when a property under the Temporary Constraint is valid. Has time points to a symbolic representation of time, which allows semantic relations between time resources. (see http://www.w3.org/TR/owl-time/)" ;
-            rdfs:label "has Time" ;
-            skos:broadMatch lode:atTime .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/placeType
-sem:placeType rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf sem:type ;
-              rdfs:domain sem:Place ;
-              rdfs:range sem:PlaceType ;
-              rdfs:comment "Has place type is used to assign a type to a place." ;
-              rdfs:label "has place type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/roleType
-sem:roleType rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf sem:type ;
-             rdfs:domain sem:Role ;
-             rdfs:range sem:RoleType ;
-             rdfs:comment "Has role type is used to assign a role type to a Role property constraint. This role is a subspecification of the eventProperty which it constrains. For example, if an Event hasActor an Actor and this property is given a Role Constraint, then roleType can be used to assign a role to the participation of the Actor in the Event indicated by hasActor." ;
-             rdfs:label "has role type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/subEventOf
-sem:subEventOf rdf:type owl:ObjectProperty ;
-               rdfs:comment "Inverse property of hasSubEvent" ;
-               rdfs:label "subevent of" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/subTypeOf
-sem:subTypeOf rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf rdfs:subClassOf ;
-              rdfs:comment "The inverse property of hasSubType." ;
-              rdfs:label "subtype of" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/timeType
-sem:timeType rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf sem:type ;
-             rdfs:domain sem:Time ;
-             rdfs:range sem:TimeType ;
-             rdfs:comment "Has time type is used to assign a type to a time individual." ;
-             rdfs:label "has time type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/type
-sem:type rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf rdf:type ;
-         rdfs:range sem:Type ;
-         rdfs:comment "Type is the super property of the properties that are used to indicate the type of a Core instance, eventType, actorType, placeType, timeType; and of roleType. Types can be both classes and individuals, cf. OWL 2 punning." ;
-         rdfs:label "type property" ;
-         skos:closeMatch dc:type ;
-         skos:relatedMatch <http://www.kulttuurisampo.fi/ebkr/quality> .
-
-
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#P129_is_about
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#P129_is_about> rdf:type owl:ObjectProperty .
-
-
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#P138_represents
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#P138_represents> rdf:type owl:ObjectProperty .
-
-
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#P67_refers_to
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#P67_refers_to> rdf:type owl:ObjectProperty .
+###  http://www.cidoc-crm.org/cidoc-crm/P67_refers_to
+<http://www.cidoc-crm.org/cidoc-crm/P67_refers_to> rdf:type owl:ObjectProperty .
 
 
 ###  http://www.europeana.eu/schemas/edm/aggregatedCHO
 edm:aggregatedCHO rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf dc:subject ,
-                                     <http://www.cidoc-crm.org/rdfs/cidoc-crm#P129_is_about> ,
+                                     <http://www.cidoc-crm.org/cidoc-crm/P129_is_about> ,
                                      ore:aggregates ;
                   rdfs:domain ore:Aggregation ;
                   rdfs:range edm:ProvidedCHO ;
@@ -528,7 +340,7 @@ resource. Such resources may be nested, such as performing a theater play text, 
 ###  http://www.europeana.eu/schemas/edm/isAnnotationOf
 edm:isAnnotationOf rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf dc:subject ,
-                                      <http://www.cidoc-crm.org/rdfs/cidoc-crm#P67_refers_to> ;
+                                      <http://www.cidoc-crm.org/cidoc-crm/P67_refers_to> ;
                    rdfs:domain edm:EuropeanaObject ;
                    rdfs:range [ rdf:type owl:Class ;
                                 owl:unionOf ( edm:ProvidedCHO
@@ -564,7 +376,7 @@ edm:isNextInSequence rdf:type owl:ObjectProperty ;
 ###  http://www.europeana.eu/schemas/edm/isRepresentationOf
 edm:isRepresentationOf rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf dc:subject ,
-                                          <http://www.cidoc-crm.org/rdfs/cidoc-crm#P138_represents> ;
+                                          <http://www.cidoc-crm.org/cidoc-crm/P138_represents> ;
                        rdfs:domain edm:InformationResource ;
                        rdfs:label "Is Representation Of"@en ;
                        skos:definition "This property associates an information resource to the resource (if any) that it represents"@en .
@@ -685,14 +497,6 @@ ore:aggregates rdf:type owl:ObjectProperty .
 ore:proxyFor rdf:type owl:ObjectProperty .
 
 
-###  http://www.w3.org/1999/02/22-rdf-syntax-ns#type
-rdf:type rdf:type owl:ObjectProperty .
-
-
-###  http://www.w3.org/2000/01/rdf-schema#subClassOf
-rdfs:subClassOf rdf:type owl:ObjectProperty .
-
-
 #################################################################
 #    Data properties
 #################################################################
@@ -707,62 +511,13 @@ dc:subject rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf edm:isRelatedTo .
 
 
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasBeginTimeStamp
-sem:hasBeginTimeStamp rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf sem:hasTimeStamp ;
-                      rdfs:comment "Has begin timestamp is used to indicate the beginning of a time interval. Omitting the hasBeginTimeStamp while stating a hasEndTimeStamp is interpreted as an open ended interval." ;
-                      rdfs:label "has begin timestamp" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasEarliestBeginTimeStamp
-sem:hasEarliestBeginTimeStamp rdf:type owl:DatatypeProperty ;
-                              rdfs:subPropertyOf sem:hasBeginTimeStamp ;
-                              rdfs:comment "Has earliest begin timestamp is used to indicate the earliest possible starting time of an uncertain time interval." ;
-                              rdfs:label "has earliest begin timestamp" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasEarliestEndTimeStamp
-sem:hasEarliestEndTimeStamp rdf:type owl:DatatypeProperty ;
-                            rdfs:subPropertyOf sem:hasEndTimeStamp ;
-                            rdfs:comment "Has earliest end timestamp is used to indicate the earliest possible ending time of an uncertain time interval." ;
-                            rdfs:label "has earliest end timestamp" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasEndTimeStamp
-sem:hasEndTimeStamp rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf sem:hasTimeStamp ;
-                    rdfs:comment "Has end timestamp is used to indicate the end of a time interval. Omitting the hasEndTimeStamp while stating a hasBeginTimeStamp is interpreted as an open ended interval." ;
-                    rdfs:label "has end timestamp" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasLatestBeginTimeStamp
-sem:hasLatestBeginTimeStamp rdf:type owl:DatatypeProperty ;
-                            rdfs:subPropertyOf sem:hasBeginTimeStamp ;
-                            rdfs:comment "Has latest begin timestamp is used to indicate the latest possible starting time of an uncertain time interval." ;
-                            rdfs:label "has latest begin timestamp" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasLatestEndTimeStamp
-sem:hasLatestEndTimeStamp rdf:type owl:DatatypeProperty ;
-                          rdfs:subPropertyOf sem:hasEndTimeStamp ;
-                          rdfs:comment "Has latest end timestamp is used to indicate the latest possible ending time of an uncertain time interval." ;
-                          rdfs:label "has latest end timestamp" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/hasTimeStamp
-sem:hasTimeStamp rdf:type owl:DatatypeProperty ;
-                 rdfs:comment "Has timestamp is used to put time indicators on any individual. It is the most common way to state when an Event took place. There are subproperties of hasTimeStamp to represent time intervals and uncertain time intervals. If the exact moment is not known, but it is necessary to specify a certain time, use hasTime instead. All of these properties are also used to indicate the time at which a property under the Temporary Constraint is valid." ;
-                 rdfs:label "has timestamp" ;
-                 skos:closeMatch <http://www.kulttuurisampo.fi/ebkr/time> .
-
-
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#P79_beginning_is_qualified_by
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#P79_beginning_is_qualified_by> rdf:type owl:DatatypeProperty ;
+###  http://www.cidoc-crm.org/cidoc-crm/P79_beginning_is_qualified_by
+<http://www.cidoc-crm.org/cidoc-crm/P79_beginning_is_qualified_by> rdf:type owl:DatatypeProperty ;
                                                                         rdfs:subPropertyOf edm:begin .
 
 
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#P80_end_is_qualified_by
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#P80_end_is_qualified_by> rdf:type owl:DatatypeProperty ;
+###  http://www.cidoc-crm.org/cidoc-crm/P80_end_is_qualified_by
+<http://www.cidoc-crm.org/cidoc-crm/P80_end_is_qualified_by> rdf:type owl:DatatypeProperty ;
                                                                   rdfs:subPropertyOf edm:end .
 
 
@@ -861,44 +616,44 @@ edm:ugc rdf:type owl:DatatypeProperty ;
 #################################################################
 
 ###  http://iflastandards.info/ns/fr/frbr/frbroo/F1_Work
-<http://iflastandards.info/ns/fr/frbr/frbroo/F1_Work> rdf:type owl:Class .
+frbroo:F1_Work rdf:type owl:Class .
 
 
 ###  http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression
-<http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression> rdf:type owl:Class .
+frbroo:F2_Expression rdf:type owl:Class .
 
 
 ###  http://iflastandards.info/ns/fr/frbr/frbroo/F3_Manifestation_Product_Type
-<http://iflastandards.info/ns/fr/frbr/frbroo/F3_Manifestation_Product_Type> rdf:type owl:Class .
+frbroo:F3_Manifestation_Product_Type rdf:type owl:Class .
 
 
 ###  http://iflastandards.info/ns/fr/frbr/frbroo/F4_Manifestation_Singleton
-<http://iflastandards.info/ns/fr/frbr/frbroo/F4_Manifestation_Singleton> rdf:type owl:Class .
+frbroo:F4_Manifestation_Singleton rdf:type owl:Class .
 
 
 ###  http://iflastandards.info/ns/fr/frbr/frbroo/F8_Event
-<http://iflastandards.info/ns/fr/frbr/frbroo/F8_Event> rdf:type owl:Class ;
-                                                       owl:equivalentClass edm:Event .
+frbroo:F8_Event rdf:type owl:Class ;
+                owl:equivalentClass edm:Event .
 
 
 ###  http://iflastandards.info/ns/fr/frbr/frbroo/F9_Place
-<http://iflastandards.info/ns/fr/frbr/frbroo/F9_Place> rdf:type owl:Class ;
-                                                       owl:equivalentClass edm:Place .
+frbroo:F9_Place rdf:type owl:Class ;
+                owl:equivalentClass edm:Place .
 
 
 ###  http://metadata.net/harmony/abc#Place
-<http://metadata.net/harmony/abc#Place> rdf:type owl:Class ;
-                                        owl:equivalentClass edm:Place .
+abc:Place rdf:type owl:Class ;
+          owl:equivalentClass edm:Place .
 
 
 ###  http://metadata.net/harmony/abc#Temporality
-<http://metadata.net/harmony/abc#Temporality> rdf:type owl:Class ;
-                                              owl:equivalentClass edm:Event .
+abc:Temporality rdf:type owl:Class ;
+                owl:equivalentClass edm:Event .
 
 
 ###  http://metadata.net/harmony/abc#Time
-<http://metadata.net/harmony/abc#Time> rdf:type owl:Class ;
-                                       owl:equivalentClass edm:TimeSpan .
+abc:Time rdf:type owl:Class ;
+         owl:equivalentClass edm:TimeSpan .
 
 
 ###  http://purl.org/dc/terms/PeriodOfTime
@@ -906,220 +661,58 @@ dcterms:PeriodOfTime rdf:type owl:Class .
 
 
 ###  http://purl.org/vocab/frbr/core#Event
-<http://purl.org/vocab/frbr/core#Event> rdf:type owl:Class ;
-                                        owl:equivalentClass edm:Event .
+frbr_core:Event rdf:type owl:Class ;
+                owl:equivalentClass edm:Event .
 
 
 ###  http://purl.org/vocab/frbr/core#Expression
-<http://purl.org/vocab/frbr/core#Expression> rdf:type owl:Class .
+frbr_core:Expression rdf:type owl:Class .
 
 
 ###  http://purl.org/vocab/frbr/core#Manifestation
-<http://purl.org/vocab/frbr/core#Manifestation> rdf:type owl:Class .
+frbr_core:Manifestation rdf:type owl:Class .
 
 
 ###  http://purl.org/vocab/frbr/core#Place
-<http://purl.org/vocab/frbr/core#Place> rdf:type owl:Class ;
-                                        owl:equivalentClass edm:Place .
+frbr_core:Place rdf:type owl:Class ;
+                owl:equivalentClass edm:Place .
 
 
 ###  http://purl.org/vocab/frbr/core#Work
-<http://purl.org/vocab/frbr/core#Work> rdf:type owl:Class .
+frbr_core:Work rdf:type owl:Class .
 
 
 ###  http://purl.org/vocommons/voaf#Vocabulary
-<http://purl.org/vocommons/voaf#Vocabulary> rdf:type owl:Class .
+voaf:Vocabulary rdf:type owl:Class .
 
 
-###  http://rdf.histograph.io/PlaceInTime
-hg:PlaceInTime rdf:type owl:Class ;
-               rdfs:subClassOf owl:Thing .
-
-
-###  http://rdf.histograph.io/PlaceInTimeType
-hg:PlaceInTimeType rdf:type owl:Class .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Actor
-sem:Actor rdf:type owl:Class ;
-          rdfs:subClassOf sem:Authority ,
-                          sem:Core ;
-          rdfs:comment """Actors are entities that take part in an Event, either actively or passively. Actors do not necessarily have to be sentient. They can also be objects. Actors are a thing, animate or inanimate, physical or non-physical.
-""" ;
-          rdfs:label "Actor" ;
-          skos:broadMatch <http://sw.opencyc.org/2009/04/07/concept/en/SomethingExisting> ,
-                          <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#endurant> ;
-          skos:closeMatch dcterms:Agent ,
-                          dcterms:AgentClass ,
-                          <http://sw.opencyc.org/2009/04/07/concept/en/Agent-Generic> ,
-                          <http://www.ontologyportal.org/translations/SUMO.owl.txt#Agent> ,
-                          <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E39.Actor> ,
-                          foaf:Agent .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/ActorType
-sem:ActorType rdf:type owl:Class ;
-              rdfs:subClassOf sem:Type ;
-              rdfs:comment "EventType contains all resources that are used to classify Actors, e.g. person" ;
-              rdfs:label "Actor type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Authority
-sem:Authority rdf:type owl:Class ;
-              rdfs:comment "Authorities are entities that state SEM properties. Their nature is not specified. They can symbolize people, organizations, sources of information, etc." ;
-              rdfs:label "Authority" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Constraint
-sem:Constraint rdf:type owl:Class ;
-               rdfs:comment "The SEM Constraint class contains instances of properties that have a constrained (i.e. not universal) validity. This includes time dependent validity (Temporary), validity in the guise of a specific role (Role), or validity according to a given Authority (View)." ;
-               rdfs:label "Constraint" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Core
-sem:Core rdf:type owl:Class ;
-         rdfs:comment "The SEM Core class contains all entities that make up the context of an event: Events, Actors, Places, Times. This class is meant to be extended for each application domain." ;
-         rdfs:label "Core" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Event
-sem:Event rdf:type owl:Class ;
-          rdfs:subClassOf sem:Core ;
-          rdfs:comment "Events are things that happen. This comprises everything from historical events to web site sessions and mythical journeys. Event is the central class of SEM." ;
-          rdfs:label "Event" ;
-          skos:broadMatch lode:Event ,
-                          <http://purl.org/NET/c4dm/event.owl#Event> ;
-          skos:closeMatch <http://purl.org/dc/dcmitype/Event> ,
-                          <http://sw.opencyc.org/2009/04/07/concept/en/Situation> ,
-                          <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#perdurant> ,
-                          <http://www.ontologyportal.org/translations/SUMO.owl.txt#Process> ,
-                          <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E5.Event> .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/EventType
-sem:EventType rdf:type owl:Class ;
-              rdfs:subClassOf sem:Type ;
-              rdfs:comment "EventType contains all resources that are used to classify Events, e.g. meeting." ;
-              rdfs:label "Event type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Object
-sem:Object rdf:type owl:Class ;
-           rdfs:subClassOf sem:Actor ;
-           rdfs:comment "Objects are passive, inanimate Actors." ;
-           rdfs:label "Object" ;
-           skos:broadMatch <http://sw.opencyc.org/2009/04/07/concept/en/SomethingExisting> ,
-                           <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#endurant> ;
-           skos:closeMatch <http://www.ontologyportal.org/translations/SUMO.owl.txt#Object> ,
-                           <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E19.Physical_Object> ,
-                           <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E21.Person> ;
-           skos:narrowMatch <http://purl.org/NET/c4dm/event.owl#Factor> ,
-                            <http://purl.org/NET/c4dm/event.owl#Product> ,
-                            <http://purl.org/dc/dcmitype/PhysicalObject> ,
-                            dcterms:PhysicalResource .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Place
-sem:Place rdf:type owl:Class ;
-          rdfs:subClassOf sem:Core ;
-          rdfs:comment "Places are locations where an Event happens. They do not need to be physical places and hence do not necessarily need coordinates. Neither do they need to have any significance apart from them being the location of an Event." ;
-          rdfs:label "Place" ;
-          skos:closeMatch dcterms:Location ,
-                          <http://sw.opencyc.org/2009/04/07/concept/en/EnduringThing-Localized> ,
-                          <http://www.ontologyportal.org/translations/SUMO.owl.txt#GeographicArea> ,
-                          <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E53.Place> ;
-          skos:narrowMatch <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#PhysicalRegion> ,
-                           <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/PlaceType
-sem:PlaceType rdf:type owl:Class ;
-              rdfs:subClassOf sem:Type ;
-              rdfs:comment "EventType contains all resources that are used to classify Places, e.g. river." ;
-              rdfs:label "Place type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Role
-sem:Role rdf:type owl:Class ;
-         rdfs:subClassOf sem:Constraint ;
-         rdfs:comment "Roles are properties with a subspecified function or position indicated by a RoleType in the scope of an Event. For example, the sem:hasActor property can be subspecified with the RoleType attacker, to denote that the type of participation of the Actor in the scope of the Event is \"attacker\". The sem:hasPlace property can be subspecified with the RoleType origin, to denote that within the scope of the Event it is the origin." ;
-         rdfs:label "Role" ;
-         skos:relatedMatch <http://sw.opencyc.org/2009/04/07/concept/en/Role> ,
-                           <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#region> ,
-                           <http://www.ontologyportal.org/translations/SUMO.owl.txt#IntentionalProcess> .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/RoleType
-sem:RoleType rdf:type owl:Class ;
-             rdfs:subClassOf sem:Type ;
-             rdfs:comment "EventType contains all resources that are used to classify Roles, e.g. receiver." ;
-             rdfs:label "Role type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Temporary
-sem:Temporary rdf:type owl:Class ;
-              rdfs:subClassOf sem:Constraint ;
-              rdfs:comment "Temporaries are properties that only hold during a certain Time, which is either indicated with the sem:hasTime property to an instance of sem:Time, or with the sem:hasTimeStamp property to some timestamp(s)." ;
-              rdfs:label "Temporary" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Time
-sem:Time rdf:type owl:Class ;
-         rdfs:subClassOf sem:Core ;
-         rdfs:comment "Time contains symbolic representations of when an Event took place. Time instances do not necessarily need to have a timestamp associated with them. The Time class exists to represent semantics of time, e.g. that one thing happens before another, even though the exact timestamps are unknown." ;
-         rdfs:label "Time" ;
-         skos:broadMatch <http://www.w3.org/2006/timeTemporalEntity> .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/TimeType
-sem:TimeType rdf:type owl:Class ;
-             rdfs:subClassOf sem:Type ;
-             rdfs:comment "EventType contains all resources that are used to classify Time, e.g. century." ;
-             rdfs:label "Time type" .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/Type
-sem:Type rdf:type owl:Class ;
-         rdfs:comment "The SEM Type class contains all types of Core instances. These can be either individuals of classes themselves. This class is meant to be extended for each application domain." ;
-         rdfs:label "Type" ;
-         skos:closeMatch <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#AbstractRegion> ,
-                         <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E55.Type> .
-
-
-###  http://semanticweb.cs.vu.nl/2009/11/sem/View
-sem:View rdf:type owl:Class ;
-         rdfs:subClassOf sem:Constraint ;
-         rdfs:comment "Views are properties that only hold according to a certain Authority." ;
-         rdfs:label "View" .
-
-
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#E18_Physical_Thing
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#E18_Physical_Thing> rdf:type owl:Class ;
+###  http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing
+<http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing> rdf:type owl:Class ;
                                                              owl:equivalentClass edm:PhysicalThing .
 
 
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#E39_Actor
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#E39_Actor> rdf:type owl:Class ;
+###  http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+<http://www.cidoc-crm.org/cidoc-crm/E39_Actor> rdf:type owl:Class ;
                                                     owl:equivalentClass edm:Agent .
 
 
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#E4_Period
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#E4_Period> rdf:type owl:Class ;
+###  http://www.cidoc-crm.org/cidoc-crm/E4_Period
+<http://www.cidoc-crm.org/cidoc-crm/E4_Period> rdf:type owl:Class ;
                                                     owl:equivalentClass edm:Event .
 
 
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#E52_Time-Span
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#E52_Time-Span> rdf:type owl:Class ;
+###  http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span
+<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span> rdf:type owl:Class ;
                                                         owl:equivalentClass edm:TimeSpan .
 
 
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#E53_Place
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#E53_Place> rdf:type owl:Class ;
+###  http://www.cidoc-crm.org/cidoc-crm/E53_Place
+<http://www.cidoc-crm.org/cidoc-crm/E53_Place> rdf:type owl:Class ;
                                                     owl:equivalentClass edm:Place .
 
 
-###  http://www.cidoc-crm.org/rdfs/cidoc-crm#E89_Propositional_Object
-<http://www.cidoc-crm.org/rdfs/cidoc-crm#E89_Propositional_Object> rdf:type owl:Class ;
+###  http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object
+<http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object> rdf:type owl:Class ;
                                                                    owl:equivalentClass edm:InformationResource .
 
 
@@ -1186,16 +779,16 @@ cultural, technological or legal phenomena\" (E5 Event in CIDOC CRM) or a \"set 
 ###  http://www.europeana.eu/schemas/edm/InformationResource
 edm:InformationResource rdf:type owl:Class ;
                         owl:equivalentClass [ rdf:type owl:Class ;
-                                              owl:unionOf ( <http://iflastandards.info/ns/fr/frbr/frbroo/F1_Work>
-                                                            <http://iflastandards.info/ns/fr/frbr/frbroo/F2_Expression>
-                                                            <http://iflastandards.info/ns/fr/frbr/frbroo/F3_Manifestation_Product_Type>
-                                                            <http://iflastandards.info/ns/fr/frbr/frbroo/F4_Manifestation_Singleton>
+                                              owl:unionOf ( frbroo:F1_Work
+                                                            frbroo:F2_Expression
+                                                            frbroo:F3_Manifestation_Product_Type
+                                                            frbroo:F4_Manifestation_Singleton
                                                           )
                                             ] ,
                                             [ rdf:type owl:Class ;
-                                              owl:unionOf ( <http://purl.org/vocab/frbr/core#Expression>
-                                                            <http://purl.org/vocab/frbr/core#Manifestation>
-                                                            <http://purl.org/vocab/frbr/core#Work>
+                                              owl:unionOf ( frbr_core:Expression
+                                                            frbr_core:Manifestation
+                                                            frbr_core:Work
                                                           )
                                             ] ;
                         rdfs:label "Information Resource"@en ;
@@ -1221,7 +814,7 @@ Persons are not items. This class represents Cultural Heritage Objects known to 
 
 ###  http://www.europeana.eu/schemas/edm/Place
 edm:Place rdf:type owl:Class ;
-          owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#space-region> ;
+          owl:equivalentClass DOLCE-Lite:space-region ;
           rdfs:subClassOf edm:NonInformationResource ;
           rdfs:label "Place"@en ;
           skos:definition "An \"extent in space, in particular on the surface of the earth, in the pure sense of physics: independent from temporal phenomena and matter\" (CIDOC CRM)"@en .
@@ -1243,7 +836,7 @@ edm:ProvidedCHO rdf:type owl:Class ;
 
 ###  http://www.europeana.eu/schemas/edm/TimeSpan
 edm:TimeSpan rdf:type owl:Class ;
-             owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#time-interval> ;
+             owl:equivalentClass DOLCE-Lite:time-interval ;
              rdfs:subClassOf dcterms:PeriodOfTime ,
                              edm:NonInformationResource ;
              rdfs:label "Time Span"@en ;
@@ -1260,11 +853,11 @@ a URI."""@en .
 
 
 ###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#space-region
-<http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#space-region> rdf:type owl:Class .
+DOLCE-Lite:space-region rdf:type owl:Class .
 
 
 ###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#time-interval
-<http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#time-interval> rdf:type owl:Class .
+DOLCE-Lite:time-interval rdf:type owl:Class .
 
 
 ###  http://www.openarchives.org/ore/terms/Aggregation
@@ -1304,141 +897,21 @@ foaf:Person rdf:type owl:Class .
                                                    foaf:name "Antoine Isaac" .
 
 
-###  http://rdf.histograph.io/Address
-hg:Address rdf:type owl:NamedIndividual ,
-                    hg:PlaceInTimeType ;
-           rdfs:label "Address" .
-
-
-###  http://rdf.histograph.io/Area
-hg:Area rdf:type owl:NamedIndividual ,
-                 hg:PlaceInTimeType ;
-        rdfs:label "Area" .
-
-
-###  http://rdf.histograph.io/Baljuwschap
-hg:Baljuwschap rdf:type owl:NamedIndividual ,
-                        hg:PlaceInTimeType ;
-               rdfs:label "Baljuwschap" .
-
-
-###  http://rdf.histograph.io/Barony
-hg:Barony rdf:type owl:NamedIndividual ,
-                   hg:PlaceInTimeType ;
-          rdfs:label "Barony" .
-
-
-###  http://rdf.histograph.io/Borough
-hg:Borough rdf:type owl:NamedIndividual ,
-                    hg:PlaceInTimeType ;
-           rdfs:label "Borough" .
-
-
-###  http://rdf.histograph.io/Building
-hg:Building rdf:type owl:NamedIndividual ,
-                     hg:PlaceInTimeType ;
-            rdfs:label "Building" .
-
-
-###  http://rdf.histograph.io/Country
-hg:Country rdf:type owl:NamedIndividual ,
-                    hg:PlaceInTimeType ;
-           rdfs:label "Country" .
-
-
-###  http://rdf.histograph.io/Countship
-hg:Countship rdf:type owl:NamedIndividual ,
-                      hg:PlaceInTimeType ;
-             rdfs:label "Countship" .
-
-
-###  http://rdf.histograph.io/Departement
-hg:Departement rdf:type owl:NamedIndividual ,
-                        hg:PlaceInTimeType ;
-               rdfs:label "Departement" .
-
-
-###  http://rdf.histograph.io/Fort
-hg:Fort rdf:type owl:NamedIndividual ,
-                 hg:PlaceInTimeType ;
-        rdfs:label "Fort" .
-
-
-###  http://rdf.histograph.io/Heerlijkheid
-hg:Heerlijkheid rdf:type owl:NamedIndividual ,
-                         hg:PlaceInTimeType ;
-                rdfs:label "Heerlijkheid" .
-
-
-###  http://rdf.histograph.io/Monument
-hg:Monument rdf:type owl:NamedIndividual ,
-                     hg:PlaceInTimeType ;
-            rdfs:label "Monument" .
-
-
-###  http://rdf.histograph.io/Municipality
-hg:Municipality rdf:type owl:NamedIndividual ,
-                         hg:PlaceInTimeType ;
-                rdfs:label "Municipality" .
-
-
-###  http://rdf.histograph.io/Neighbourhood
-hg:Neighbourhood rdf:type owl:NamedIndividual ,
-                          hg:PlaceInTimeType ;
-                 rdfs:label "Neighbourhood" .
-
-
-###  http://rdf.histograph.io/Place
-hg:Place rdf:type owl:NamedIndividual ,
-                  hg:PlaceInTimeType ;
-         rdfs:label "Place" .
-
-
-###  http://rdf.histograph.io/Polder
-hg:Polder rdf:type owl:NamedIndividual ,
-                   hg:PlaceInTimeType ;
-          rdfs:label "Polder" .
-
-
-###  http://rdf.histograph.io/Province
-hg:Province rdf:type owl:NamedIndividual ,
-                     hg:PlaceInTimeType ;
-            rdfs:label "Province" .
-
-
-###  http://rdf.histograph.io/Region
-hg:Region rdf:type owl:NamedIndividual ,
-                   hg:PlaceInTimeType ;
-          rdfs:label "Region" .
-
-
-###  http://rdf.histograph.io/Street
-hg:Street rdf:type owl:NamedIndividual ,
-                   hg:PlaceInTimeType ;
-          rdfs:label "Street" .
-
-
-###  http://rdf.histograph.io/Water
-hg:Water rdf:type owl:NamedIndividual ,
-                  hg:PlaceInTimeType ;
-         rdfs:label "Water" .
-
-
 ###  http://www.europeana.eu/schemas/edm/
-edm: rdf:type owl:NamedIndividual ,
-              <http://purl.org/vocommons/voaf#Vocabulary> ;
-     dc:contributor <http://www.ibi.hu-berlin.de/institut/personen/iwanowa> ,
-                    <http://www.ics.forth.gr/isl/people/people_individual.jsp?Person_ID=2> ,
-                    <http://www.image.ece.ntua.gr/~ndroso/> ,
-                    <http://www.image.ntua.gr/~tzouvaras/> ,
-                    [ rdf:type foaf:Organization ;
-                      foaf:name "Participants of Europeana Version 1.0 Work Package on Further Specification of Functionality and Interoperability aspects of Europeana (WP3)"
-                    ] ,
-                    [ rdf:type foaf:Person ;
-                      foaf:name "Hugo Manguinhas"
-                    ] ;
-     dc:creator <http://data.semanticweb.org/person/antoine-isaac> ;
-     dc:publisher <http://europeana.eu> .
+<http://www.europeana.eu/schemas/edm/> rdf:type owl:NamedIndividual ,
+                                                voaf:Vocabulary ;
+                                       dc:contributor <http://www.ibi.hu-berlin.de/institut/personen/iwanowa> ,
+                                                      <http://www.ics.forth.gr/isl/people/people_individual.jsp?Person_ID=2> ,
+                                                      <http://www.image.ece.ntua.gr/~ndroso/> ,
+                                                      <http://www.image.ntua.gr/~tzouvaras/> ,
+                                                      [ rdf:type foaf:Organization ;
+                                                        foaf:name "Participants of Europeana Version 1.0 Work Package on Further Specification of Functionality and Interoperability aspects of Europeana (WP3)"
+                                                      ] ,
+                                                      [ rdf:type foaf:Person ;
+                                                        foaf:name "Hugo Manguinhas"
+                                                      ] ;
+                                       dc:creator <http://data.semanticweb.org/person/antoine-isaac> ;
+                                       dc:publisher <http://europeana.eu> .
 
 
 ###  http://www.ibi.hu-berlin.de/institut/personen/iwanowa
@@ -1469,66 +942,6 @@ edm: rdf:type owl:NamedIndividual ,
 #    Annotations
 #################################################################
 
-lode:Event rdfs:isDefinedBy lode: .
-
-
-lode:atTime rdfs:isDefinedBy lode: .
-
-
-lode:inSpace rdfs:isDefinedBy lode: .
-
-
-lode:involved rdfs:isDefinedBy lode: .
-
-
-<http://purl.org/NET/c4dm/event.owl#Event> rdfs:isDefinedBy <http://purl.org/NET/c4dm/event.owl#> .
-
-
-<http://purl.org/NET/c4dm/event.owl#Factor> rdfs:isDefinedBy <http://purl.org/NET/c4dm/event.owl#> .
-
-
-<http://purl.org/NET/c4dm/event.owl#Product> rdfs:isDefinedBy <http://purl.org/NET/c4dm/event.owl#> .
-
-
-<http://purl.org/NET/c4dm/event.owl#sub_event> rdfs:isDefinedBy <http://purl.org/NET/c4dm/event.owl#> .
-
-
-<http://purl.org/dc/dcmitype/Event> rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> .
-
-
-<http://purl.org/dc/dcmitype/PhysicalObject> rdfs:isDefinedBy <http://purl.org/dc/dcmitype/> .
-
-
-dc:type rdfs:isDefinedBy dc: .
-
-
-dcterms:Agent rdfs:isDefinedBy dcterms: .
-
-
-dcterms:AgentClass rdfs:isDefinedBy dcterms: .
-
-
-dcterms:Location rdfs:isDefinedBy dcterms: .
-
-
-dcterms:PhysicalResource rdfs:isDefinedBy dcterms: .
-
-
-<http://sw.opencyc.org/2009/04/07/concept/en/Agent-Generic> rdfs:isDefinedBy <http://sw.opencyc.org/2009/04/07/concept/en/> .
-
-
-<http://sw.opencyc.org/2009/04/07/concept/en/EnduringThing-Localized> rdfs:isDefinedBy <http://sw.opencyc.org/2009/04/07/concept/en/> .
-
-
-<http://sw.opencyc.org/2009/04/07/concept/en/Role> rdfs:isDefinedBy <http://sw.opencyc.org/2009/04/07/concept/en/> .
-
-
-<http://sw.opencyc.org/2009/04/07/concept/en/Situation> rdfs:isDefinedBy <http://sw.opencyc.org/2009/04/07/concept/en/> .
-
-
-<http://sw.opencyc.org/2009/04/07/concept/en/SomethingExisting> rdfs:isDefinedBy <http://sw.opencyc.org/2009/04/07/concept/en/> .
-
-
 edm:dataProvider skos:definition "The name or identifier of the organisation who contributes data indirectly to an aggregation service (e.g. Europeana)."@en ;
                  rdfs:label "Data Provider"@en .
 
@@ -1546,78 +959,9 @@ edm:realizes skos:definition "This property describes a relation between a physi
              rdfs:label "Realizes"@en .
 
 
-edm:unstored skos:definition """This is a container element which includes all relevant information that
-otherwise cannot be mapped to another element in the ESE."""@en ;
-             rdfs:label "Unstored"@en .
-
-
-<http://www.kulttuurisampo.fi/ebkr/agent> rdfs:isDefinedBy <http://www.kulttuurisampo.fi/ebkr/> .
-
-
-<http://www.kulttuurisampo.fi/ebkr/place> rdfs:isDefinedBy <http://www.kulttuurisampo.fi/ebkr/> .
-
-
-<http://www.kulttuurisampo.fi/ebkr/quality> rdfs:isDefinedBy <http://www.kulttuurisampo.fi/ebkr/> .
-
-
-<http://www.kulttuurisampo.fi/ebkr/time> rdfs:isDefinedBy <http://www.kulttuurisampo.fi/ebkr/> .
-
-
-<http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#AbstractRegion> rdfs:isDefinedBy <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
-
-
-<http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#PhysicalRegion> rdfs:isDefinedBy <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
-
-
-<http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#endurant> rdfs:isDefinedBy <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
-
-
-<http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#perdurant> rdfs:isDefinedBy <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
-
-
-<http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#region> rdfs:isDefinedBy <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
-
-
-<http://www.ontologyportal.org/translations/SUMO.owl.txt#Agent> rdfs:isDefinedBy <http://www.ontologyportal.org/translations/SUMO.owl.txt#> .
-
-
-<http://www.ontologyportal.org/translations/SUMO.owl.txt#GeographicArea> rdfs:isDefinedBy <http://www.ontologyportal.org/translations/SUMO.owl.txt#> .
-
-
-<http://www.ontologyportal.org/translations/SUMO.owl.txt#IntentionalProcess> rdfs:isDefinedBy <http://www.ontologyportal.org/translations/SUMO.owl.txt#> .
-
-
-<http://www.ontologyportal.org/translations/SUMO.owl.txt#Object> rdfs:isDefinedBy <http://www.ontologyportal.org/translations/SUMO.owl.txt#> .
-
-
-<http://www.ontologyportal.org/translations/SUMO.owl.txt#Process> rdfs:isDefinedBy <http://www.ontologyportal.org/translations/SUMO.owl.txt#> .
-
-
-<http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> rdfs:isDefinedBy <http://www.w3.org/2003/01/geo/wgs84_pos#> .
-
-
-<http://www.w3.org/2006/timeTemporalEntity> rdfs:isDefinedBy <http://www.w3.org/2006/time> .
-
-
-<http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E19.Physical_Object> rdfs:isDefinedBy <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#> .
-
-
-<http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E21.Person> rdfs:isDefinedBy <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#> .
-
-
-<http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E39.Actor> rdfs:isDefinedBy <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#> .
-
-
-<http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E5.Event> rdfs:isDefinedBy <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#> .
-
-
-<http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E53.Place> rdfs:isDefinedBy <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#> .
-
-
-<http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#E55.Type> rdfs:isDefinedBy <http://www8.informatik.uni-erlangen.de/IMMD8/Services/cidoc-crm/erlangen-crm_090330_5_0_1.owl#> .
-
-
-foaf:Agent rdfs:isDefinedBy foaf: .
+edm:unstored rdfs:label "Unstored"@en ;
+             skos:definition """This is a container element which includes all relevant information that
+otherwise cannot be mapped to another element in the ESE."""@en .
 
 
 ###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
