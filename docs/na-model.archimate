@@ -115,9 +115,11 @@ Bijvoorbeeld: https://bag.basisregistraties.overheid.nl/doc/begrip/RegistratiefG
     </folder>
     <folder name="services" id="a7ecfed5-fb15-46a3-ba2c-dbd4a7c090bf"/>
     <folder name="vocabulaires" id="2fcddbf0-bd0c-4745-83ad-2430f2541d2d">
-      <element xsi:type="archimate:DataObject" name="@prefix ds:" id="9adf30b5-8516-45b9-9943-77367e05c36b">
-        <documentation>@prefix ds: &lt;http://na.metamatter.nl/NadereToegangen/resource/Dataset/> .
-@prefix ds: &lt;lod-data.nationaalarchief.nl/terms/Dataset/></documentation>
+      <element xsi:type="archimate:DataObject" name="prefix ds" id="9adf30b5-8516-45b9-9943-77367e05c36b">
+        <documentation>@prefix ds: &lt;http://na.metamatter.nl/NadereToegangen/resource/Dataset/> . (oud)
+@prefix ds: &lt;lod-data.nationaalarchief.nl/terms/Dataset/>
+
+voorstel om te hernomen naar cat want ds:NT00373 a dcat:CatalogRecord is een CatalogRecord</documentation>
       </element>
       <element xsi:type="archimate:DataObject" name="bgn:Person" id="3b4aa45f-cff7-49ca-a2b1-a468ffdb37c8">
         <documentation>http://biographynet.nl/schema/Person
@@ -391,7 +393,7 @@ Note: The value of void:uriSpace is an RDF literal. That is, in Turtle it is wri
       </element>
       <element xsi:type="archimate:DataObject" name="owl:Class" id="c7aa225f-8a77-4476-afc3-d623f4a356f8"/>
       <element xsi:type="archimate:DataObject" name="rdfs:subClassOf" id="921c9cd7-a4db-4447-a0ca-84c3c661f3d1"/>
-      <element xsi:type="archimate:DataObject" name="@prefix na" id="02100b70-bc2e-411c-a09c-571bf1adc1c4">
+      <element xsi:type="archimate:DataObject" name="prefix na" id="02100b70-bc2e-411c-a09c-571bf1adc1c4">
         <documentation>http://lod-data.nationaalarchief.nl/terms/</documentation>
       </element>
       <element xsi:type="archimate:DataObject" name="na:AccessToArchives" id="ffe03670-9526-4494-8f59-0affcb15d0eb"/>
@@ -478,6 +480,10 @@ https://github.com/OpenRefine/OpenRefine/wiki</documentation>
     <element xsi:type="archimate:ApplicationService" name="Tonen Nadere Toegangen" id="dbb3ce16-a7fe-41ea-827c-a57d47df6d2f"/>
     <element xsi:type="archimate:ApplicationService" name="Tonen record uit Nadere Toegang" id="99b55fe5-a546-4204-9b46-b2962e952994"/>
     <element xsi:type="archimate:DataObject" name="Data Object" id="e44d7ae5-83e5-42bb-b78a-b8b577210301"/>
+    <element xsi:type="archimate:DataObject" name="prefix cat" id="da9430e3-b968-4aa0-99bc-8e145ea64667"/>
+    <element xsi:type="archimate:DataObject" name="prefix nt" id="bb588cd1-73e7-414e-84d3-b976c39c55fa">
+      <documentation>http://lod-data.nationaalarchief.nl/nt/{NT-naam}</documentation>
+    </element>
   </folder>
   <folder name="Technology &amp; Physical" id="61545d0e-7d10-4010-95d7-8dfca0130293" type="technology">
     <element xsi:type="archimate:Node" name="Hub3" id="2c87ad78-9c86-423b-9db1-14006d8a7ee6"/>
@@ -712,6 +718,7 @@ ds:CommissieDataset a void:Dataset</documentation>
     <element xsi:type="archimate:AggregationRelationship" id="ffb041d5-171b-4026-8af7-3be7002d803a" source="205610c0-3a3e-4a48-85b0-0cd359a82710" target="0b436b80-1563-4a6f-b305-3969708ecc36"/>
     <element xsi:type="archimate:AggregationRelationship" id="a3b36239-3aa4-49b0-8757-c34133f0cb36" source="bc7fbdc0-8dd9-4a1e-8909-c6d84f9ebecf" target="ffe03670-9526-4494-8f59-0affcb15d0eb"/>
     <element xsi:type="archimate:AggregationRelationship" id="20c3e4dc-9dee-402b-afad-3f305eecaf93" source="0b436b80-1563-4a6f-b305-3969708ecc36" target="ebd45516-5f43-40b8-8906-801bdb0a4b57"/>
+    <element xsi:type="archimate:AssociationRelationship" id="cf046ce7-18ef-41c8-b3ae-f0f6bc258b52" source="9adf30b5-8516-45b9-9943-77367e05c36b" target="da9430e3-b968-4aa0-99bc-8e145ea64667"/>
   </folder>
   <folder name="Views" id="1106c770-e13e-4b3d-b75c-8d72c67d5ead" type="diagrams">
     <element xsi:type="archimate:ArchimateDiagramModel" name="Linked Open Data bij het NA" id="61e08e90-ab15-4be6-af9b-6fb00ec2f2dc">
@@ -1577,7 +1584,7 @@ ds:CommissieDataset a void:Dataset</documentation>
         <bounds x="1047" y="474" width="120" height="55"/>
       </child>
     </element>
-    <element xsi:type="archimate:ArchimateDiagramModel" name="RDF model Nadere Toegang: Bewindslieden (NT00334)" id="adb8a019-3b8e-452d-a9fa-ab464572f43f">
+    <element xsi:type="archimate:ArchimateDiagramModel" name="NT00334: RDF model Nadere Toegang Bewindslieden" id="adb8a019-3b8e-452d-a9fa-ab464572f43f">
       <child xsi:type="archimate:DiagramObject" id="f30b4c98-f1b6-4be6-b76e-101330deb71a" targetConnections="d691ac3e-ecba-413f-91a9-90b3f8727367" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="b64a1f66-9f6a-46fd-a0b6-00d137f06d02">
         <bounds x="685" y="48" width="120" height="55"/>
       </child>
@@ -1648,7 +1655,7 @@ ds:CommissieDataset a void:Dataset</documentation>
         <bounds x="360" y="360" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="6b86f151-0b23-46af-a4ca-04f8584f8674" targetConnections="76a8599e-4d64-4212-9731-4880fa11b872" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="9594e097-554b-4e71-8d67-789fe668d806">
-        <bounds x="-624" y="252" width="120" height="55"/>
+        <bounds x="-564" y="252" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="f2a6307c-63f5-4ed6-a2b0-65fe6bf4252f" lineColor="#000000" textPosition="0" source="6b86f151-0b23-46af-a4ca-04f8584f8674" target="e27fbd06-7d3f-444d-b9b6-7f3064fb19a2" archimateRelationship="4025edac-ca41-46b4-b9c7-2c5a0200dbf4"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="5cf3c6d4-91ff-42c3-9ec4-db2ee711d066" targetConnections="6538e9d1-5e09-4ac9-a5a7-1d516ed24ec1" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="ae78e82c-5573-454b-8a0a-870e285089ef">
@@ -1664,10 +1671,10 @@ ds:CommissieDataset a void:Dataset</documentation>
         <bounds x="-480" y="516" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="e27fbd06-7d3f-444d-b9b6-7f3064fb19a2" targetConnections="f2a6307c-63f5-4ed6-a2b0-65fe6bf4252f" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="205610c0-3a3e-4a48-85b0-0cd359a82710">
-        <bounds x="-624" y="360" width="120" height="55"/>
+        <bounds x="-564" y="348" width="120" height="55"/>
       </child>
     </element>
-    <element xsi:type="archimate:ArchimateDiagramModel" name="RDF model Nadere Toegang: CommissieBoeken (NT00194)" id="c0b82c04-81e5-4dcc-88b2-c7542127855c">
+    <element xsi:type="archimate:ArchimateDiagramModel" name="NT00194: RDF model Nadere Toegang CommissieBoeken" id="c0b82c04-81e5-4dcc-88b2-c7542127855c">
       <child xsi:type="archimate:DiagramObject" id="79abd42f-9ef8-4bcd-ae8d-85367d801c09" targetConnections="accaa14f-e349-4e35-bf79-d2b5ee1a6ce4" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="157a633e-a671-4606-a19e-22b5eab340b6">
         <bounds x="132" y="48" width="120" height="55"/>
       </child>
@@ -1706,21 +1713,21 @@ ds:CommissieDataset a void:Dataset</documentation>
     </element>
     <element xsi:type="archimate:ArchimateDiagramModel" name="RDF Metamodel Archieven" id="1b617a92-d4c1-442e-8039-599667f96af0">
       <child xsi:type="archimate:DiagramObject" id="070e4357-0466-40ef-ab3e-3496d957cbb7" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="205610c0-3a3e-4a48-85b0-0cd359a82710">
-        <bounds x="204" y="324" width="120" height="55"/>
+        <bounds x="384" y="252" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="4094897e-03dc-4761-826b-a9ffb8afcc47" lineColor="#000000" source="070e4357-0466-40ef-ab3e-3496d957cbb7" target="01cde540-68d5-4904-8c3a-9bb1c61a5275" archimateRelationship="93ece6df-5d03-4751-840d-39787bb08fdc"/>
         <sourceConnection xsi:type="archimate:Connection" id="aeb6824a-7e88-42c3-a9fe-1c38191566d2" lineColor="#000000" source="070e4357-0466-40ef-ab3e-3496d957cbb7" target="659e6d7c-2c0f-46e9-9cfd-1d1f2419c366" archimateRelationship="4a4d0398-0e39-4d66-8ed0-adf3f4e87015"/>
         <sourceConnection xsi:type="archimate:Connection" id="5118116b-50ce-45fb-b035-64b8eb44de9c" lineColor="#000000" source="070e4357-0466-40ef-ab3e-3496d957cbb7" target="79b059cd-a50e-467f-8a75-8bb830bcde5c" archimateRelationship="f7cf47f3-a1f5-4e59-9965-47c2d57468db"/>
         <sourceConnection xsi:type="archimate:Connection" id="b48afe96-603c-4a4d-ac39-f9a9df556376" lineColor="#000000" source="070e4357-0466-40ef-ab3e-3496d957cbb7" target="418e9154-e48c-4aae-9fbe-3313565396fc" archimateRelationship="ffb041d5-171b-4026-8af7-3be7002d803a"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="01cde540-68d5-4904-8c3a-9bb1c61a5275" targetConnections="4094897e-03dc-4761-826b-a9ffb8afcc47" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="b3e4994d-f738-4e6b-9898-3dd65cb93705">
-        <bounds x="132" y="216" width="120" height="55"/>
+        <bounds x="312" y="144" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="bf648c48-5122-4628-bc6c-3c84eabdba55" lineColor="#000000" source="01cde540-68d5-4904-8c3a-9bb1c61a5275" target="7e953be4-bf94-4eec-8a3d-d23709888e41" archimateRelationship="b7f2813b-fc10-409f-88a8-215b76790562"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="659e6d7c-2c0f-46e9-9cfd-1d1f2419c366" targetConnections="aeb6824a-7e88-42c3-a9fe-1c38191566d2" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="45f4b885-8f21-45cd-a7d4-b63b738a6191">
-        <bounds x="288" y="216" width="120" height="55"/>
+        <bounds x="468" y="144" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="7e953be4-bf94-4eec-8a3d-d23709888e41" targetConnections="bf648c48-5122-4628-bc6c-3c84eabdba55" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="c7aa225f-8a77-4476-afc3-d623f4a356f8">
-        <bounds x="132" y="108" width="120" height="55"/>
+        <bounds x="312" y="36" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="6ff6b111-1901-4be3-948e-6f4448674e95" targetConnections="c056a90f-08a0-4c67-9f63-863e4d849568" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="921c9cd7-a4db-4447-a0ca-84c3c661f3d1">
         <bounds x="636" y="252" width="120" height="55"/>
@@ -1734,24 +1741,37 @@ ds:CommissieDataset a void:Dataset</documentation>
         <bounds x="636" y="360" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="79b059cd-a50e-467f-8a75-8bb830bcde5c" targetConnections="5118116b-50ce-45fb-b035-64b8eb44de9c" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="bc7fbdc0-8dd9-4a1e-8909-c6d84f9ebecf">
-        <bounds x="108" y="420" width="120" height="55"/>
+        <bounds x="288" y="348" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="64a4533b-ff6b-40d8-8236-2479b6bb7b01" lineColor="#000000" source="79b059cd-a50e-467f-8a75-8bb830bcde5c" target="7adac770-0293-4990-bda3-e98ae57beaba" archimateRelationship="a3b36239-3aa4-49b0-8757-c34133f0cb36"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="7adac770-0293-4990-bda3-e98ae57beaba" targetConnections="64a4533b-ff6b-40d8-8236-2479b6bb7b01" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="ffe03670-9526-4494-8f59-0affcb15d0eb">
-        <bounds x="108" y="504" width="120" height="55"/>
+        <bounds x="288" y="432" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="418e9154-e48c-4aae-9fbe-3313565396fc" targetConnections="b48afe96-603c-4a4d-ac39-f9a9df556376" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="0b436b80-1563-4a6f-b305-3969708ecc36">
-        <bounds x="288" y="420" width="120" height="55"/>
+        <bounds x="468" y="348" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="a0d29dcf-62f6-4f77-96b7-458606ba2cad" lineColor="#000000" source="418e9154-e48c-4aae-9fbe-3313565396fc" target="5436a815-3d2d-45ac-82e7-81ad6f687596" archimateRelationship="20c3e4dc-9dee-402b-afad-3f305eecaf93"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="5436a815-3d2d-45ac-82e7-81ad6f687596" targetConnections="a0d29dcf-62f6-4f77-96b7-458606ba2cad" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="ebd45516-5f43-40b8-8906-801bdb0a4b57">
-        <bounds x="288" y="504" width="120" height="55"/>
+        <bounds x="468" y="432" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="943df211-fce2-46e1-9abd-ebabfa06a74d" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="ffe03670-9526-4494-8f59-0affcb15d0eb">
         <bounds x="828" y="144" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="e20b44d2-3539-4c35-ac5e-1b1b04a1eb54" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="ebd45516-5f43-40b8-8906-801bdb0a4b57">
         <bounds x="1008" y="144" width="120" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="7504c3f8-c7bd-4760-9f19-f2b13ea398b0" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="9adf30b5-8516-45b9-9943-77367e05c36b">
+        <bounds x="13" y="36" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="416cc230-7617-4d5c-83b2-9f9fa10e37c2" lineColor="#000000" source="7504c3f8-c7bd-4760-9f19-f2b13ea398b0" target="72ebdb7b-182a-475f-955e-e2d2f06cd639" archimateRelationship="cf046ce7-18ef-41c8-b3ae-f0f6bc258b52"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="2e10e9e9-744a-458d-b338-a4e7ff43bf4e" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="02100b70-bc2e-411c-a09c-571bf1adc1c4">
+        <bounds x="13" y="108" width="120" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="72ebdb7b-182a-475f-955e-e2d2f06cd639" targetConnections="416cc230-7617-4d5c-83b2-9f9fa10e37c2" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="da9430e3-b968-4aa0-99bc-8e145ea64667">
+        <bounds x="156" y="36" width="120" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="ae734bc4-b55b-4caf-8b01-2ea86435d749" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="bb588cd1-73e7-414e-84d3-b976c39c55fa">
+        <bounds x="24" y="198" width="120" height="55"/>
       </child>
     </element>
   </folder>
