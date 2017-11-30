@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://data.nationaalarchief.nl/terms#"
-     xml:base="http://data.nationaalarchief.nl/terms"
+<rdf:RDF xmlns="http://data.nationaalarchief.nl/terms/"
+     xml:base="http://data.nationaalarchief.nl/terms/"
      xmlns:ore="http://www.openarchives.org/ore/terms/"
      xmlns:adms="http://www.w3.org/ns/adms#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
@@ -10,7 +10,7 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:edm="http://www.europeana.eu/schemas/edm/"
      xmlns:core="http://purl.org/vocab/frbr/core#"
-     xmlns:na="http://lod-data.nationaalarchief.nl/terms/"
+     xmlns:na="http://data.nationaalarchief.nl/terms/"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:lode="http://linkedevents.org/ontology/"
@@ -24,7 +24,7 @@
      xmlns:hg="http://rdf.histograph.io/"
      xmlns:crm="http://www.cidoc-crm.org/cidoc-crm/"
      xmlns:dc="http://purl.org/dc/elements/1.1/">
-    <owl:Ontology rdf:about="http://data.nationaalarchief.nl/terms">
+    <owl:Ontology rdf:about="http://data.nationaalarchief.nl/terms/">
         <owl:versionInfo>5.2.4</owl:versionInfo>
         <dcterms:issued xml:lang="nl">2017-10-30</dcterms:issued>
         <dc:modified xml:lang="nl">2017-10-30</dc:modified>
@@ -55,9 +55,9 @@
     
 
 
-    <!-- http://data.nationaalarchief.nl/termswie -->
+    <!-- http://data.nationaalarchief.nl/terms/wie -->
 
-    <owl:Class rdf:about="http://data.nationaalarchief.nl/termswie">
+    <owl:Class rdf:about="http://data.nationaalarchief.nl/terms/wie">
         <owl:equivalentClass rdf:resource="http://www.w3.org/ns/prov#Agent"/>
         <owl:equivalentClass rdf:resource="http://www.w3.org/ns/prov#Person"/>
     </owl:Class>
