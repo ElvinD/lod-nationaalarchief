@@ -100,28 +100,236 @@ Bijvoorbeeld: https://bag.basisregistraties.overheid.nl/doc/begrip/RegistratiefG
     </folder>
     <folder name="data" id="549eec2a-1840-48a1-b974-cc135bdd91ba">
       <folder name="RDF" id="2fcddbf0-bd0c-4745-83ad-2430f2541d2d">
-        <element xsi:type="archimate:DataObject" name="prefix ds" id="9adf30b5-8516-45b9-9943-77367e05c36b">
-          <documentation>@prefix ds: &lt;http://na.metamatter.nl/NadereToegangen/resource/Dataset/> . (oud)
-@prefix ds: &lt;lod-data.nationaalarchief.nl/terms/Dataset/>
-
-voorstel om te hernomen naar cat want ds:NT00373 a dcat:CatalogRecord is een CatalogRecord</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="bgn:Person" id="3b4aa45f-cff7-49ca-a2b1-a468ffdb37c8">
-          <documentation>http://biographynet.nl/schema/Person
-bgn:Person rdf:type owl:Class ;
-           owl:equivalentClass def:MinisterInGovernment ,
-                               def:PersonEntity ,
-                               def:SecretaryOfState .</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="dcat:CatalogRecord" id="b64a1f66-9f6a-46fd-a0b6-00d137f06d02">
-          <documentation>Another important class in DCAT is dcat:CatalogRecord which describes a dataset entry in the catalog. Notice that while dcat:Dataset represents the dataset itself, dcat:CatalogRecord represents the record that describes a dataset in the catalog. The use of the CatalogRecord is considered optional. It is used to capture provenance information about dataset entries in a catalog. If this distinction is not necessary then CatalogRecord can be safely ignored.
+        <folder name="def (Nationaal Archief)" id="7670af6b-8310-46ab-a6e5-22374ad4495f">
+          <element xsi:type="archimate:DataObject" name="def:AccessType" id="b3e4994d-f738-4e6b-9898-3dd65cb93705">
+            <documentation>def:AccessType rdf:type owl:Class ;
+      rdfs:subClassOf skos:Concept ;
+      skos:prefLabel &quot;Documentsoort in een toegang tot een archief&quot;@nl ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:AdditionalFindingAid" id="ed25277c-e859-4114-8fb0-59a291d29363">
+            <documentation>def:AdditionalFindingAid rdf:type owl:Class ;
+              rdfs:label &quot;Methodische ontsluiting van één of meer archieven&quot;^^xsd:string ;
+              rdfs:subClassOf def:FindingAid ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:ArchivalEntity" id="22cf36e3-7965-4b9a-883c-09e2d7f718ed">
+            <documentation>def:ArchivalEntity a owl:Class ;
+    rdfs:label &quot;Entity in an Archives domain&quot;^^xsd:string ;
+    owl:equivalentClass edm:NonInformationResource ;
+    rdfs:comment &quot;An Archival entity represents entities referred to across the boundaries of archival records&quot;^^xsd:string ;
+    owl:disjointWith def:ArchivalReference ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:ArchivalInventory" id="59955224-8ee5-4ab7-9e91-a7a7d69891d8">
+            <documentation>def:ArchivalInventory rdf:type owl:Class ;
+      rdfs:label &quot;Inventaris op een archief,de meest omvattende toegang&quot;^^xsd:string ;
+      rdfs:subClassOf def:FormalFindingAid ;
+      owl:disjointWith def:ArchivalInventoryElement ;
+     * rdfs:isDefinedBy def:InventoryTypeAccess ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:ArchivalInventoryElement" id="89bf12a8-73f6-461e-ac8b-62084dce3749">
+            <documentation>def:ArchivalInventoryElement rdf:type owl:Class ;
+      rdfs:label &quot;Onderdeel van een inventaris op een archief&quot;^^xsd:string ;
+      rdfs:subClassOf def:FormalFindingAid ;
+      owl:disjointWith def:ArchivalInventory ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:ArchivalReference " id="5eff7a6f-230a-44b9-87fc-27b87e194e0d">
+            <documentation>def:ArchivalReference a owl:Class ;
+    rdfs:label &quot;Reference in an Archives domain&quot;^^xsd:string ;
+    owl:equivalentClass edm:InformationResource , dbo:Reference , dct:BibliographicResource ;
+    rdfs:comment &quot;An Archival Reference is the document-bound stand-in for archival entities referred to in archival records. May also be a dataset&quot;^^xsd:string ;
+    owl:disjointWith def:ArchivalEntity ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:ArchivalSubSection" id="cceedb24-0477-4697-a659-0603c482f453">
+            <documentation>def:ArchivalSubSection rdf:type owl:Class ;
+      rdfs:label &quot;Sub-rubriek in een Inventaris&quot;^^xsd:string ;
+      rdfs:subClassOf def:ArchivalInventoryElement ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:Archive" id="8e5f36d9-a792-471b-9aa1-d1eb617b9439">
+            <documentation>def:Archive rdf:type owl:Class ;
+   rdfs:label &quot;Archive&quot;^^xsd:string ;
+   skos:prefLabel &quot;Archief&quot;@nl ;
+   owl:equivalentClass dbo:Archive ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:Commission" id="b895ab91-eac1-45ea-ac97-754a161472c0">
+            <documentation>def:Commission rdf:type owl:Class ; rdfs:subClassOf def:ArchivalEntity ;
+               rdfs:label &quot;Commission&quot;@en , &quot;Opdracht of aanstelling&quot;@nl ;
+               skos:prefLabel &quot;Aanstelling&quot;@nl ;
+               rdfs:comment &quot;Apart from the Commission as a Career Event, we need a Commission as an Entity, since commissions can also be a thing connected to property rights - a source of financial claims&quot;^^xsd:string ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:CommissionReference" id="5ac04ad2-e7b6-427c-84b5-62be68cd9618">
+            <documentation>def:CommissionReference a owl:Class ;
+    rdfs:label &quot;Reference to a Commission in an Archives domain&quot;^^xsd:string ;
+    rdfs:subClassOf def:ArchivalReference ;
+    rdfs:comment &quot;A Commission Reference is the reference to a Commission in a single archival record&quot;^^xsd:string ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:DetailedContentDescription" id="b6d6f1e3-1bf6-413d-8bde-4459fae16a4b">
+            <documentation>def:DetailedContentDescription rdf:type owl:Class ;
+      rdfs:label &quot;Nadere Toegang&quot;^^xsd:string ;
+      skos:prefLabel &quot;Nadere Toegang&quot;@nl ;
+      skos:definition &quot;Een Nadere Toegang bevat verdiepende beschrijving (ofwel, een omschrijving van de stukken op een niveau dieper dan de beschrijving van het inventarisnummer). Nadere Toegangen zijn meer op de inhoud van de stukken gericht.&quot;@nl ;
+      rdfs:subClassOf def:AdditionalFindingAid ;
+      owl:disjointWith def:ArchivalInventory ;
+      def:modelsConceptOf def:DetailedInventoryTypeAccess ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:DetailedInventoryTypeAccess" id="4d31448f-86bd-491c-b457-57c003efaaa2">
+            <documentation>GEEN DEFINITIE </documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:FindingAid" id="a5ac711c-0dcb-48b5-a68f-fd074eaec9c4">
+            <documentation>def:FindingAid rdf:type owl:Class ;
+              rdfs:label &quot;Toegang tot een of meer archieven&quot;^^xsd:string ;
+              rdfs:subClassOf def:GuideForTheUseOfArchives ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:FormalFindingAid" id="350c27e4-1413-4cee-a13e-883971dcf9c0">
+            <documentation>def:FormalFindingAid rdf:type owl:Class ;
+              rdfs:label &quot;Methodische ontsluitng van één of meer archieven&quot;^^xsd:string ;
+              rdfs:subClassOf def:FindingAid ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:GraphicalRecord" id="2bf47a43-f35f-484f-a2fe-407e6d0fdb56">
+            <documentation>def:GraphicalRecord a owl:Class;
+rdfs:subClassOf def:ArchivalReference;
+owl:equivalentClass ore:Aggregation;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:GuideForTheUseOfArchives" id="db062d65-5034-4a2a-b183-a2bcfb39d019">
+            <documentation>def:GuideForTheUseOfArchives rdf:type owl:Class ;
+              rdfs:label &quot;Abstracte klasse die zowel de zoekhulpen als de gebruikersgidsen omspant&quot;^^xsd:string ;
+              rdfs:subClassOf dct:BibliographicResource ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:GuideToArchives" id="2770cc56-6dcd-497e-bce9-d31ca18803c2">
+            <documentation>def:GuideToArchives rdf:type owl:Class ;
+      rdfs:label &quot;Archiefgids&quot;^^xsd:string ;
+      skos:prefLabel &quot;Archiefgids&quot;@nl ;
+      skos:definition &quot;Een archiefgids/index is een verzameling beschrijvingen op thema samengesteld die verwijst naar materiaal uit meer dan één archief.&quot;@nl ;
+      rdfs:subClassOf def:AdditionalFindingAid ;
+      owl:disjointWith def:DetailedContentDescription ;
+      def:modelsConceptOf def:GuideToArchivesTypeAccess ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:Illustration" id="3ac58f24-f9f7-4c02-8595-c6b44fdc9e18">
+            <documentation>def:Illustration df:type owl:Class;
+rdfs:subClassOf def:ArchivalEntity;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:InventoryTypeAccess " id="ca29fdda-d6bb-4b46-aa0c-0f1d69940d77">
+            <documentation>GEEN DEFINITIE</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:Map" id="d4e28347-29dd-447c-aaac-8a905268753f">
+            <documentation>def:Map df:type owl:Class;
+rdfs:subClassOf def:ArchivalEntity;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:Page" id="aa6e43bd-478b-4f39-b7b8-da282a86f610">
+            <documentation>def:Page df:type owl:Class;
+rdfs:subClassOf def:ArchivalEntity;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:PersonEntity" id="e80f443b-0e8e-4bf4-b718-cb2547e9f285">
+            <documentation>def:PersonEntity a owl:Class  ;
+    rdfs:label &quot;Person in an Archives domain&quot;^^xsd:string ;
+    rdfs:subClassOf def:ArchivalEntity ;
+    owl:equivalentClass foaf:Person , bgn:Person ;
+    rdfs:comment &quot;A Person Entity is a Person referred to across a set of archival records&quot;^^xsd:string ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:PersonReference" id="26eed749-491b-4e90-968a-dbe4f4cad18a">
+            <documentation>def:PersonReference a owl:Class ;
+    rdfs:label &quot;Reference to a Person in an Archives domain&quot;^^xsd:string ;
+    rdfs:subClassOf def:ArchivalReference ;
+    owl:disjointWith def:PersonEntity ;
+    rdfs:comment &quot;A Person Reference is the reference to a Person in a single archival record&quot;^^xsd:string ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:Photograph" id="faafe8fd-a58f-468a-bb6f-53bda8d1fa62">
+            <documentation>def:Photograph rdf:type owl:Class;
+rdfs:subClassOf def:ArchivalEntity;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:datasetClosestToSource" id="a5d5e91d-a552-41d5-a3d3-8b29a5b2b338"/>
+          <element xsi:type="archimate:DataObject" name="def:datasetWithInterpretationLayer" id="53a26a42-ad1e-4a05-89bb-0dae7a14da4c"/>
+          <element xsi:type="archimate:DataObject" name="def:hasCommission" id="18dede17-f310-4af2-a01e-3a6a302f455b">
+            <documentation>def:hasCommission
+  rdf:type rdf:ObjectProperty ;
+  rdfs:domain bgnExt:PersonEntity ;
+  rdfs:range def:CommissionReference ;
+  rdfs:label &quot;commissionnee of&quot;^^xsd:string ;
+  skos:prefLabel &quot;is aangesteld - verwerver van opdracht&quot;@nl ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:memberOf" id="b9970c73-6f62-4c17-8782-ee53b3d601a3">
+            <documentation>def:memberOf rdf:type owl:ObjectProperty ;
+   rdfs:domain rdf:Resource ;
+   rdfs:label &quot;Deel van verzameling&quot;^^xsd:string ;
+   rdfs:comment &quot;Extension meant to specify that the Resource is the domain, whereas for the range, the List is the collection of which the Resource is part&quot;@en ;
+   rdfs:range rdf:List ;
+   owl:inverseOf def:hasMember ;
+   skos:prefLabel &quot;Deel van verzameling&quot;@nl ;
+   rdfs:subPropertyOf rdfs:member ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="def:memberOf" id="fdcc2ce1-d5bc-4ddc-8f12-226be5006d85"/>
+          <element xsi:type="archimate:DataObject" name="def:modelsConceptOf" id="eb837398-db0c-4d57-b259-f2d6c6be79ac"/>
+        </folder>
+        <folder name="commBk (CommissieBoeken)" id="db55c60f-e4bf-4bc1-8bd3-b116a929641b">
+          <element xsi:type="archimate:DataObject" name="commBk:ArchiefRaadVanState" id="5927c808-fe73-44bf-bb50-2b9c3a3e2c83">
+            <documentation>commBk:ArchiefRaadVanState a def:Archive ; def:archiveName &quot;Archief Raad van State , (1574) 1581-1795 (1801)&quot;^^xsd:string ;
+        rdfs:label &quot;Archief Raad van State 1581-1795&quot;^^xsd:string ;
+        def:archiveCreator commBk:RaadVanState ;
+	def:typeOfArchive nt:StateDepartmentArchive ;
+	def:archiveAccessibility nt:StatusPublic ;
+	def:lengthOfArchive &quot;268.05 meter&quot;^^xsd:string ;
+	def:beginPeriodArchive &quot;1574&quot;^^xsd:gYear ;
+	def:firstMentionInArchive &quot;1574&quot;^^xsd:gYear ;
+	def:endPeriodArchive &quot;1795&quot;^^xsd:gYear ;
+	def:accessNumber &quot;1.01.19&quot;^^xsd:string ;
+        def:archivalDepot nt:NationaalArchief ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="commBk:CommissieLijst" id="19b6fa86-85b5-4e04-91ac-eb2f31091a5e">
+            <documentation>commBk:CommissieLijst a rdf:List , owl:NamedIndividual, prov:Entity ;
+               rdfs:label &quot;De lijst van commissies zoals die gegeven is in de Commissieboeken&quot;^^xsd:string ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="commBk:GebeurtenissenLijst" id="ecde23c1-abd3-4478-8f26-32af04ad4845">
+            <documentation>commBk:GebeurtenissenLijst a rdf:List , owl:NamedIndividual , prov:Entity ;
+               rdfs:label &quot;De lijst van Gebeurtenissen, conform het SEM-vocabulaire&quot;^^xsd:string ;
+               prov:agent nt:GerardKuys ;
+               prov:wasGeneratedBy [ a prov:Activity ; prov:wasAssociatedWith nt:GerardKuys ; prov:startedAtTime &quot;2017-07-14T01:01:01Z&quot;^^xsd:dateTime ] ; </documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="commBk:NT00194Comm﻿[n]" id="346ae25d-adfb-47c7-a082-3bd2984fe625">
+            <documentation>commBk:NT00194Comm﻿1 a def:CommissionReference ; def:memberOf commBk:CommissieLijst ;
+	dct:relation [ a def:PersonReference ;
+	def:fullNameDesignation &quot;Gregorius van Thiras&quot;^^xsd:string ;
+	def:firstNameDesignation &quot;Gregorius&quot;^^xsd:string ;
+	def:middleNameDesignation &quot;van&quot;^^xsd:string ;
+	def:lastNameDesignation &quot;Thiras&quot;^^xsd:string ] ;
+	def:commissionDescription &quot;Commissaris van de Monstering&quot;^^xsd:string ;
+	def:sourceDescription &quot;NL-HaNA/1.01.19/1523//002//&quot;^^xsd:string ;
+	def:persistentIdentifier &quot;http://www.gahetna.nl/collectie/index/nt00194/2e8433b8-ae58-102d-8e23-0050569c51dd&quot;^^xsd:anyURI ;
+	def:commissionDate &quot;1581-08-05&quot;^^xsd:date ; def:shortDate &quot;5-8-1581&quot;^^xsd:string .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="commBk:PersonenLijst" id="35c248e9-2394-4e08-ac8e-b2b5dace96ac">
+            <documentation>commBk:PersonenLijst a rdf:List , owl:NamedIndividual , prov:Entity ;
+               rdfs:label &quot;De lijst van unieke personen (resources met URI obv uniek gemaakte naam)&quot;^^xsd:string ;
+               prov:agent nt:GerardKuys ;
+               prov:wasGeneratedBy [ a prov:Activity ; prov:wasAssociatedWith nt:GerardKuys ; prov:startedAtTime &quot;2017-02-13T01:01:01Z&quot;^^xsd:dateTime ] ; </documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="commBk:PersoonsnamenLijst" id="69ac7a0c-cccc-4bd0-9439-d651156be571">
+            <documentation>commBk:PersoonsnamenLijst a rdf:List , owl:NamedIndividual, prov:Entity ;
+               rdfs:label &quot;De lijst van unieke persoonsnamen (literals)&quot;^^xsd:string ;
+               prov:agent nt:GerardKuys ;
+               prov:wasGeneratedBy [ a prov:Activity ; prov:wasAssociatedWith nt:GerardKuys ; prov:startedAtTime &quot;2017-02-13T01:01:01Z&quot;^^xsd:dateTime ] ; </documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="commBk:Schipio_Meckma[n]" id="1c41089d-a051-4744-9ab2-f6592e70505c">
+            <documentation>commBk:Schipio_Meckma	rdf:type	def:PersonEntity ;
+	bgnExt:hasName [ a bgnExt:PersonName ; bgnExt:prepositionName	&quot;Schipio&quot;^^xsd:string ;
+	bgnExt:fullname	&quot;Schipio Meckma&quot;^^xsd:string ;
+	bgnExt:postpositionName  &quot;Meckma&quot;^^xsd:string ] ;
+	def:hasCommission	commBk:NT00194Comm10 ;
+	bgnExt:sex	bgnExt:Male ;
+	def:memberOf	commBk:PersonenLijst .</documentation>
+          </element>
+        </folder>
+        <folder name="dbo (dBPedia)" id="f43cdc60-8035-4cd6-8b88-df6e5f825670">
+          <element xsi:type="archimate:DataObject" name="dbo:Archive" id="09b3c319-1e9d-4c88-a1c7-1fb23e30bd50"/>
+          <element xsi:type="archimate:DataObject" name="dbo:Reference" id="d27d8572-1a97-4eeb-bc5c-18617a80dee6"/>
+        </folder>
+        <folder name="dcat" id="8a92f987-9d28-4a73-931d-befb1bf62570">
+          <element xsi:type="archimate:DataObject" name="dcat:CatalogRecord" id="b64a1f66-9f6a-46fd-a0b6-00d137f06d02">
+            <documentation>Another important class in DCAT is dcat:CatalogRecord which describes a dataset entry in the catalog. Notice that while dcat:Dataset represents the dataset itself, dcat:CatalogRecord represents the record that describes a dataset in the catalog. The use of the CatalogRecord is considered optional. It is used to capture provenance information about dataset entries in a catalog. If this distinction is not necessary then CatalogRecord can be safely ignored.
 
 Definition:	A record in a data catalog, describing a single dataset.
 
 Usage note:	 this class is optional and not all catalogs will use it. It exists for catalogs where a distinction is made between metadata about a dataset and metadata about the dataset's entry in the catalog. For example, the publication date property of the dataset reflects the date when the information was originally made available by the publishing agency, while the publication date of the catalog record is the date when the dataset was added to the catalog. In cases where both dates differ, or where only the latter is known, the publication date should only be specified for the catalog record. Notice that the W3C PROV Ontology [prov-o] allows describing further provenance information such as the details of the process and the agent involved in a particular change to a dataset.</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="dcat:Dataset" id="157a633e-a671-4606-a19e-22b5eab340b6">
-          <documentation>Definition: A collection of data, published or curated by a single agent, and available for access or download in one or more formats.
+          </element>
+          <element xsi:type="archimate:DataObject" name="dcat:Dataset" id="157a633e-a671-4606-a19e-22b5eab340b6">
+            <documentation>Definition: A collection of data, published or curated by a single agent, and available for access or download in one or more formats.
 
 Sub class of:dctype:Dataset
 
@@ -129,23 +337,49 @@ Usage note:	This class represents the actual dataset as published by the dataset
 
 See also:	Catalog record
 https://www.w3.org/TR/vocab-dcat/#Class:_Dataset</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:Commission" id="b895ab91-eac1-45ea-ac97-754a161472c0">
-          <documentation>def:Commission rdf:type owl:Class ; rdfs:subClassOf def:ArchivalEntity ;
-               rdfs:label &quot;Commission&quot;@en , &quot;Opdracht of aanstelling&quot;@nl ;
-               skos:prefLabel &quot;Aanstelling&quot;@nl ;
-               rdfs:comment &quot;Apart from the Commission as a Career Event, we need a Commission as an Entity, since commissions can also be a thing connected to property rights - a source of financial claims&quot;^^xsd:string ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:hasCommission" id="18dede17-f310-4af2-a01e-3a6a302f455b">
-          <documentation>def:hasCommission
-  rdf:type rdf:ObjectProperty ;
-  rdfs:domain bgnExt:PersonEntity ;
-  rdfs:range def:CommissionReference ;
-  rdfs:label &quot;commissionnee of&quot;^^xsd:string ;
-  skos:prefLabel &quot;is aangesteld - verwerver van opdracht&quot;@nl ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="ds:BewindsliedenDataset" id="d2f2e84f-726b-4afc-93d1-812bd90faee9">
-          <documentation>ds:BewindsliedenDataset a dcat:Dataset , void:Dataset ;
+          </element>
+          <element xsi:type="archimate:DataObject" name="dcat:distribution" id="37e17dca-a55e-42d0-9ddc-de1008e34818"/>
+          <element xsi:type="archimate:DataObject" name="dcat:keyword" id="ae78e82c-5573-454b-8a0a-870e285089ef"/>
+          <element xsi:type="archimate:DataObject" name="dcat:theme" id="9594e097-554b-4e71-8d67-789fe668d806">
+            <documentation>Definition:	The main category of the dataset. A dataset can have multiple themes.
+Sub property of:	dct:subject
+Domain:	dcat:Dataset
+Range:	skos:Concept
+Usage note:	The set of skos:Concepts used to categorize the datasets are organized in a skos:ConceptScheme describing all the categories and their relations in the catalog.
+See also:	catalog themes taxonomy
+
+https://www.w3.org/TR/vocab-dcat/</documentation>
+          </element>
+        </folder>
+        <folder name="bgn (BiographyNet)" id="d28d0a6c-fd11-465b-8645-4b29ba9fe231">
+          <element xsi:type="archimate:DataObject" name="bgn:Person" id="3b4aa45f-cff7-49ca-a2b1-a468ffdb37c8">
+            <documentation>http://biographynet.nl/schema/Person
+bgn:Person rdf:type owl:Class ;
+           owl:equivalentClass def:MinisterInGovernment ,
+                               def:PersonEntity ,
+                               def:SecretaryOfState .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="bgnExt:Male" id="ecfb74fe-b9e8-407f-b231-1cd0ffdb944b"/>
+          <element xsi:type="archimate:DataObject" name="bgnExt:PersonName" id="1870fbf1-6883-4414-8732-5772b247c015">
+            <documentation>bgnExt:PersonName rdf:type owl:Class ;
+  rdfs:subClassOf bgnExt:ArchivalName ;
+  rdfs:label &quot;Person name&quot;^^xsd:string ;
+  owl:disjointWith bgnExt:PersonEntity , def:PersonReference ;
+  owl:equivalentClass dbo:Name , bgn:Name ;
+  skos:prefLabel &quot;Persoonsnaam&quot;@nl ;</documentation>
+          </element>
+        </folder>
+        <folder name="dublincore" id="a9720741-eed0-4678-9f9e-09adeb678f80">
+          <element xsi:type="archimate:DataObject" name="dct:BibliographicResource" id="4e31ca50-b8e2-453f-af08-48f1aee133fe">
+            <documentation>URI:	http://purl.org/dc/terms/BibliographicResource
+Label:	Bibliographic Resource
+Definition:	A book, article, or other documentary resource.</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="dct:subject" id="f681a3e2-1f36-4cf1-9032-af28e7f7604c"/>
+        </folder>
+        <folder name="ds (Dataset NA)" id="00a77737-7aee-4437-a927-58bb5f5ecbbb">
+          <element xsi:type="archimate:DataObject" name="ds:BewindsliedenDataset" id="d2f2e84f-726b-4afc-93d1-812bd90faee9">
+            <documentation>ds:BewindsliedenDataset a dcat:Dataset , void:Dataset ;
                      void:classPartition [ void:class foaf:Agent ] ;
                      void:sparqlEndpoint &lt;http://gaf.nationaalarchief.nl/sparql/> ;
                      void:rootResource &lt;http://lod-data.nationaalarchief.nl/nt/NT00334/wie/Bewindslieden/> ;
@@ -156,9 +390,9 @@ https://www.w3.org/TR/vocab-dcat/#Class:_Dataset</documentation>
                      def:datasetClosestToSource bewL:BewindsliedenLijst ;
                      def:datasetWithInterpretationLayer bewL:PartijenLijst ;
                      def:datasetWithInterpretationLayer bewL:ArchievenLijstBewindspersonen ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="ds:CommissieDataset" id="8e6559ba-c888-4527-98ea-a39baf1e19aa">
-          <documentation>ds:CommissieDataset a dcat:Dataset , void:Dataset ;
+          </element>
+          <element xsi:type="archimate:DataObject" name="ds:CommissieDataset" id="8e6559ba-c888-4527-98ea-a39baf1e19aa">
+            <documentation>ds:CommissieDataset a dcat:Dataset , void:Dataset ;
                      void:classPartition [ void:class bgn:Person ] ;
                      void:propertyPartition [ void:property def:hasCommission ] ;
                      void:sparqlEndpoint &lt;http://na.metamatter.nl/sparql> ;
@@ -171,18 +405,89 @@ https://www.w3.org/TR/vocab-dcat/#Class:_Dataset</documentation>
                      def:datasetClosestToSource commBk:CommissieLijst ;
                      def:datasetWithInterpretationLayer commBk:PersonenLijst ;
 .</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="ds:NT00334" id="b19b5ef9-cc02-4a9c-b3ca-85fa6587f8d1">
-          <documentation>ds:NT00334 a dcat:CatalogRecord, owl:NamedIndividual ;
+          </element>
+          <element xsi:type="archimate:DataObject" name="ds:NT00194" id="f1eb36b7-3e84-4e4a-801e-466bd1de5d8d">
+            <documentation>ds:NT00194 a dcat:CatalogRecord , owl:NamedIndividual ;
+           rdfs:label &quot;Catalogus Record op de Nadere Toegang Commissieboeken Raad van State&quot;^^xsd:string ;
+           dct:issued &quot;2016-08&quot;^^xsd:gYearMonth ;
+           foaf:primaryTopic ds:CommissieDataset ;
+           dct:title &quot;Raad van State: Naamindex op de commissieboeken&quot;@nl ;
+           dct:subject nt:NadereToegangCommissieboeken ;
+           dct:description &quot;Data op de Nadere Toegang: Raad van State - Commissieboeken&quot;@nl ;
+	   def:persistentIdentifier &quot;http://www.gahetna.nl/collectie/index/nt00194/02b4f924-cd6d-102c-9f8b-005056a23d00&quot;^^xsd:anyURI ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="ds:NT00334" id="b19b5ef9-cc02-4a9c-b3ca-85fa6587f8d1">
+            <documentation>ds:NT00334 a dcat:CatalogRecord, owl:NamedIndividual ;
 	   dct:issued &quot;2016-10&quot;^^xsd:gYearMonth ;
            foaf:primaryTopic ds:BewindsliedenDataset ;
            dc:subject &quot;NL NA NT00334&quot;^^xsd:string ;
            dct:subject nt:BewindsliedenIndex ;
            dct:title &quot;Bewindslieden: Archieven van ministers en staatssecretarissen (1798-2010)&quot;@nl ;
            dct:description &quot;Data op de Archiefgids: Bewindsliedenindex 1798-2010&quot;@nl ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="foaf:primaryTopic" id="41876d42-cd76-4d4c-a329-4497b6cb48bf">
-          <documentation>Property: foaf:primaryTopic
+          </element>
+        </folder>
+        <folder name="edm (Europeana)" id="e20c1014-608c-4985-809f-08db444bdd59">
+          <element xsi:type="archimate:DataObject" name="edm:InformationResource" id="fd68b3d0-46fe-4eb3-a276-a05796e11c65">
+            <documentation>###  http://www.europeana.eu/schemas/edm/InformationResource
+edm:InformationResource rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Class ;
+                                              owl:unionOf ( frbroo:F1_Work
+                                                            frbroo:F2_Expression
+                                                            frbroo:F3_Manifestation_Product_Type
+                                                            frbroo:F4_Manifestation_Singleton
+                                                          )
+                                            ] ,
+                                            [ rdf:type owl:Class ;
+                                              owl:unionOf ( frbr_core:Expression
+                                                            frbr_core:Manifestation
+                                                            frbr_core:Work
+                                                          )
+                                            ] ;
+                        rdfs:label &quot;Information Resource&quot;@en ;
+                        skos:definition &quot;An information resource is a resource whose essential characteristics can be conveyed in a single message. It can be associated with a URI, it can have a representation, for example: a text is an InformationResource.&quot;@en .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="edm:NonInformationResource" id="e5dc33a7-6f8b-45de-8790-da1cc8fdd810">
+            <documentation>###  http://www.europeana.eu/schemas/edm/NonInformationResource
+edm:NonInformationResource rdf:type owl:Class ;
+                           owl:equivalentClass [ rdf:type owl:Class ;
+                                                 owl:complementOf edm:InformationResource
+                                               ] ;
+                           rdfs:label &quot;Non-Information Resource&quot;@en ;
+                           skos:definition &quot;All resources that are not information resources.&quot;@en .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="edm:ProvidedCHO" id="8c843230-2458-4baa-989b-bce44d033359">
+            <documentation>###  http://www.europeana.eu/schemas/edm/ProvidedCHO
+edm:ProvidedCHO rdf:type owl:Class ;
+                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                  owl:onProperty [ owl:inverseOf edm:aggregatedCHO
+                                                 ] ;
+                                  owl:cardinality &quot;1&quot;^^xsd:nonNegativeInteger
+                                ] ;
+                rdfs:label &quot;Provided CHO&quot;@en ;
+                skos:definition &quot;This class comprises the Cultural Heritage objects that Europeana collects descriptions about.&quot;@en ;
+                skos:example &quot;Mona Lisa, Winged Victory of Samothrace&quot;@en ;
+                skos:note &quot;This class has been mostly motivated by the need to assign a type to the “central node” in the EDM pattern, during the ingestion process, related to the XML expression of EDM at that stage. It was especially intended to fit the cases where edm:PhysicalThing  cannot be used as the type of the resource standing for the real-world object (independently of any specific data contributor perspective).&quot;@en ;
+                skos:scopeNote &quot;Rationale: This class is the range of edm:aggregatedCHO. A resource of type ProvidedCHO can be the subject of statements using edm:isRelatedTo or any more specific property.&quot;@en .</documentation>
+          </element>
+        </folder>
+        <folder name="foaf (Friend of a Friend)" id="9755b96b-f380-4d9f-882f-afaa9663f58b">
+          <element xsi:type="archimate:DataObject" name="foaf:Agent" id="460df47e-cf59-401a-8412-717c133e0b08">
+            <documentation>Class: foaf:Agent
+
+Agent - An agent (eg. person, group, software or physical artifact). 
+Status:	stable
+Properties include:	gender yahooChatID account birthday icqChatID aimChatID jabberID made mbox interest tipjar skypeID topic_interest age mbox_sha1sum status msnChatID openid holdsAccount weblog
+Used with:	maker member
+Has Subclass	Group Person Organization
+The Agent class is the class of agents; things that do stuff. A well known sub-class is Person, representing people. Other kinds of agents include Organization and Group.
+
+The Agent class is useful in a few places in FOAF where Person would have been overly specific. For example, the IM chat ID properties such as jabberID are typically associated with people, but sometimes belong to software bots.
+
+http://xmlns.com/foaf/spec/</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="foaf:Person" id="aac74a56-45b5-4af9-b714-64ca60f1cfff"/>
+          <element xsi:type="archimate:DataObject" name="foaf:primaryTopic" id="41876d42-cd76-4d4c-a329-4497b6cb48bf">
+            <documentation>Property: foaf:primaryTopic
 
 primary topic - The primary topic of some page or document. 
 Status:	stable
@@ -195,253 +500,22 @@ The primaryTopic property is functional: for any document it applies to, it can 
 It is an inverse of the isPrimaryTopicOf property, which relates a thing to a document primarily about that thing. The choice between these two properties is purely pragmatic. When describing documents, we use primaryTopic former to point to the things they're about. When describing things (people etc.), it is useful to be able to directly cite documents which have those things as their main topic - so we use isPrimaryTopicOf. In this way, Web sites such as Wikipedia or NNDB can provide indirect identification for the things they have descriptions of.
 
 http://xmlns.com/foaf/spec/</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="owl:NamedIndividual" id="45f4b885-8f21-45cd-a7d4-b63b738a6191">
-          <documentation>http://www.w3.org/2002/07/owl#NamedIndividual
-
-    &lt;Class rdf:about=&quot;http://www.w3.org/2002/07/owl#NamedIndividual&quot;>
-        &lt;rdfs:subClassOf rdf:resource=&quot;http://www.w3.org/2002/07/owl#Thing&quot;/>
-        &lt;rdfs:comment>The class of named individuals.&lt;/rdfs:comment>
-        &lt;rdfs:isDefinedBy rdf:resource=&quot;http://www.w3.org/2002/07/owl#&quot;/>
-        &lt;rdfs:label>NamedIndividual&lt;/rdfs:label>
-    &lt;/Class>
-</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="void:Dataset" id="80577857-1a9a-46b5-b1a6-a045b1838200">
-          <documentation>The fundamental concept of VoID is the dataset. A dataset is a set of RDF triples that are published, maintained or aggregated by a single provider. Unlike RDF graphs, which are purely mathematical constructs [RDF-CONCEPTS], the term dataset has a social dimension: we think of a dataset as a meaningful collection of triples, that deal with a certain topic, originate from a certain source or process, are hosted on a certain server, or are aggregated by a certain custodian. Also, typically a dataset is accessible on the Web, for example through resolvable HTTP URIs or through a SPARQL endpoint, and it contains sufficiently many triples that there is benefit in providing a concise summary.
-
-Since most datasets describe a well-defined set of entities, datasets can also be seen as a set of descriptions of certain entities, which often share a common URI prefix (such as http://dbpedia.org/resource/).
-
-In VoID, a dataset is modelled as an instance of the void:Dataset class. Such a void:Dataset instance is a single RDF resource that represents the entire dataset, and thus allows us to easily make statements about the entire dataset and all its triples.
-
-The relationship between a void:Dataset instance and the concrete triples contained in the dataset is established through access information, such as the address of a SPARQL endpoint where the triples can be accessed.
-
-The following example declares the resource :DBpedia as a void:Dataset:
-
-:DBpedia a void:Dataset .
-The resource is intended as a proxy for the well-known DBpedia dataset [DBPEDIA]. A good next step would be to make this unambiguously clear by adding general metadata and access metadata to the resource.
-
-https://www.w3.org/TR/void/</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="void:class" id="0fab3f54-8618-4b83-a462-372150376b2f">
-          <documentation>class – The rdfs:Class that is the rdf:type of all entities in a class-based partition.
-URI:http://rdfs.org/ns/void#class
-Type:owl:FunctionalProperty
-Domain:void:Dataset
-Range:rdfs:Class
-http://vocab.deri.ie/void#class</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="void:classPartition" id="a7b14282-dcdb-494b-9a1a-13239d472274">
-          <documentation>Partitioning a dataset based on classes and properties
-Class- and property-based partitioning offers a way of talking about particular classes and properties in a dataset.
-
-A class-based partition contains only that subset of a dataset which describes instances of a particular class.
-A property-based partition contains only those triples of a dataset that use a particular predicate.
-Note that void:classPartition and void:propertyPartition are subproperties of void:subset. This means that the partition is itself a dataset.
-
-A dataset that is the void:classPartition of another dataset must have exactly one void:class property. The partition contains all triples that describe entities that have this class as their rdf:type.
-
-A class-based partition with rdfs:Resource as its void:class is defined to also contain all resources that have no explicit rdf:type statement.
-
-A dataset that is the void:propertyPartition of another dataset must have exactly one void:property property. The partition contains all triples that have this property as their predicate.
-
-A partition without any statistical properties is thought to contain at least one triple. Hence, the following example asserts that the classes foaf:Person and foaf:Organization and the properties foaf:name, foaf:member, foaf:homepage and rdf:type are used in the dataset :MyDataset, without any assertion about the number of instances:
-
-:MyDataset a void:Dataset;
-    void:classPartition [ void:class foaf:Person; ];
-    void:classPartition [ void:class foaf:Organization; ];
-    void:propertyPartition [ void:property foaf:name; ];
-    void:propertyPartition [ void:property foaf:member; ];
-    void:propertyPartition [ void:property foaf:homepage; ];
-    void:propertyPartition [ void:property rdf:type; ];
-    .
-
-Property: void:classPartition
-class partition – A subset of a void:Dataset that contains only the entities of a certain rdfs:Class.
-URI:http://rdfs.org/ns/void#classPartition
-Domain:void:Dataset
-Range:void:Dataset
-Superproperty:void:subset
-http://vocab.deri.ie/void#class</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="void:property" id="9d58995d-48b9-47a8-af6a-d9fb84d2d778"/>
-        <element xsi:type="archimate:DataObject" name="void:propertyPartition" id="f837b45a-3bf0-425a-b0f5-5f077fc20ab8">
-          <documentation>Partitioning a dataset based on classes and properties
-Class- and property-based partitioning offers a way of talking about particular classes and properties in a dataset.
-
-A class-based partition contains only that subset of a dataset which describes instances of a particular class.
-A property-based partition contains only those triples of a dataset that use a particular predicate.
-Note that void:classPartition and void:propertyPartition are subproperties of void:subset. This means that the partition is itself a dataset.
-
-A dataset that is the void:classPartition of another dataset must have exactly one void:class property. The partition contains all triples that describe entities that have this class as their rdf:type.
-
-A class-based partition with rdfs:Resource as its void:class is defined to also contain all resources that have no explicit rdf:type statement.
-
-A dataset that is the void:propertyPartition of another dataset must have exactly one void:property property. The partition contains all triples that have this property as their predicate.
-
-A partition without any statistical properties is thought to contain at least one triple. Hence, the following example asserts that the classes foaf:Person and foaf:Organization and the properties foaf:name, foaf:member, foaf:homepage and rdf:type are used in the dataset :MyDataset, without any assertion about the number of instances:
-
-:MyDataset a void:Dataset;
-    void:classPartition [ void:class foaf:Person; ];
-    void:classPartition [ void:class foaf:Organization; ];
-    void:propertyPartition [ void:property foaf:name; ];
-    void:propertyPartition [ void:property foaf:member; ];
-    void:propertyPartition [ void:property foaf:homepage; ];
-    void:propertyPartition [ void:property rdf:type; ];
-    .</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="dcat:distribution" id="37e17dca-a55e-42d0-9ddc-de1008e34818"/>
-        <element xsi:type="archimate:DataObject" name="dcat:keyword" id="ae78e82c-5573-454b-8a0a-870e285089ef"/>
-        <element xsi:type="archimate:DataObject" name="dcat:theme" id="9594e097-554b-4e71-8d67-789fe668d806">
-          <documentation>Definition:	The main category of the dataset. A dataset can have multiple themes.
-Sub property of:	dct:subject
-Domain:	dcat:Dataset
-Range:	skos:Concept
-Usage note:	The set of skos:Concepts used to categorize the datasets are organized in a skos:ConceptScheme describing all the categories and their relations in the catalog.
-See also:	catalog themes taxonomy
-
-https://www.w3.org/TR/vocab-dcat/</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:datasetWithInterpretationLayer" id="53a26a42-ad1e-4a05-89bb-0dae7a14da4c"/>
-        <element xsi:type="archimate:DataObject" name="foaf:Agent" id="460df47e-cf59-401a-8412-717c133e0b08">
-          <documentation>Class: foaf:Agent
-
-Agent - An agent (eg. person, group, software or physical artifact). 
-Status:	stable
-Properties include:	gender yahooChatID account birthday icqChatID aimChatID jabberID made mbox interest tipjar skypeID topic_interest age mbox_sha1sum status msnChatID openid holdsAccount weblog
-Used with:	maker member
-Has Subclass	Group Person Organization
-The Agent class is the class of agents; things that do stuff. A well known sub-class is Person, representing people. Other kinds of agents include Organization and Group.
-
-The Agent class is useful in a few places in FOAF where Person would have been overly specific. For example, the IM chat ID properties such as jabberID are typically associated with people, but sometimes belong to software bots.
-
-http://xmlns.com/foaf/spec/</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="na:GuideToArchivesTypeAccess" id="205610c0-3a3e-4a48-85b0-0cd359a82710">
-          <documentation>na:GuideToArchivesTypeAccess a def:AccessType , owl:NamedIndividual ;
-               rdfs:label &quot;Toegang zonder verwijzing naar een inventaris&quot;^^xsd:string ;
-               skos:prefLabel &quot;Toegang zonder verwijzing naar een inventaris&quot;@nl ;
-               skos:altLabel &quot;Toegang via archiefgids&quot;@nl ;
-               skos:inScheme na:AccessToArchives ;
-               skos:broader na:AdditionalTypeAccess ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="url: .../sparql" id="c96899c4-843b-4d8d-a6bf-d433b9a27c0d">
-          <documentation>http://gaf.nationaalarchief.nl/sparql/</documentation>
-          <property key="data" value="&lt;http://na.metamatter.nl/sparql>;"/>
-        </element>
-        <element xsi:type="archimate:DataObject" name="url: ...resource/Bewindslieden/" id="6c265ab2-fd00-4d54-bcff-f858dca9135b">
-          <documentation>http://lod-data.nationaalarchief.nl/nt/NT00334/wie/Bewindslieden/</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="void:rootResource" id="46bd3d75-5f54-4490-baab-8e48d35e3e54">
-          <documentation>Many datasets are structured in a tree-like fashion, with one or a few natural “top concepts” or “entry points”, and all other entities reachable from these root resources in a small number of steps.
-
-One or more such root resources can be named using the void:rootResource property. Naming a resource as a root resource implies:
-
-that it is a central entity of particular importance in the dataset; and
-that the entire dataset can be crawled by resolving the root resource(s) and recursively following links to other URIs in the retrieved RDF responses.
-Root resources make good entry points for crawling an RDF dataset.
-
-This property is similar to void:exampleResource. While void:exampleResource names particularly representative or typical resources in the dataset, void:rootResource names particularly important or central resources that make good entry points for navigating the dataset.
-
-https://www.w3.org/TR/void/</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="void:sparqlEndpoint" id="1142acf4-6698-4fbd-a5cf-fe14543b65f1">
-          <documentation>A SPARQL endpoint that provides access to a dataset via the SPARQL protocol can be announced using void:sparqlEndpoint:
-
-:DBpedia a void:Dataset;
-    void:sparqlEndpoint &lt;http://dbpedia.org/sparql>;
-    .
-This states that the default graph of the SPARQL endpoint contains the triples in the DBpedia dataset.
-
-VoID descriptions can be deployed as part of a SPARQL Service Description. This also allows the expression of further information about the features and capabilites of the SPARQL endpoint, as described in the SPARQL 1.1 Service Description [SPARQL-SD] specification.
-
-https://www.w3.org/TR/void/</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="void:uriSpace" id="13d13cb3-783c-43cf-834b-f5a34dbcb4ac">
-          <documentation>Often, the entities described in a dataset share URIs of a common form. For example, all DBpedia entity URIs start with http://dbpedia.org/resource/.
-
-The void:uriSpace property can be used to state that all entity URIs in a dataset start with a given string. In other words, they share a common “URI namespace”.
-
-:DBpedia a void:Dataset;
-    void:uriSpace &quot;http://dbpedia.org/resource/&quot;;
-    .
-Note: The value of void:uriSpace is an RDF literal. That is, in Turtle it is written like &quot;http://dbpedia.org/resource/&quot;, not &lt;http://dbpedia.org/resource/>.</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:datasetClosestToSource" id="a5d5e91d-a552-41d5-a3d3-8b29a5b2b338"/>
-        <element xsi:type="archimate:DataObject" name="url:lod-data.nationaalarchief.nl/nt/" id="dab851c3-395c-4e18-b1d1-339e6c560b16">
-          <documentation>http://lod-data.nationaalarchief.nl/nt/</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:AccessType" id="b3e4994d-f738-4e6b-9898-3dd65cb93705">
-          <documentation>def:AccessType rdf:type owl:Class ;
-      rdfs:subClassOf skos:Concept ;
-      skos:prefLabel &quot;Documentsoort in een toegang tot een archief&quot;@nl ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="owl:Class" id="c7aa225f-8a77-4476-afc3-d623f4a356f8"/>
-        <element xsi:type="archimate:DataObject" name="rdfs:subClassOf" id="921c9cd7-a4db-4447-a0ca-84c3c661f3d1"/>
-        <element xsi:type="archimate:DataObject" name="prefix ra" id="02100b70-bc2e-411c-a09c-571bf1adc1c4">
-          <documentation>http://data.nationaalarchief.nl/terms/
-ra = RijksArchieven
-raterms = RijksArchieven
-ravo = RijksArchieven Vocab
-rav 
-rate = RijksArchieven Termen
-</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="nt:AccessToArchives" id="ffe03670-9526-4494-8f59-0affcb15d0eb">
-          <documentation>nt:AccessToArchives a skos:ConceptScheme ;
+          </element>
+        </folder>
+        <folder name="nt (Nationaal Archief)" id="16668d84-2794-4604-bf11-b58669ca7a99">
+          <element xsi:type="archimate:DataObject" name="nt:AccessToArchives" id="ffe03670-9526-4494-8f59-0affcb15d0eb">
+            <documentation>nt:AccessToArchives a skos:ConceptScheme ;
                       skos:prefLabel &quot;Taxonomie van archiefbeschrijvingen&quot;@nl ;
                       rdfs:label &quot;Inventory Structure as a Taxonomy&quot;^^xsd:string ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="nt:AdditionalTypeAccess" id="ebd45516-5f43-40b8-8906-801bdb0a4b57">
-          <documentation>nt:AdditionalTypeAccess a def:AccessType , owl:NamedIndividual ;
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:AdditionalTypeAccess" id="ebd45516-5f43-40b8-8906-801bdb0a4b57">
+            <documentation>nt:AdditionalTypeAccess a def:AccessType , owl:NamedIndividual ;
                rdfs:label &quot;Ontsluiting van een archief complementair aan een inventaris&quot;^^xsd:string ;
                skos:prefLabel &quot;Ontsluiting van een archief complementair aan een inventaris&quot;@nl ;
                skos:topConceptOf nt:AccessToArchives ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="skos:Concept" id="5b4e2088-e68f-4184-aaad-8b9b204e674b">
-          <documentation>The class skos:Concept is the class of SKOS concepts.
-
-A SKOS concept can be viewed as an idea or notion; a unit of thought. However, what constitutes a unit of thought is subjective, and this definition is meant to be suggestive, rather than restrictive.
-
-The notion of a SKOS concept is useful when describing the conceptual or intellectual structure of a knowledge organization system, and when referring to specific ideas or meanings established within a KOS.
-
-Note that, because SKOS is designed to be a vehicle for representing semi-formal KOS, such as thesauri and classification schemes, a certain amount of flexibility has been built in to the formal definition of this class.
-
-https://www.w3.org/2009/08/skos-reference/skos.html#Concept</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="skos:broader" id="0b436b80-1563-4a6f-b305-3969708ecc36"/>
-        <element xsi:type="archimate:DataObject" name="skos:inScheme" id="bc7fbdc0-8dd9-4a1e-8909-c6d84f9ebecf"/>
-        <element xsi:type="archimate:DataObject" name="dct:subject" id="f681a3e2-1f36-4cf1-9032-af28e7f7604c"/>
-        <element xsi:type="archimate:DataObject" name="def:DetailedContentDescription" id="b6d6f1e3-1bf6-413d-8bde-4459fae16a4b">
-          <documentation>def:DetailedContentDescription rdf:type owl:Class ;
-      rdfs:label &quot;Nadere Toegang&quot;^^xsd:string ;
-      skos:prefLabel &quot;Nadere Toegang&quot;@nl ;
-      skos:definition &quot;Een Nadere Toegang bevat verdiepende beschrijving (ofwel, een omschrijving van de stukken op een niveau dieper dan de beschrijving van het inventarisnummer). Nadere Toegangen zijn meer op de inhoud van de stukken gericht.&quot;@nl ;
-      rdfs:subClassOf def:AdditionalFindingAid ;
-      owl:disjointWith def:ArchivalInventory ;
-      def:modelsConceptOf def:DetailedInventoryTypeAccess ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:GuideToArchives" id="2770cc56-6dcd-497e-bce9-d31ca18803c2">
-          <documentation>def:GuideToArchives rdf:type owl:Class ;
-      rdfs:label &quot;Archiefgids&quot;^^xsd:string ;
-      skos:prefLabel &quot;Archiefgids&quot;@nl ;
-      skos:definition &quot;Een archiefgids/index is een verzameling beschrijvingen op thema samengesteld die verwijst naar materiaal uit meer dan één archief.&quot;@nl ;
-      rdfs:subClassOf def:AdditionalFindingAid ;
-      owl:disjointWith def:DetailedContentDescription ;
-      def:modelsConceptOf def:GuideToArchivesTypeAccess ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:memberOf" id="b9970c73-6f62-4c17-8782-ee53b3d601a3">
-          <documentation>def:memberOf rdf:type owl:ObjectProperty ;
-   rdfs:domain rdf:Resource ;
-   rdfs:label &quot;Deel van verzameling&quot;^^xsd:string ;
-   rdfs:comment &quot;Extension meant to specify that the Resource is the domain, whereas for the range, the List is the collection of which the Resource is part&quot;@en ;
-   rdfs:range rdf:List ;
-   owl:inverseOf def:hasMember ;
-   skos:prefLabel &quot;Deel van verzameling&quot;@nl ;
-   rdfs:subPropertyOf rdfs:member ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="nt:BewindsliedenIndex" id="92884cb3-9105-417d-a082-9f5652204dcd">
-          <documentation>nt:BewindsliedenIndex a def:GuideToArchives , owl:NamedIndividual ;
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:BewindsliedenIndex" id="92884cb3-9105-417d-a082-9f5652204dcd">
+            <documentation>nt:BewindsliedenIndex a def:GuideToArchives , owl:NamedIndividual ;
                    rdfs:label &quot;Bewindslieden: Archieven van ministers en staatssecretarissen (1798-2010)&quot;@nl ;
                    dct:identifier &quot;NT00334&quot;^^xsd:string ;
                    dcat:record ds:NT00334 ;
@@ -452,22 +526,125 @@ https://www.w3.org/2009/08/skos-reference/skos.html#Concept</documentation>
                    dct:description &quot;In deze zoekgids is informatie te vinden over uitsluitend de archieven van de bewindspersonen. &quot;^^xsd:string ; 
 		   rdfs:comment &quot;Index van bewindslieden, hun functie in een kabinet sinds 1798 en de archieven die zij hebben nagelaten.&quot;^^xsd:string ;
 </documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="owl:ObjectProperty" id="a04d9397-9c90-49b0-8904-2d949b926b17">
-          <documentation>An owl:ObjectProperty is defined as an instance of the OWL class owl:ObjectProperty.
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:CentraleArchiefSelectiedienst" id="26668890-fb3c-4de3-971d-b610ebabe092">
+            <documentation>nt:CentraleArchiefSelectiedienst a org:FormalOrganization , owl:NamedIndividual ;
+                  org:subOrganizationOf nt:NationaalArchief ;
+                  rdfs:label &quot;Centrale Archief Selectiedienst&quot;^^xsd:string ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:GuideToArchivesTypeAccess" id="205610c0-3a3e-4a48-85b0-0cd359a82710">
+            <documentation>nt:GuideToArchivesTypeAccess a def:AccessType , owl:NamedIndividual ;
+               rdfs:label &quot;Toegang zonder verwijzing naar een inventaris&quot;^^xsd:string ;
+               skos:prefLabel &quot;Toegang zonder verwijzing naar een inventaris&quot;@nl ;
+               skos:altLabel &quot;Toegang via archiefgids&quot;@nl ;
+               skos:inScheme nt:AccessToArchives ;
+               skos:broader nt:AdditionalTypeAccess ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:NAInventaris_1-01-19_2623" id="b91d7120-fe03-43c2-ba19-cc923e565a23">
+            <documentation>nt:NAInventaris_1-01-19_2623 rdf:type def:ArchivalInventory ;
+                                   dct:creator nt:WGvanOijen , nt:EAThMSchreuder , nt:HAJvanSchie ;
+                                   def:status nt:StatusFinal ;
+				   dcat:theme &lt;http://nl.dbpedia.org/resource/Raad_van_State_(historisch)> ;
+				   dct:issued &quot;2008&quot;^^xsd:gYear ;
+                                   dc:subject &quot;NL NA 1.01.19&quot;^^xsd:string ;
+                                   dct:subject commBk:ArchiefRaadVanState ;
+                                   rdfs:label &quot;Inventaris van het archief van de Raad van State 1581-1795&quot;^^xsd:string ;
+                                   dct:title &quot;Inventaris van het archief van de Raad van State, (1574) 1581-1795 (1801)&quot;^^xsd:string ;
+                                   dct:alternative &quot;Raad van State, 1581-1795&quot;@nl ;
+                                   def:numberOfInventoryItems &quot;2398&quot;^^xsd:integer ;
+                                   dct:publisher nt:NationaalArchief ;
+                                   def:fullMention &quot;Nationaal Archief, Den Haag, Raad van State, nummer toegang 1.01.19, inventarisnummer 2623&quot;^^xsd:string ;
+				   def:shortMention &quot;NL-HaNA, Raad van State, 1581-1795, 1.01.19, inv.nr. 2623&quot;^^xsd:string ;
+				   dct:description &quot;De Raad van State was oorspronkelijk gedacht als het centrale regeringsorgaan van de geünieerde provinciën, maar nam spoedig een aan de Staten-Generaal ondergeschikte functie in. De Raad had de zorg voor de het verdedigingsapparaat te land (leger, vestingen en magazijnen), voornamelijk in logistieke zin. In perioden van grote stadhouderlijke macht was de raad ook sterk betrokken bij operationele aangelegenheden. De Raad van State had tevens een belangrijke taak in het financiële beleid; hij maakte de begroting op die ter goedkeuring aan de Staten-Generaal en provinciale Staten werd voorgelegd. De raad had daarenboven een uitvoerende taak bij het bestuur van gebieden die op de vijand waren veroverd (de zgn. Generaliteitslanden: Staats-Brabant, Staats-Vlaanderen, Maastricht en de Landen van Overmaze, Wedde en Westerwoldingerland), in het bijzonder de financiële aangelegenheden. Voorts was de Raad van State het belangrijkste rechtscollege der Generaliteit. Naast rechtspraak in de aangelegenheden die tot de bijzondere taken van de Raad van State, had de raad ook de bevoegdheid om op te treden in zaken betreffende delicten tegen de Generaliteit. Het archief bevat resoluties met bijlagen (uit de 16e en 17e eeuw zijn de bijlagen slechts fragmentarisch bewaard), commissieboeken (aanstellingen), acteboeken (contracten) en verbalen (verslagen) van commissies betreffende fortificaties en betreffende de financiën van de Generaliteit en de Generaliteitslanden alsmede stukken betreffende voor de raad gevoerde processen.&quot;^^xsd:string ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:NadereToegangCommissieboeken" id="c9668fc6-600c-4740-a34a-dcf67303af03">
+            <documentation>nt:NadereToegangCommissieboeken a def:DetailedContentDescription , owl:NamedIndividual ;
+                   rdfs:label &quot;Nadere Toegang Commissieboeken&quot;^^xsd:string ;
+                   def:refersToElement nt:SubRubriekCommissieboeken-10119 ;
+                   dct:identifier &quot;NT00194&quot;^^xsd:string ;
+                   dcat:record ds:NT00194 ;
+                   def:accessType def:DetailedInventoryTypeAccess ;
+                   def:datasetWithInterpretationLayer commBk:PersonenLijst ;
+                   def:datasetWithInterpretationLayer commBk:GebeurtenissenLijst ;
+                   def:contentDescription nt:recordTypeRegistrationBook ;
+                   dct:creator nt:CentraleArchiefSelectiedienst ;
+                   def:contentList commBk:CommissieLijst ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:RubriekCommissieboeken-10119" id="f4d234b1-fe37-4c8a-97cc-b58887dab8af">
+            <documentation>nt:RubriekCommissieboeken-10119 a def:ArchivalSubSection ;
+                   rdfs:label &quot;A. Resoluties, brieven, akten en verbalen&quot;^^xsd:string ;
+                   dct:isPartOf nt:NAInventaris_1-01-19_2623 ;
+                   def:nextLowerElement nt:SubRubriekCommissieboeken-10119  ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:SubRubriekCommissieboeken-10119" id="46df7374-0a7b-404a-ad16-5e6ce7d33800">
+            <documentation>nt:SubRubriekCommissieboeken-10119 a def:ArchivalSubSection ;
+                   rdfs:label &quot;A.4 Akten, commissieboeken, instructieboeken en presentieboeken&quot;^^xsd:string ;
+                   dct:isPartOf nt:NAInventaris_1-01-19_2623 ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="nt:recordTypeRegistrationBook" id="64d252e3-2cae-4399-a0f9-47cf657de738"/>
+        </folder>
+        <folder name="owl" id="36fc138b-dac8-4103-a70d-13ebdfeb1799">
+          <element xsi:type="archimate:DataObject" name="owl:Class" id="c7aa225f-8a77-4476-afc3-d623f4a356f8">
+            <documentation>###  http://www.w3.org/2002/07/owl#Class
+owl:Class rdf:type owl:Class ;
+          rdfs:subClassOf rdfs:Class ;
+          rdfs:comment &quot;The class of OWL classes.&quot; ;
+          rdfs:isDefinedBy owl: ;
+          rdfs:label &quot;Class&quot; .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="owl:NamedIndividual" id="45f4b885-8f21-45cd-a7d4-b63b738a6191">
+            <documentation>http://www.w3.org/2002/07/owl#NamedIndividual
+
+    &lt;Class rdf:about=&quot;http://www.w3.org/2002/07/owl#NamedIndividual&quot;>
+        &lt;rdfs:subClassOf rdf:resource=&quot;http://www.w3.org/2002/07/owl#Thing&quot;/>
+        &lt;rdfs:comment>The class of named individuals.&lt;/rdfs:comment>
+        &lt;rdfs:isDefinedBy rdf:resource=&quot;http://www.w3.org/2002/07/owl#&quot;/>
+        &lt;rdfs:label>NamedIndividual&lt;/rdfs:label>
+    &lt;/Class>
+</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="owl:ObjectProperty" id="a04d9397-9c90-49b0-8904-2d949b926b17">
+            <documentation>An owl:ObjectProperty is defined as an instance of the OWL class owl:ObjectProperty.
 
 Object properties link objects to objects.
 
 owl:ObjectProperty is a subclass of the RDF class rdf:Property.
-http://www.coinsweb.nl/wiki2/index.php/Owl:ObjectProperty</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="prefix cat" id="da9430e3-b968-4aa0-99bc-8e145ea64667"/>
-        <element xsi:type="archimate:DataObject" name="prefix nt" id="bb588cd1-73e7-414e-84d3-b976c39c55fa">
-          <documentation>http://lod-data.nationaalarchief.nl/nt/{NT-naam}</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="rdf:List" id="d80974f2-c53d-4846-b8dd-4213c47f3d77"/>
-        <element xsi:type="archimate:DataObject" name="rdf:resource" id="46493ca3-26cd-49c6-9150-bf7d9ae64a49">
-          <documentation>https://stackoverflow.com/questions/7118326/differences-between-rdfresource-rdfabout-and-rdfid
+http://www.coinsweb.nl/wiki2/index.php/Owl:ObjectProperty
+
+###  http://www.w3.org/2002/07/owl#ObjectProperty
+owl:ObjectProperty rdf:type owl:Class ;
+                   rdfs:subClassOf rdf:Property ;
+                   rdfs:comment &quot;The class of object properties.&quot; ;
+                   rdfs:isDefinedBy owl: ;
+                   rdfs:label &quot;ObjectProperty&quot; .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="owl:disjointWith" id="2dfeaab1-7954-42e8-9277-f45b7da59444">
+            <documentation>https://www.cambridgesemantics.com/blog/semantic-university/learn-owl-rdfs/owl-references-humans/
+
+disjointWith	…the first class and second class have no members in common	:Man    owl:disjointWith    :Woman</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="owl:equivalentClass" id="7eb0d744-e8e7-457a-b658-6e47f5a97bdd">
+            <documentation>###  http://www.w3.org/2002/07/owl#equivalentClass
+owl:equivalentClass rdf:type owl:ObjectProperty ;
+                    rdfs:domain rdfs:Class ;
+                    rdfs:range rdfs:Class ;
+                    rdfs:comment &quot;The property that determines that two given classes are equivalent, and that is used to specify datatype definitions.&quot; ;
+                    rdfs:isDefinedBy owl: ;
+                    rdfs:label &quot;equivalentClass&quot; .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="owl:Thing" id="9d87336b-b21b-45d8-a69b-9492d087f9a9">
+            <documentation>###  http://www.w3.org/2002/07/owl#Thing
+owl:Thing rdf:type owl:Class ;
+          rdfs:comment &quot;The class of OWL individuals.&quot; ;
+          rdfs:isDefinedBy owl: ;
+          rdfs:label &quot;Thing&quot; .</documentation>
+          </element>
+        </folder>
+        <folder name="rdf(s)" id="b0a2b12c-18c9-4875-82a3-d61bb3cd831b">
+          <element xsi:type="archimate:DataObject" name="rdf:type" id="1b7f7dd6-d734-40b1-8945-9002b36a0be4"/>
+          <element xsi:type="archimate:DataObject" name="rdf:List" id="d80974f2-c53d-4846-b8dd-4213c47f3d77"/>
+          <element xsi:type="archimate:DataObject" name="rdf:resource" id="46493ca3-26cd-49c6-9150-bf7d9ae64a49">
+            <documentation>https://stackoverflow.com/questions/7118326/differences-between-rdfresource-rdfabout-and-rdfid
 
 To be clear this is only about a particular way of writing rdf: namely RDF/XML. Other syntaxes don't feature these differences.
 
@@ -509,9 +686,9 @@ Avoid rdf:ID. Use rdf:about and rdf:resource much like an href, the former for s
 Additional
 
 Forgot to mention that rdf:ID can be used on a property element, but it does something you may find unexpected: it reifies the triple. Avoid rdf:ID.</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="rdfs:domain" id="64b867e3-dda7-4959-9b40-51da580b999d">
-          <documentation>Properties are instances of the class rdf:Property and describe a relation between subject resources and object resources. When used as such a property is a predicate (see also RDF: reification).
+          </element>
+          <element xsi:type="archimate:DataObject" name="rdfs:domain" id="64b867e3-dda7-4959-9b40-51da580b999d">
+            <documentation>Properties are instances of the class rdf:Property and describe a relation between subject resources and object resources. When used as such a property is a predicate (see also RDF: reification).
 
 rdfs:domain of an rdf:Property declares the class of the subject in a triple whose predicate is that property.
 rdfs:range of an rdf:Property declares the class or datatype of the object in a triple whose predicate is that property.
@@ -524,9 +701,10 @@ ex:employer rdfs:range foaf:Organization
 Given the previous two declarations, the following triple requires that ex:John is necessarily a foaf:Person, and ex:CompanyX is necessarily a foaf:Organization:
 
 ex:John ex:employer ex:CompanyX</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="rdfs:range" id="44259a01-2b6f-4548-87c5-7fc792641c15">
-          <documentation>range: is an instance of rdf:Property that is used to state that the values of a property are instances of one or more classes.
+          </element>
+          <element xsi:type="archimate:DataObject" name="rdfs:isDefinedBy" id="2c72b4c7-ff93-4fe2-a714-e3bf76ddc52c"/>
+          <element xsi:type="archimate:DataObject" name="rdfs:range" id="44259a01-2b6f-4548-87c5-7fc792641c15">
+            <documentation>range: is an instance of rdf:Property that is used to state that the values of a property are instances of one or more classes.
 Notes: A range of the subject property.
 
 Constraints in the context of RDF Schema:
@@ -535,128 +713,158 @@ rdfs:domain: rdfs:Property (=the class, to which “rdfs:range” may be applied
 rdfs:range: rdfs:Class (=the class or datatype of the values or objects that are assigned to “rdfs:range”, i.e. the right side in the triple)
 
 https://terms.tdwg.org/wiki/rdfs:range</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:AdditionalFindingAid" id="ed25277c-e859-4114-8fb0-59a291d29363">
-          <documentation>def:AdditionalFindingAid rdf:type owl:Class ;
-              rdfs:label &quot;Methodische ontsluiting van één of meer archieven&quot;^^xsd:string ;
-              rdfs:subClassOf def:FindingAid ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:ArchivalInventory" id="59955224-8ee5-4ab7-9e91-a7a7d69891d8">
-          <documentation>def:ArchivalInventory rdf:type owl:Class ;
-      rdfs:label &quot;Inventaris op een archief,de meest omvattende toegang&quot;^^xsd:string ;
-      rdfs:subClassOf def:FormalFindingAid ;
-      owl:disjointWith def:ArchivalInventoryElement ;
-     * rdfs:isDefinedBy def:InventoryTypeAccess ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="owl:disjointWith" id="2dfeaab1-7954-42e8-9277-f45b7da59444">
-          <documentation>https://www.cambridgesemantics.com/blog/semantic-university/learn-owl-rdfs/owl-references-humans/
+          </element>
+          <element xsi:type="archimate:DataObject" name="rdfs:subClassOf" id="921c9cd7-a4db-4447-a0ca-84c3c661f3d1"/>
+        </folder>
+        <folder name="skos" id="0ec158b0-f34e-45e5-a533-58c095577682">
+          <element xsi:type="archimate:DataObject" name="skos:Concept" id="5b4e2088-e68f-4184-aaad-8b9b204e674b">
+            <documentation>The class skos:Concept is the class of SKOS concepts.
 
-disjointWith	…the first class and second class have no members in common	:Man    owl:disjointWith    :Woman</documentation>
+A SKOS concept can be viewed as an idea or notion; a unit of thought. However, what constitutes a unit of thought is subjective, and this definition is meant to be suggestive, rather than restrictive.
+
+The notion of a SKOS concept is useful when describing the conceptual or intellectual structure of a knowledge organization system, and when referring to specific ideas or meanings established within a KOS.
+
+Note that, because SKOS is designed to be a vehicle for representing semi-formal KOS, such as thesauri and classification schemes, a certain amount of flexibility has been built in to the formal definition of this class.
+
+https://www.w3.org/2009/08/skos-reference/skos.html#Concept</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="skos:ConceptScheme" id="69234a3a-966f-4ce2-951e-22944d87c7fe"/>
+          <element xsi:type="archimate:DataObject" name="skos:broader" id="0b436b80-1563-4a6f-b305-3969708ecc36"/>
+          <element xsi:type="archimate:DataObject" name="skos:inScheme" id="bc7fbdc0-8dd9-4a1e-8909-c6d84f9ebecf"/>
+        </folder>
+        <folder name="prov" id="981b4c6b-d406-41d0-9d3b-d9c8688454cf">
+          <element xsi:type="archimate:DataObject" name="prov:Entity" id="5b7e17c5-1a06-4aa4-a48b-21697b6ab27d"/>
+        </folder>
+        <folder name="void" id="b56f6b77-31c1-45f8-b804-e2d2789b4898">
+          <element xsi:type="archimate:DataObject" name="void:Dataset" id="80577857-1a9a-46b5-b1a6-a045b1838200">
+            <documentation>The fundamental concept of VoID is the dataset. A dataset is a set of RDF triples that are published, maintained or aggregated by a single provider. Unlike RDF graphs, which are purely mathematical constructs [RDF-CONCEPTS], the term dataset has a social dimension: we think of a dataset as a meaningful collection of triples, that deal with a certain topic, originate from a certain source or process, are hosted on a certain server, or are aggregated by a certain custodian. Also, typically a dataset is accessible on the Web, for example through resolvable HTTP URIs or through a SPARQL endpoint, and it contains sufficiently many triples that there is benefit in providing a concise summary.
+
+Since most datasets describe a well-defined set of entities, datasets can also be seen as a set of descriptions of certain entities, which often share a common URI prefix (such as http://dbpedia.org/resource/).
+
+In VoID, a dataset is modelled as an instance of the void:Dataset class. Such a void:Dataset instance is a single RDF resource that represents the entire dataset, and thus allows us to easily make statements about the entire dataset and all its triples.
+
+The relationship between a void:Dataset instance and the concrete triples contained in the dataset is established through access information, such as the address of a SPARQL endpoint where the triples can be accessed.
+
+The following example declares the resource :DBpedia as a void:Dataset:
+
+:DBpedia a void:Dataset .
+The resource is intended as a proxy for the well-known DBpedia dataset [DBPEDIA]. A good next step would be to make this unambiguously clear by adding general metadata and access metadata to the resource.
+
+https://www.w3.org/TR/void/</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="void:class" id="0fab3f54-8618-4b83-a462-372150376b2f">
+            <documentation>class – The rdfs:Class that is the rdf:type of all entities in a class-based partition.
+URI:http://rdfs.org/ns/void#class
+Type:owl:FunctionalProperty
+Domain:void:Dataset
+Range:rdfs:Class
+http://vocab.deri.ie/void#class</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="void:classPartition" id="a7b14282-dcdb-494b-9a1a-13239d472274">
+            <documentation>Partitioning a dataset based on classes and properties
+Class- and property-based partitioning offers a way of talking about particular classes and properties in a dataset.
+
+A class-based partition contains only that subset of a dataset which describes instances of a particular class.
+A property-based partition contains only those triples of a dataset that use a particular predicate.
+Note that void:classPartition and void:propertyPartition are subproperties of void:subset. This means that the partition is itself a dataset.
+
+A dataset that is the void:classPartition of another dataset must have exactly one void:class property. The partition contains all triples that describe entities that have this class as their rdf:type.
+
+A class-based partition with rdfs:Resource as its void:class is defined to also contain all resources that have no explicit rdf:type statement.
+
+A dataset that is the void:propertyPartition of another dataset must have exactly one void:property property. The partition contains all triples that have this property as their predicate.
+
+A partition without any statistical properties is thought to contain at least one triple. Hence, the following example asserts that the classes foaf:Person and foaf:Organization and the properties foaf:name, foaf:member, foaf:homepage and rdf:type are used in the dataset :MyDataset, without any assertion about the number of instances:
+
+:MyDataset a void:Dataset;
+    void:classPartition [ void:class foaf:Person; ];
+    void:classPartition [ void:class foaf:Organization; ];
+    void:propertyPartition [ void:property foaf:name; ];
+    void:propertyPartition [ void:property foaf:member; ];
+    void:propertyPartition [ void:property foaf:homepage; ];
+    void:propertyPartition [ void:property rdf:type; ];
+    .
+
+Property: void:classPartition
+class partition – A subset of a void:Dataset that contains only the entities of a certain rdfs:Class.
+URI:http://rdfs.org/ns/void#classPartition
+Domain:void:Dataset
+Range:void:Dataset
+Superproperty:void:subset
+http://vocab.deri.ie/void#class</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="void:property" id="9d58995d-48b9-47a8-af6a-d9fb84d2d778"/>
+          <element xsi:type="archimate:DataObject" name="void:propertyPartition" id="f837b45a-3bf0-425a-b0f5-5f077fc20ab8">
+            <documentation>Partitioning a dataset based on classes and properties
+Class- and property-based partitioning offers a way of talking about particular classes and properties in a dataset.
+
+A class-based partition contains only that subset of a dataset which describes instances of a particular class.
+A property-based partition contains only those triples of a dataset that use a particular predicate.
+Note that void:classPartition and void:propertyPartition are subproperties of void:subset. This means that the partition is itself a dataset.
+
+A dataset that is the void:classPartition of another dataset must have exactly one void:class property. The partition contains all triples that describe entities that have this class as their rdf:type.
+
+A class-based partition with rdfs:Resource as its void:class is defined to also contain all resources that have no explicit rdf:type statement.
+
+A dataset that is the void:propertyPartition of another dataset must have exactly one void:property property. The partition contains all triples that have this property as their predicate.
+
+A partition without any statistical properties is thought to contain at least one triple. Hence, the following example asserts that the classes foaf:Person and foaf:Organization and the properties foaf:name, foaf:member, foaf:homepage and rdf:type are used in the dataset :MyDataset, without any assertion about the number of instances:
+
+:MyDataset a void:Dataset;
+    void:classPartition [ void:class foaf:Person; ];
+    void:classPartition [ void:class foaf:Organization; ];
+    void:propertyPartition [ void:property foaf:name; ];
+    void:propertyPartition [ void:property foaf:member; ];
+    void:propertyPartition [ void:property foaf:homepage; ];
+    void:propertyPartition [ void:property rdf:type; ];
+    .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="void:rootResource" id="46bd3d75-5f54-4490-baab-8e48d35e3e54">
+            <documentation>Many datasets are structured in a tree-like fashion, with one or a few natural “top concepts” or “entry points”, and all other entities reachable from these root resources in a small number of steps.
+
+One or more such root resources can be named using the void:rootResource property. Naming a resource as a root resource implies:
+
+that it is a central entity of particular importance in the dataset; and
+that the entire dataset can be crawled by resolving the root resource(s) and recursively following links to other URIs in the retrieved RDF responses.
+Root resources make good entry points for crawling an RDF dataset.
+
+This property is similar to void:exampleResource. While void:exampleResource names particularly representative or typical resources in the dataset, void:rootResource names particularly important or central resources that make good entry points for navigating the dataset.
+
+https://www.w3.org/TR/void/</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="void:sparqlEndpoint" id="1142acf4-6698-4fbd-a5cf-fe14543b65f1">
+            <documentation>A SPARQL endpoint that provides access to a dataset via the SPARQL protocol can be announced using void:sparqlEndpoint:
+
+:DBpedia a void:Dataset;
+    void:sparqlEndpoint &lt;http://dbpedia.org/sparql>;
+    .
+This states that the default graph of the SPARQL endpoint contains the triples in the DBpedia dataset.
+
+VoID descriptions can be deployed as part of a SPARQL Service Description. This also allows the expression of further information about the features and capabilites of the SPARQL endpoint, as described in the SPARQL 1.1 Service Description [SPARQL-SD] specification.
+
+https://www.w3.org/TR/void/</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="void:uriSpace" id="13d13cb3-783c-43cf-834b-f5a34dbcb4ac">
+            <documentation>Often, the entities described in a dataset share URIs of a common form. For example, all DBpedia entity URIs start with http://dbpedia.org/resource/.
+
+The void:uriSpace property can be used to state that all entity URIs in a dataset start with a given string. In other words, they share a common “URI namespace”.
+
+:DBpedia a void:Dataset;
+    void:uriSpace &quot;http://dbpedia.org/resource/&quot;;
+    .
+Note: The value of void:uriSpace is an RDF literal. That is, in Turtle it is written like &quot;http://dbpedia.org/resource/&quot;, not &lt;http://dbpedia.org/resource/>.</documentation>
+          </element>
+        </folder>
+        <element xsi:type="archimate:DataObject" name="url: .../sparql" id="c96899c4-843b-4d8d-a6bf-d433b9a27c0d">
+          <documentation>http://gaf.nationaalarchief.nl/sparql/</documentation>
+          <property key="data" value="&lt;http://na.metamatter.nl/sparql>;"/>
         </element>
-        <element xsi:type="archimate:DataObject" name="dct:BibliographicResource" id="4e31ca50-b8e2-453f-af08-48f1aee133fe">
-          <documentation>URI:	http://purl.org/dc/terms/BibliographicResource
-Label:	Bibliographic Resource
-Definition:	A book, article, or other documentary resource.</documentation>
+        <element xsi:type="archimate:DataObject" name="url: ...resource/Bewindslieden/" id="6c265ab2-fd00-4d54-bcff-f858dca9135b">
+          <documentation>http://lod-data.nationaalarchief.nl/nt/NT00334/wie/Bewindslieden/</documentation>
         </element>
-        <element xsi:type="archimate:DataObject" name="def:DetailedInventoryTypeAccess" id="4d31448f-86bd-491c-b457-57c003efaaa2">
-          <documentation>GEEN DEFINITIE </documentation>
+        <element xsi:type="archimate:DataObject" name="url:lod-data.nationaalarchief.nl/nt/" id="dab851c3-395c-4e18-b1d1-339e6c560b16">
+          <documentation>http://lod-data.nationaalarchief.nl/nt/</documentation>
         </element>
-        <element xsi:type="archimate:DataObject" name="def:FindingAid" id="a5ac711c-0dcb-48b5-a68f-fd074eaec9c4">
-          <documentation>def:FindingAid rdf:type owl:Class ;
-              rdfs:label &quot;Toegang tot een of meer archieven&quot;^^xsd:string ;
-              rdfs:subClassOf def:GuideForTheUseOfArchives ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:GuideForTheUseOfArchives" id="db062d65-5034-4a2a-b183-a2bcfb39d019">
-          <documentation>def:GuideForTheUseOfArchives rdf:type owl:Class ;
-              rdfs:label &quot;Abstracte klasse die zowel de zoekhulpen als de gebruikersgidsen omspant&quot;^^xsd:string ;
-              rdfs:subClassOf dct:BibliographicResource ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:modelsConceptOf" id="eb837398-db0c-4d57-b259-f2d6c6be79ac"/>
-        <element xsi:type="archimate:DataObject" name="def:ArchivalInventoryElement" id="89bf12a8-73f6-461e-ac8b-62084dce3749">
-          <documentation>def:ArchivalInventoryElement rdf:type owl:Class ;
-      rdfs:label &quot;Onderdeel van een inventaris op een archief&quot;^^xsd:string ;
-      rdfs:subClassOf def:FormalFindingAid ;
-      owl:disjointWith def:ArchivalInventory ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:FormalFindingAid" id="350c27e4-1413-4cee-a13e-883971dcf9c0">
-          <documentation>def:FormalFindingAid rdf:type owl:Class ;
-              rdfs:label &quot;Methodische ontsluitng van één of meer archieven&quot;^^xsd:string ;
-              rdfs:subClassOf def:FindingAid ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:InventoryTypeAccess " id="ca29fdda-d6bb-4b46-aa0c-0f1d69940d77">
-          <documentation>GEEN DEFINITIE</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="rdfs:isDefinedBy" id="2c72b4c7-ff93-4fe2-a714-e3bf76ddc52c"/>
-        <element xsi:type="archimate:DataObject" name="bgnExt:Male" id="ecfb74fe-b9e8-407f-b231-1cd0ffdb944b"/>
-        <element xsi:type="archimate:DataObject" name="bgnExt:PersonName" id="1870fbf1-6883-4414-8732-5772b247c015">
-          <documentation>bgnExt:PersonName rdf:type owl:Class ;
-  rdfs:subClassOf bgnExt:ArchivalName ;
-  rdfs:label &quot;Person name&quot;^^xsd:string ;
-  owl:disjointWith bgnExt:PersonEntity , def:PersonReference ;
-  owl:equivalentClass dbo:Name , bgn:Name ;
-  skos:prefLabel &quot;Persoonsnaam&quot;@nl ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="commBk:CommissieLijst" id="19b6fa86-85b5-4e04-91ac-eb2f31091a5e">
-          <documentation>commBk:CommissieLijst a rdf:List , owl:NamedIndividual, prov:Entity ;
-               rdfs:label &quot;De lijst van commissies zoals die gegeven is in de Commissieboeken&quot;^^xsd:string ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="commBk:NT00194Comm﻿[n]" id="346ae25d-adfb-47c7-a082-3bd2984fe625">
-          <documentation>commBk:NT00194Comm﻿1 a def:CommissionReference ; def:memberOf commBk:CommissieLijst ;
-	dct:relation [ a def:PersonReference ;
-	def:fullNameDesignation &quot;Gregorius van Thiras&quot;^^xsd:string ;
-	def:firstNameDesignation &quot;Gregorius&quot;^^xsd:string ;
-	def:middleNameDesignation &quot;van&quot;^^xsd:string ;
-	def:lastNameDesignation &quot;Thiras&quot;^^xsd:string ] ;
-	def:commissionDescription &quot;Commissaris van de Monstering&quot;^^xsd:string ;
-	def:sourceDescription &quot;NL-HaNA/1.01.19/1523//002//&quot;^^xsd:string ;
-	def:persistentIdentifier &quot;http://www.gahetna.nl/collectie/index/nt00194/2e8433b8-ae58-102d-8e23-0050569c51dd&quot;^^xsd:anyURI ;
-	def:commissionDate &quot;1581-08-05&quot;^^xsd:date ; def:shortDate &quot;5-8-1581&quot;^^xsd:string .</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="commBk:PersonenLijst" id="35c248e9-2394-4e08-ac8e-b2b5dace96ac">
-          <documentation>commBk:PersonenLijst a rdf:List , owl:NamedIndividual , prov:Entity ;
-               rdfs:label &quot;De lijst van unieke personen (resources met URI obv uniek gemaakte naam)&quot;^^xsd:string ;
-               prov:agent nt:GerardKuys ;
-               prov:wasGeneratedBy [ a prov:Activity ; prov:wasAssociatedWith nt:GerardKuys ; prov:startedAtTime &quot;2017-02-13T01:01:01Z&quot;^^xsd:dateTime ] ; </documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="commBk:Schipio_Meckma" id="1c41089d-a051-4744-9ab2-f6592e70505c">
-          <documentation>commBk:Schipio_Meckma	rdf:type	def:PersonEntity ;
-	bgnExt:hasName [ a bgnExt:PersonName ; bgnExt:prepositionName	&quot;Schipio&quot;^^xsd:string ;
-	bgnExt:fullname	&quot;Schipio Meckma&quot;^^xsd:string ;
-	bgnExt:postpositionName  &quot;Meckma&quot;^^xsd:string ] ;
-	def:hasCommission	commBk:NT00194Comm10 ;
-	bgnExt:sex	bgnExt:Male ;
-	def:memberOf	commBk:PersonenLijst .</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:ArchivalEntity" id="22cf36e3-7965-4b9a-883c-09e2d7f718ed">
-          <documentation>def:ArchivalEntity a owl:Class ;
-    rdfs:label &quot;Entity in an Archives domain&quot;^^xsd:string ;
-    owl:equivalentClass edm:NonInformationResource ;
-    rdfs:comment &quot;An Archival entity represents entities referred to across the boundaries of archival records&quot;^^xsd:string ;
-    owl:disjointWith def:ArchivalReference ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:CommissionReference" id="5ac04ad2-e7b6-427c-84b5-62be68cd9618">
-          <documentation>def:CommissionReference a owl:Class ;
-    rdfs:label &quot;Reference to a Commission in an Archives domain&quot;^^xsd:string ;
-    rdfs:subClassOf def:ArchivalReference ;
-    rdfs:comment &quot;A Commission Reference is the reference to a Commission in a single archival record&quot;^^xsd:string ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:PersonEntity" id="e80f443b-0e8e-4bf4-b718-cb2547e9f285">
-          <documentation>def:PersonEntity a owl:Class  ;
-    rdfs:label &quot;Person in an Archives domain&quot;^^xsd:string ;
-    rdfs:subClassOf def:ArchivalEntity ;
-    owl:equivalentClass foaf:Person , bgn:Person ;
-    rdfs:comment &quot;A Person Entity is a Person referred to across a set of archival records&quot;^^xsd:string ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:PersonReference" id="26eed749-491b-4e90-968a-dbe4f4cad18a">
-          <documentation>def:PersonReference a owl:Class ;
-    rdfs:label &quot;Reference to a Person in an Archives domain&quot;^^xsd:string ;
-    rdfs:subClassOf def:ArchivalReference ;
-    owl:disjointWith def:PersonEntity ;
-    rdfs:comment &quot;A Person Reference is the reference to a Person in a single archival record&quot;^^xsd:string ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:memberOf" id="fdcc2ce1-d5bc-4ddc-8f12-226be5006d85"/>
-        <element xsi:type="archimate:DataObject" name="foaf:Person" id="aac74a56-45b5-4af9-b714-64ca60f1cfff"/>
-        <element xsi:type="archimate:DataObject" name="skos:ConceptScheme" id="69234a3a-966f-4ce2-951e-22944d87c7fe"/>
         <element xsi:type="archimate:DataObject" name="www.gahetna.nl/collectie/index/nt00194/2e..." id="ba18663c-4e2c-451c-a344-dca23a130398">
           <documentation>http://www.gahetna.nl/collectie/index/nt00194/2e8433b8-ae58-102d-8e23-0050569c51dd&quot;^^xsd:anyURI</documentation>
         </element>
@@ -666,118 +874,24 @@ Definition:	A book, article, or other documentary resource.</documentation>
         <element xsi:type="archimate:DataObject" name="5-8-1581" id="ab6e71b3-3096-4c52-9443-63db93e29071">
           <documentation>&quot;5-8-1581&quot;^^xsd:string </documentation>
         </element>
-        <element xsi:type="archimate:DataObject" name="nt:NadereToegangCommissieboeken" id="c9668fc6-600c-4740-a34a-dcf67303af03">
-          <documentation>nt:NadereToegangCommissieboeken a def:DetailedContentDescription , owl:NamedIndividual ;
-                   rdfs:label &quot;Nadere Toegang Commissieboeken&quot;^^xsd:string ;
-                   def:refersToElement nt:SubRubriekCommissieboeken-10119 ;
-                   dct:identifier &quot;NT00194&quot;^^xsd:string ;
-                   dcat:record ds:NT00194 ;
-                   def:accessType def:DetailedInventoryTypeAccess ;
-                   def:datasetWithInterpretationLayer commBk:PersonenLijst ;
-                   def:datasetWithInterpretationLayer commBk:GebeurtenissenLijst ;
-                   def:contentDescription nt:recordTypeRegistrationBook ;
-                   dct:creator nt:CentraleArchiefSelectiedienst ;
-                   def:contentList commBk:CommissieLijst ;</documentation>
-        </element>
         <element xsi:type="archimate:DataObject" name="NL-HaNA/1.01.19/1523//002//" id="bd75db0a-d6b9-4e11-ab84-104093171098">
           <documentation>&quot;NL-HaNA/1.01.19/1523//002//&quot;^^xsd:string</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="commBk:ArchiefRaadVanState" id="5927c808-fe73-44bf-bb50-2b9c3a3e2c83">
-          <documentation>commBk:ArchiefRaadVanState a def:Archive ; def:archiveName &quot;Archief Raad van State , (1574) 1581-1795 (1801)&quot;^^xsd:string ;
-        rdfs:label &quot;Archief Raad van State 1581-1795&quot;^^xsd:string ;
-        def:archiveCreator commBk:RaadVanState ;
-	def:typeOfArchive nt:StateDepartmentArchive ;
-	def:archiveAccessibility nt:StatusPublic ;
-	def:lengthOfArchive &quot;268.05 meter&quot;^^xsd:string ;
-	def:beginPeriodArchive &quot;1574&quot;^^xsd:gYear ;
-	def:firstMentionInArchive &quot;1574&quot;^^xsd:gYear ;
-	def:endPeriodArchive &quot;1795&quot;^^xsd:gYear ;
-	def:accessNumber &quot;1.01.19&quot;^^xsd:string ;
-        def:archivalDepot nt:NationaalArchief ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="commBk:GebeurtenissenLijst" id="ecde23c1-abd3-4478-8f26-32af04ad4845">
-          <documentation>commBk:GebeurtenissenLijst a rdf:List , owl:NamedIndividual , prov:Entity ;
-               rdfs:label &quot;De lijst van Gebeurtenissen, conform het SEM-vocabulaire&quot;^^xsd:string ;
-               prov:agent nt:GerardKuys ;
-               prov:wasGeneratedBy [ a prov:Activity ; prov:wasAssociatedWith nt:GerardKuys ; prov:startedAtTime &quot;2017-07-14T01:01:01Z&quot;^^xsd:dateTime ] ; </documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="dbo:Archive" id="09b3c319-1e9d-4c88-a1c7-1fb23e30bd50"/>
-        <element xsi:type="archimate:DataObject" name="def:ArchivalSubSection" id="cceedb24-0477-4697-a659-0603c482f453">
-          <documentation>def:ArchivalSubSection rdf:type owl:Class ;
-      rdfs:label &quot;Sub-rubriek in een Inventaris&quot;^^xsd:string ;
-      rdfs:subClassOf def:ArchivalInventoryElement ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="def:Archive" id="8e5f36d9-a792-471b-9aa1-d1eb617b9439">
-          <documentation>def:Archive rdf:type owl:Class ;
-   rdfs:label &quot;Archive&quot;^^xsd:string ;
-   skos:prefLabel &quot;Archief&quot;@nl ;
-   owl:equivalentClass dbo:Archive ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="ds:NT00194" id="f1eb36b7-3e84-4e4a-801e-466bd1de5d8d">
-          <documentation>ds:NT00194 a dcat:CatalogRecord , owl:NamedIndividual ;
-           rdfs:label &quot;Catalogus Record op de Nadere Toegang Commissieboeken Raad van State&quot;^^xsd:string ;
-           dct:issued &quot;2016-08&quot;^^xsd:gYearMonth ;
-           foaf:primaryTopic ds:CommissieDataset ;
-           dct:title &quot;Raad van State: Naamindex op de commissieboeken&quot;@nl ;
-           dct:subject nt:NadereToegangCommissieboeken ;
-           dct:description &quot;Data op de Nadere Toegang: Raad van State - Commissieboeken&quot;@nl ;
-	   def:persistentIdentifier &quot;http://www.gahetna.nl/collectie/index/nt00194/02b4f924-cd6d-102c-9f8b-005056a23d00&quot;^^xsd:anyURI ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="nt:NAInventaris_1-01-19_2623" id="b91d7120-fe03-43c2-ba19-cc923e565a23">
-          <documentation>nt:NAInventaris_1-01-19_2623 rdf:type def:ArchivalInventory ;
-                                   dct:creator nt:WGvanOijen , nt:EAThMSchreuder , nt:HAJvanSchie ;
-                                   def:status nt:StatusFinal ;
-				   dcat:theme &lt;http://nl.dbpedia.org/resource/Raad_van_State_(historisch)> ;
-				   dct:issued &quot;2008&quot;^^xsd:gYear ;
-                                   dc:subject &quot;NL NA 1.01.19&quot;^^xsd:string ;
-                                   dct:subject commBk:ArchiefRaadVanState ;
-                                   rdfs:label &quot;Inventaris van het archief van de Raad van State 1581-1795&quot;^^xsd:string ;
-                                   dct:title &quot;Inventaris van het archief van de Raad van State, (1574) 1581-1795 (1801)&quot;^^xsd:string ;
-                                   dct:alternative &quot;Raad van State, 1581-1795&quot;@nl ;
-                                   def:numberOfInventoryItems &quot;2398&quot;^^xsd:integer ;
-                                   dct:publisher nt:NationaalArchief ;
-                                   def:fullMention &quot;Nationaal Archief, Den Haag, Raad van State, nummer toegang 1.01.19, inventarisnummer 2623&quot;^^xsd:string ;
-				   def:shortMention &quot;NL-HaNA, Raad van State, 1581-1795, 1.01.19, inv.nr. 2623&quot;^^xsd:string ;
-				   dct:description &quot;De Raad van State was oorspronkelijk gedacht als het centrale regeringsorgaan van de geünieerde provinciën, maar nam spoedig een aan de Staten-Generaal ondergeschikte functie in. De Raad had de zorg voor de het verdedigingsapparaat te land (leger, vestingen en magazijnen), voornamelijk in logistieke zin. In perioden van grote stadhouderlijke macht was de raad ook sterk betrokken bij operationele aangelegenheden. De Raad van State had tevens een belangrijke taak in het financiële beleid; hij maakte de begroting op die ter goedkeuring aan de Staten-Generaal en provinciale Staten werd voorgelegd. De raad had daarenboven een uitvoerende taak bij het bestuur van gebieden die op de vijand waren veroverd (de zgn. Generaliteitslanden: Staats-Brabant, Staats-Vlaanderen, Maastricht en de Landen van Overmaze, Wedde en Westerwoldingerland), in het bijzonder de financiële aangelegenheden. Voorts was de Raad van State het belangrijkste rechtscollege der Generaliteit. Naast rechtspraak in de aangelegenheden die tot de bijzondere taken van de Raad van State, had de raad ook de bevoegdheid om op te treden in zaken betreffende delicten tegen de Generaliteit. Het archief bevat resoluties met bijlagen (uit de 16e en 17e eeuw zijn de bijlagen slechts fragmentarisch bewaard), commissieboeken (aanstellingen), acteboeken (contracten) en verbalen (verslagen) van commissies betreffende fortificaties en betreffende de financiën van de Generaliteit en de Generaliteitslanden alsmede stukken betreffende voor de raad gevoerde processen.&quot;^^xsd:string ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="nt:SubRubriekCommissieboeken-10119" id="46df7374-0a7b-404a-ad16-5e6ce7d33800">
-          <documentation>nt:SubRubriekCommissieboeken-10119 a def:ArchivalSubSection ;
-                   rdfs:label &quot;A.4 Akten, commissieboeken, instructieboeken en presentieboeken&quot;^^xsd:string ;
-                   dct:isPartOf nt:NAInventaris_1-01-19_2623 ;</documentation>
         </element>
         <element xsi:type="archimate:DataObject" name="Commissaris van de Monstering" id="a63ed301-ec36-4d2c-8909-7c56a0d62b8c">
           <documentation>&quot;Commissaris van de Monstering&quot;^^xsd:string ;</documentation>
         </element>
         <element xsi:type="archimate:DataObject" name="Linked Metada" id="bf3f377c-fa5f-4d00-99b3-bafafc8bf786"/>
-        <element xsi:type="archimate:DataObject" name="commBk:PersoonsnamenLijst" id="69ac7a0c-cccc-4bd0-9439-d651156be571">
-          <documentation>commBk:PersoonsnamenLijst a rdf:List , owl:NamedIndividual, prov:Entity ;
-               rdfs:label &quot;De lijst van unieke persoonsnamen (literals)&quot;^^xsd:string ;
-               prov:agent nt:GerardKuys ;
-               prov:wasGeneratedBy [ a prov:Activity ; prov:wasAssociatedWith nt:GerardKuys ; prov:startedAtTime &quot;2017-02-13T01:01:01Z&quot;^^xsd:dateTime ] ; </documentation>
+        <element xsi:type="archimate:DataObject" name="dvl:Photo1" id="8bb4d2cb-44de-43e3-9c3b-bbe7e8269cf7">
+          <documentation>dvl:Photo1 a def:Photograph;
+edm:hasView </documentation>
         </element>
-        <element xsi:type="archimate:DataObject" name="prov:Entity" id="5b7e17c5-1a06-4aa4-a48b-21697b6ab27d"/>
-        <element xsi:type="archimate:DataObject" name="nt:CentraleArchiefSelectiedienst" id="26668890-fb3c-4de3-971d-b610ebabe092">
-          <documentation>nt:CentraleArchiefSelectiedienst a org:FormalOrganization , owl:NamedIndividual ;
-                  org:subOrganizationOf nt:NationaalArchief ;
-                  rdfs:label &quot;Centrale Archief Selectiedienst&quot;^^xsd:string ;</documentation>
+        <element xsi:type="archimate:DataObject" name="na_beeld:Photo1" id="32c7fce5-baf9-4a7a-b17f-0261b2ef573e">
+          <documentation>na_beeld:Photo1 a def:Photograph;
+edm:hasView </documentation>
         </element>
-        <element xsi:type="archimate:DataObject" name="nt:recordTypeRegistrationBook" id="64d252e3-2cae-4399-a0f9-47cf657de738"/>
-        <element xsi:type="archimate:DataObject" name="nt:RubriekCommissieboeken-10119" id="f4d234b1-fe37-4c8a-97cc-b58887dab8af">
-          <documentation>nt:RubriekCommissieboeken-10119 a def:ArchivalSubSection ;
-                   rdfs:label &quot;A. Resoluties, brieven, akten en verbalen&quot;^^xsd:string ;
-                   dct:isPartOf nt:NAInventaris_1-01-19_2623 ;
-                   def:nextLowerElement nt:SubRubriekCommissieboeken-10119  ;</documentation>
+        <element xsi:type="archimate:DataObject" name="na_beeld:Record01" id="113f77d1-583d-43c2-bc0a-ae7587f4f3fe">
+          <documentation>na_beeld:Record01 a def:GraphicalRecord;</documentation>
         </element>
-        <element xsi:type="archimate:DataObject" name="def:ArchivalReference " id="5eff7a6f-230a-44b9-87fc-27b87e194e0d">
-          <documentation>def:ArchivalReference a owl:Class ;
-    rdfs:label &quot;Reference in an Archives domain&quot;^^xsd:string ;
-    owl:equivalentClass edm:InformationResource , dbo:Reference , dct:BibliographicResource ;
-    rdfs:comment &quot;An Archival Reference is the document-bound stand-in for archival entities referred to in archival records. May also be a dataset&quot;^^xsd:string ;
-    owl:disjointWith def:ArchivalEntity ;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="dbo:Reference" id="d27d8572-1a97-4eeb-bc5c-18617a80dee6"/>
-        <element xsi:type="archimate:DataObject" name="edm:InformationResource" id="fd68b3d0-46fe-4eb3-a276-a05796e11c65"/>
-        <element xsi:type="archimate:DataObject" name="edm:NonInformationResource" id="e5dc33a7-6f8b-45de-8790-da1cc8fdd810"/>
       </folder>
       <folder name="Anders" id="3b795398-588e-4ecc-9da6-66157e8f23a7">
         <element xsi:type="archimate:DataObject" name="Beeldcollecties" id="49a6616d-37c0-471b-bc41-a40e77d8440b"/>
@@ -890,19 +1004,15 @@ https://github.com/OpenRefine/OpenRefine/wiki</documentation>
       <element xsi:type="archimate:ApplicationProcess" name="Zoeken Vinden Tonen Resultaten in beeldcollecties" id="fa1b3c23-6260-4f4c-8152-0a4f211c52cb"/>
       <element xsi:type="archimate:ApplicationProcess" name="ZoekenVindenTonen in archieven" id="ea1c1b8d-5b9f-41e5-9ab2-db745b8bfffd"/>
     </folder>
-    <element xsi:type="archimate:DataObject" name="def:Photograph" id="faafe8fd-a58f-468a-bb6f-53bda8d1fa62">
-      <documentation>def:Photograph a edm:ProvidedCHO</documentation>
-    </element>
-    <element xsi:type="archimate:DataObject" name="def:GraphicalRecord" id="2bf47a43-f35f-484f-a2fe-407e6d0fdb56">
-      <documentation>def:GraphicalRecord rdfs:subClassOf def:ArchivalReference;
-owl:equivalentClass ore:Aggregation;
-edm:aggregatedCHO def:Photograph;
-edm:aggregatedCHO def:Map;</documentation>
-    </element>
-    <element xsi:type="archimate:DataObject" name="def:Illustration" id="3ac58f24-f9f7-4c02-8595-c6b44fdc9e18"/>
-    <element xsi:type="archimate:DataObject" name="def:Map" id="d4e28347-29dd-447c-aaac-8a905268753f"/>
-    <element xsi:type="archimate:DataObject" name="def:Page" id="aa6e43bd-478b-4f39-b7b8-da282a86f610">
-      <documentation>def:Scan a edm:ProvidedCHO</documentation>
+    <element xsi:type="archimate:DataObject" name="ds:FotoCollectie-DVLCI" id="84f3fe0a-6acf-4925-b003-dbbf4195c9b5">
+      <documentation>ds:FotoCollectie-DVLCI a dcat:CatalogRecord , owl:NamedIndividual ;
+           rdfs:label &quot;Fotocollectie Dienst voor Legercontacten Indonesië&quot;^^xsd:string ;
+           dct:issued &quot;2016-08&quot;^^xsd:gYearMonth ;
+           foaf:primaryTopic ds:CommissieDataset ;
+           dct:title &quot;Raad van State: Naamindex op de commissieboeken&quot;@nl ;
+           dct:subject nt:NadereToegangCommissieboeken ;
+           dct:description &quot;Data op de Nadere Toegang: Raad van State - Commissieboeken&quot;@nl ;
+	   def:persistentIdentifier &quot;http://www.gahetna.nl/collectie/index/nt00194/02b4f924-cd6d-102c-9f8b-005056a23d00&quot;^^xsd:anyURI ;</documentation>
     </element>
   </folder>
   <folder name="Technology &amp; Physical" id="61545d0e-7d10-4010-95d7-8dfca0130293" type="technology">
@@ -1128,7 +1238,6 @@ ds:CommissieDataset a void:Dataset</documentation>
     <element xsi:type="archimate:SpecializationRelationship" name="rdf:type (a)" id="4a4d0398-0e39-4d66-8ed0-adf3f4e87015" source="205610c0-3a3e-4a48-85b0-0cd359a82710" target="45f4b885-8f21-45cd-a7d4-b63b738a6191"/>
     <element xsi:type="archimate:SpecializationRelationship" name="rdf:type (a)" id="b7f2813b-fc10-409f-88a8-215b76790562" source="b3e4994d-f738-4e6b-9898-3dd65cb93705" target="c7aa225f-8a77-4476-afc3-d623f4a356f8"/>
     <element xsi:type="archimate:AggregationRelationship" name="skos:inScheme" id="a3b36239-3aa4-49b0-8757-c34133f0cb36" source="205610c0-3a3e-4a48-85b0-0cd359a82710" target="ffe03670-9526-4494-8f59-0affcb15d0eb"/>
-    <element xsi:type="archimate:AssociationRelationship" id="cf046ce7-18ef-41c8-b3ae-f0f6bc258b52" source="9adf30b5-8516-45b9-9943-77367e05c36b" target="da9430e3-b968-4aa0-99bc-8e145ea64667"/>
     <element xsi:type="archimate:SpecializationRelationship" id="ec4556f3-b804-4564-908a-856dd2125836" source="b9970c73-6f62-4c17-8782-ee53b3d601a3" target="a04d9397-9c90-49b0-8904-2d949b926b17"/>
     <element xsi:type="archimate:AggregationRelationship" id="a58a3c34-9c36-4e6c-b8b5-72dbceaa4432" source="b19b5ef9-cc02-4a9c-b3ca-85fa6587f8d1" target="f681a3e2-1f36-4cf1-9032-af28e7f7604c"/>
     <element xsi:type="archimate:AggregationRelationship" id="50024464-8f4e-4c50-aa9d-cb3647fbd9d3" source="f681a3e2-1f36-4cf1-9032-af28e7f7604c" target="92884cb3-9105-417d-a082-9f5652204dcd"/>
@@ -1264,15 +1373,17 @@ disjointWith	…the first class and second class have no members in common	:Man 
     <element xsi:type="archimate:AggregationRelationship" name="owl:disjointWith" id="cfc18ed0-dfeb-4dc1-af76-cefd84bf8bee" source="22cf36e3-7965-4b9a-883c-09e2d7f718ed" target="5eff7a6f-230a-44b9-87fc-27b87e194e0d"/>
     <element xsi:type="archimate:AggregationRelationship" name="owl:disjointWith" id="1e2b0e76-393f-421f-9a0f-728f63dfbde5" source="5eff7a6f-230a-44b9-87fc-27b87e194e0d" target="22cf36e3-7965-4b9a-883c-09e2d7f718ed"/>
     <element xsi:type="archimate:AggregationRelationship" name="owl:equivalentClass" id="391ebd24-866c-452e-9c5e-5fbe019872fc" source="5eff7a6f-230a-44b9-87fc-27b87e194e0d" target="4e31ca50-b8e2-453f-af08-48f1aee133fe"/>
-    <element xsi:type="archimate:AggregationRelationship" name="edm:aggregatedCHO" id="2cc8ab84-5170-4753-8aba-49f497d1d0bf" source="2bf47a43-f35f-484f-a2fe-407e6d0fdb56" target="faafe8fd-a58f-468a-bb6f-53bda8d1fa62"/>
-    <element xsi:type="archimate:AggregationRelationship" name="edm:aggregatedCHO" id="3f482746-bae4-4887-b432-fdd8d1e50447" source="2bf47a43-f35f-484f-a2fe-407e6d0fdb56" target="3ac58f24-f9f7-4c02-8595-c6b44fdc9e18"/>
-    <element xsi:type="archimate:AggregationRelationship" name="edm:aggregatedCHO" id="5cafcc1b-af41-4e2d-af56-24c3bca222f9" source="2bf47a43-f35f-484f-a2fe-407e6d0fdb56" target="d4e28347-29dd-447c-aaac-8a905268753f"/>
     <element xsi:type="archimate:AggregationRelationship" name="rdfs:subClassOf" id="f11cff74-9d3f-40c9-817d-10c670b6f8c3" source="2bf47a43-f35f-484f-a2fe-407e6d0fdb56" target="5eff7a6f-230a-44b9-87fc-27b87e194e0d"/>
     <element xsi:type="archimate:AggregationRelationship" name="rdfs:subClassOf" id="5b7801ca-9326-44a6-bded-0406187e53fd" source="faafe8fd-a58f-468a-bb6f-53bda8d1fa62" target="22cf36e3-7965-4b9a-883c-09e2d7f718ed"/>
     <element xsi:type="archimate:AggregationRelationship" name="rdfs:subClassOf" id="b205932b-cc45-47f1-a575-ac3c9dc2e8b7" source="3ac58f24-f9f7-4c02-8595-c6b44fdc9e18" target="22cf36e3-7965-4b9a-883c-09e2d7f718ed"/>
     <element xsi:type="archimate:AggregationRelationship" name="rdfs:subClassOf" id="efe843dc-16d5-4fea-9ddb-8e1b55125107" source="d4e28347-29dd-447c-aaac-8a905268753f" target="22cf36e3-7965-4b9a-883c-09e2d7f718ed"/>
     <element xsi:type="archimate:AggregationRelationship" name="rdfs:subClassOf" id="f18379f7-180c-4354-9c68-2554b83f55c3" source="aa6e43bd-478b-4f39-b7b8-da282a86f610" target="22cf36e3-7965-4b9a-883c-09e2d7f718ed"/>
-    <element xsi:type="archimate:AggregationRelationship" name="edm:aggregatedCHO" id="8f9c4d8d-14b2-409e-b2f7-586d6b0fca09" source="2bf47a43-f35f-484f-a2fe-407e6d0fdb56" target="aa6e43bd-478b-4f39-b7b8-da282a86f610"/>
+    <element xsi:type="archimate:SpecializationRelationship" name="rdfs:type (a)" id="1932d112-dc0a-4722-a12e-d43a2fe0cf0a" source="113f77d1-583d-43c2-bc0a-ae7587f4f3fe" target="2bf47a43-f35f-484f-a2fe-407e6d0fdb56"/>
+    <element xsi:type="archimate:SpecializationRelationship" name="rdfs:type (a)" id="682e7fe1-97a9-40cc-b1b7-1f248f79198e" source="32c7fce5-baf9-4a7a-b17f-0261b2ef573e" target="faafe8fd-a58f-468a-bb6f-53bda8d1fa62"/>
+    <element xsi:type="archimate:AggregationRelationship" name="edm:aggregatedCHO" id="2ea78f8c-1fdc-472a-a807-b6d7d603067a" source="113f77d1-583d-43c2-bc0a-ae7587f4f3fe" target="32c7fce5-baf9-4a7a-b17f-0261b2ef573e"/>
+    <element xsi:type="archimate:SpecializationRelationship" name="rdfs:type (a)" id="1c2a0cf7-18d5-4d13-a44a-b60b8626dd8e" source="8bb4d2cb-44de-43e3-9c3b-bbe7e8269cf7" target="faafe8fd-a58f-468a-bb6f-53bda8d1fa62"/>
+    <element xsi:type="archimate:AggregationRelationship" id="58d76bba-c684-4d68-8f69-16fbf07ccc51" source="113f77d1-583d-43c2-bc0a-ae7587f4f3fe" target="8bb4d2cb-44de-43e3-9c3b-bbe7e8269cf7"/>
+    <element xsi:type="archimate:AggregationRelationship" name="owl:equivalentClass" id="8e29e1de-344d-4985-9349-698042a4701d" source="3b4aa45f-cff7-49ca-a2b1-a468ffdb37c8" target="e80f443b-0e8e-4bf4-b718-cb2547e9f285"/>
   </folder>
   <folder name="Views" id="1106c770-e13e-4b3d-b75c-8d72c67d5ead" type="diagrams">
     <element xsi:type="archimate:ArchimateDiagramModel" name="Linked Open Data bij het NA" id="61e08e90-ab15-4be6-af9b-6fb00ec2f2dc">
@@ -2544,8 +2655,8 @@ disjointWith	…the first class and second class have no members in common	:Man 
           <bendpoint startY="-57" endX="192" endY="-3"/>
         </sourceConnection>
       </child>
-      <child xsi:type="archimate:DiagramObject" id="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" targetConnections="fc3805cf-21d7-46c7-ab9b-67c16c8f9608 c5829f14-1141-4e3b-9d68-b2259f1c0d12 8e2d15e9-2d13-46e1-a5a0-c99941c9d3f8 84a2121d-36b1-47dd-944b-7afd31aebfe8 eb6b7636-6082-40b8-8f65-d5139d980ac0" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="22cf36e3-7965-4b9a-883c-09e2d7f718ed">
-        <bounds x="1489" y="-432" width="120" height="55"/>
+      <child xsi:type="archimate:DiagramObject" id="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" targetConnections="fc3805cf-21d7-46c7-ab9b-67c16c8f9608 c5829f14-1141-4e3b-9d68-b2259f1c0d12 8e2d15e9-2d13-46e1-a5a0-c99941c9d3f8 84a2121d-36b1-47dd-944b-7afd31aebfe8 eb6b7636-6082-40b8-8f65-d5139d980ac0 119d993a-073e-4c77-9a9b-e17c3e731219" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="22cf36e3-7965-4b9a-883c-09e2d7f718ed">
+        <bounds x="1620" y="-432" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="1ac85af7-72e6-4e75-b847-b54513477bb9" lineColor="#000000" source="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" target="0143d810-acf3-4ce5-ab59-440f55321e82" archimateRelationship="71e5233a-71f3-4c1e-9f32-ba63bb854536"/>
         <sourceConnection xsi:type="archimate:Connection" id="9dea6274-85c5-4c84-9186-825375c8df7f" lineColor="#000000" source="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" target="1d8ed8b3-d60c-4070-8d88-7b72ce5d22de" archimateRelationship="cfc18ed0-dfeb-4dc1-af76-cefd84bf8bee">
           <bendpoint startX="-120" startY="9" endX="132" endY="9"/>
@@ -2555,54 +2666,53 @@ disjointWith	…the first class and second class have no members in common	:Man 
         <bounds x="1320" y="-246" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="0143d810-acf3-4ce5-ab59-440f55321e82" targetConnections="1ac85af7-72e6-4e75-b847-b54513477bb9" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="e5dc33a7-6f8b-45de-8790-da1cc8fdd810">
-        <bounds x="1464" y="-246" width="120" height="55"/>
+        <bounds x="1620" y="-528" width="120" height="55"/>
       </child>
       <child xsi:type="archimate:DiagramObject" id="7c57e546-dc35-480a-804b-74d7ff792c78" targetConnections="9580888e-3b76-4e64-939f-c68a5fa9b47c" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="d27d8572-1a97-4eeb-bc5c-18617a80dee6">
         <bounds x="1188" y="-246" width="120" height="55"/>
       </child>
-      <child xsi:type="archimate:DiagramObject" id="6ad4f09c-2915-4993-b5ea-b6c379c36152" targetConnections="a310a6ec-bf22-4216-968d-3b7babfc6bab" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="faafe8fd-a58f-468a-bb6f-53bda8d1fa62">
-        <bounds x="1680" y="-258" width="120" height="55"/>
+      <child xsi:type="archimate:DiagramObject" id="6ad4f09c-2915-4993-b5ea-b6c379c36152" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="faafe8fd-a58f-468a-bb6f-53bda8d1fa62">
+        <bounds x="1836" y="-258" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="c5829f14-1141-4e3b-9d68-b2259f1c0d12" lineColor="#000000" source="6ad4f09c-2915-4993-b5ea-b6c379c36152" target="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" archimateRelationship="5b7801ca-9326-44a6-bded-0406187e53fd">
           <bendpoint startX="-84" startY="3" endX="107" endY="177"/>
           <bendpoint startX="-84" startY="-177" endX="107" endY="-3"/>
         </sourceConnection>
       </child>
       <child xsi:type="archimate:DiagramObject" id="5954a8af-91e5-4439-9209-3bd878903447" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="2bf47a43-f35f-484f-a2fe-407e6d0fdb56">
-        <bounds x="1824" y="-540" width="120" height="55"/>
-        <sourceConnection xsi:type="archimate:Connection" id="a310a6ec-bf22-4216-968d-3b7babfc6bab" lineColor="#000000" source="5954a8af-91e5-4439-9209-3bd878903447" target="6ad4f09c-2915-4993-b5ea-b6c379c36152" archimateRelationship="2cc8ab84-5170-4753-8aba-49f497d1d0bf">
-          <bendpoint startX="-36" startY="297" endX="84" endY="15"/>
-        </sourceConnection>
-        <sourceConnection xsi:type="archimate:Connection" id="794b6ddc-41ef-4a0a-b4e5-aa08253193bb" lineColor="#000000" source="5954a8af-91e5-4439-9209-3bd878903447" target="5dfbe322-51e5-4369-9f43-618d32408c19" archimateRelationship="3f482746-bae4-4887-b432-fdd8d1e50447">
-          <bendpoint startY="357" endX="120" endY="-3"/>
-        </sourceConnection>
-        <sourceConnection xsi:type="archimate:Connection" id="b26a0310-6588-4737-8a2f-b2cb0a759d9f" lineColor="#000000" source="5954a8af-91e5-4439-9209-3bd878903447" target="a722243d-8648-40d4-add8-9804812788ca" archimateRelationship="5cafcc1b-af41-4e2d-af56-24c3bca222f9">
-          <bendpoint startX="24" startY="429" endX="132" endY="-15"/>
-        </sourceConnection>
+        <bounds x="1439" y="-528" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="9de8e610-81cf-472d-8e0d-a2a0cc942ea1" lineColor="#000000" source="5954a8af-91e5-4439-9209-3bd878903447" target="1d8ed8b3-d60c-4070-8d88-7b72ce5d22de" archimateRelationship="f11cff74-9d3f-40c9-817d-10c670b6f8c3">
-          <bendpoint startX="-504" startY="-15" endX="48" endY="-87"/>
-        </sourceConnection>
-        <sourceConnection xsi:type="archimate:Connection" id="ca3e46f7-1719-4d05-bb19-04c58bfb72f7" lineColor="#000000" source="5954a8af-91e5-4439-9209-3bd878903447" target="c45a3f0b-845f-4de4-b234-e2a8908850fb" archimateRelationship="8f9c4d8d-14b2-409e-b2f7-586d6b0fca09">
-          <bendpoint startX="24" startY="525" endX="168" endY="3"/>
+          <bendpoint startX="-215" startY="-3" endX="36" endY="-99"/>
         </sourceConnection>
       </child>
-      <child xsi:type="archimate:DiagramObject" id="5dfbe322-51e5-4369-9f43-618d32408c19" targetConnections="794b6ddc-41ef-4a0a-b4e5-aa08253193bb" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="3ac58f24-f9f7-4c02-8595-c6b44fdc9e18">
-        <bounds x="1680" y="-180" width="120" height="55"/>
+      <child xsi:type="archimate:DiagramObject" id="5dfbe322-51e5-4369-9f43-618d32408c19" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="3ac58f24-f9f7-4c02-8595-c6b44fdc9e18">
+        <bounds x="1836" y="-180" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="8e2d15e9-2d13-46e1-a5a0-c99941c9d3f8" lineColor="#000000" source="5dfbe322-51e5-4369-9f43-618d32408c19" target="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" archimateRelationship="b205932b-cc45-47f1-a575-ac3c9dc2e8b7">
           <bendpoint startX="-108" startY="9" endX="83" endY="261"/>
           <bendpoint startX="-108" startY="-243" endX="83" endY="9"/>
         </sourceConnection>
       </child>
-      <child xsi:type="archimate:DiagramObject" id="a722243d-8648-40d4-add8-9804812788ca" targetConnections="b26a0310-6588-4737-8a2f-b2cb0a759d9f" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="d4e28347-29dd-447c-aaac-8a905268753f">
-        <bounds x="1680" y="-96" width="120" height="55"/>
+      <child xsi:type="archimate:DiagramObject" id="a722243d-8648-40d4-add8-9804812788ca" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="d4e28347-29dd-447c-aaac-8a905268753f">
+        <bounds x="1836" y="-96" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="84a2121d-36b1-47dd-944b-7afd31aebfe8" lineColor="#000000" source="a722243d-8648-40d4-add8-9804812788ca" target="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" archimateRelationship="efe843dc-16d5-4fea-9ddb-8e1b55125107">
           <bendpoint startX="-144" startY="-3" endX="47" endY="333"/>
         </sourceConnection>
       </child>
-      <child xsi:type="archimate:DiagramObject" id="c45a3f0b-845f-4de4-b234-e2a8908850fb" targetConnections="ca3e46f7-1719-4d05-bb19-04c58bfb72f7" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="aa6e43bd-478b-4f39-b7b8-da282a86f610">
-        <bounds x="1680" y="-18" width="120" height="55"/>
+      <child xsi:type="archimate:DiagramObject" id="c45a3f0b-845f-4de4-b234-e2a8908850fb" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="aa6e43bd-478b-4f39-b7b8-da282a86f610">
+        <bounds x="1836" y="-18" width="120" height="55"/>
         <sourceConnection xsi:type="archimate:Connection" id="eb6b7636-6082-40b8-8f65-d5139d980ac0" lineColor="#000000" source="c45a3f0b-845f-4de4-b234-e2a8908850fb" target="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" archimateRelationship="f18379f7-180c-4354-9c68-2554b83f55c3">
           <bendpoint startX="-156" startY="-3" endX="35" endY="429"/>
         </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="35de988c-951d-4c7e-a904-0cf89d5dc987" targetConnections="5e76daa8-8405-4412-a21f-caf9b49b5244" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="e80f443b-0e8e-4bf4-b718-cb2547e9f285">
+        <bounds x="1596" y="-246" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="119d993a-073e-4c77-9a9b-e17c3e731219" lineColor="#000000" source="35de988c-951d-4c7e-a904-0cf89d5dc987" target="eb8f1fbf-8fb5-4a4b-959e-7478b02a2628" archimateRelationship="57826d71-49cd-4d37-bc96-7e60d7aaafa8"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="5eccb658-97ba-4559-afa7-c6f4e9830402" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="3b4aa45f-cff7-49ca-a2b1-a468ffdb37c8">
+        <bounds x="1572" y="-168" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="5e76daa8-8405-4412-a21f-caf9b49b5244" lineColor="#000000" source="5eccb658-97ba-4559-afa7-c6f4e9830402" target="35de988c-951d-4c7e-a904-0cf89d5dc987" archimateRelationship="8e29e1de-344d-4985-9349-698042a4701d"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="6685b708-835a-4c72-a5e1-5858155c8e73" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="7eb0d744-e8e7-457a-b658-6e47f5a97bdd">
+        <bounds x="886" y="-262" width="120" height="55"/>
       </child>
     </element>
     <element xsi:type="archimate:ArchimateDiagramModel" name="Webcomponent ZVT" id="8093f8c8-1bdc-4352-8e14-d0db35bb7868" viewpoint="layered">
@@ -2646,6 +2756,30 @@ disjointWith	…the first class and second class have no members in common	:Man 
       <child xsi:type="archimate:DiagramObject" id="c700ac98-f832-4495-9afc-59ae2a42da3e" targetConnections="46c70385-0663-4c51-819e-f1cef1ee5025 13492a54-d156-42f1-b6bf-59a69ca94dc7" lineColor="#5c5c5c" fillColor="#000000" archimateElement="5601950e-a4e8-4246-9bc3-8478c32077ac">
         <bounds x="544" y="108" width="15" height="15"/>
         <sourceConnection xsi:type="archimate:Connection" id="e34c9c45-7b98-408e-900b-0312ac5adc50" lineColor="#000000" source="c700ac98-f832-4495-9afc-59ae2a42da3e" target="13e0a0df-a8ef-4650-b908-7a37f237345d" archimateRelationship="e55d2a50-887f-4f9b-b885-723b080c420c"/>
+      </child>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="NA Fotocollectie Dienst voor Legercontacten Indonesië" id="367592a8-ff61-4b76-8135-9361ee4d80de">
+      <child xsi:type="archimate:DiagramObject" id="39a5792c-5f60-40e2-8ee7-92ee97631d42" targetConnections="12f8f06c-24a1-4b02-94ac-b3c17a1144c3 2916a876-b624-4ba8-84a0-86c466e20a83" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="faafe8fd-a58f-468a-bb6f-53bda8d1fa62">
+        <bounds x="240" y="204" width="120" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="92e0930a-5164-4104-a521-ee170ab656a4" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="32c7fce5-baf9-4a7a-b17f-0261b2ef573e">
+        <bounds x="240" y="327" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="12f8f06c-24a1-4b02-94ac-b3c17a1144c3" lineColor="#000000" source="92e0930a-5164-4104-a521-ee170ab656a4" target="39a5792c-5f60-40e2-8ee7-92ee97631d42" archimateRelationship="682e7fe1-97a9-40cc-b1b7-1f248f79198e"/>
+      </child>
+      <child xsi:type="archimate:Note" id="fab79e99-6d42-4375-9f83-d3dcf438221b" lineColor="#5c5c5c" textAlignment="1" fillColor="#ffffff">
+        <bounds x="768" y="276" width="337" height="157"/>
+        <content>namespace na fotocollectie Dienst voor Legercontacten: dvl
+namespace na beeldcollectie ALLE records: na_beeld</content>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="66a44004-fea5-419f-9df0-25188983da8f" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="8bb4d2cb-44de-43e3-9c3b-bbe7e8269cf7">
+        <bounds x="72" y="327" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="2916a876-b624-4ba8-84a0-86c466e20a83" lineColor="#000000" source="66a44004-fea5-419f-9df0-25188983da8f" target="39a5792c-5f60-40e2-8ee7-92ee97631d42" archimateRelationship="1c2a0cf7-18d5-4d13-a44a-b60b8626dd8e"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="4577c958-7033-4b20-8510-50f9098a8c5b" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="f1eb36b7-3e84-4e4a-801e-466bd1de5d8d">
+        <bounds x="564" y="180" width="120" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="f9042e84-4c40-4a51-956e-3baf05818efd" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="84f3fe0a-6acf-4925-b003-dbbf4195c9b5">
+        <bounds x="780" y="150" width="120" height="55"/>
       </child>
     </element>
   </folder>
