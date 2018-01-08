@@ -766,7 +766,11 @@ owl:ObjectProperty rdf:type owl:Class ;
 disjointWith	…the first class and second class have no members in common	:Man    owl:disjointWith    :Woman</documentation>
           </element>
           <element xsi:type="archimate:DataObject" name="owl:equivalentClass" id="7eb0d744-e8e7-457a-b658-6e47f5a97bdd">
-            <documentation>###  http://www.w3.org/2002/07/owl#equivalentClass
+            <documentation>http://www.w3.org/2002/07/owl#equivalentClass
+
+https://www.w3.org/TR/owl-ref/#equivalentClass-def
+
+
 owl:equivalentClass rdf:type owl:ObjectProperty ;
                     rdfs:domain rdfs:Class ;
                     rdfs:range rdfs:Class ;
@@ -1063,8 +1067,8 @@ edm:hasView https://files.nationaalarchief.nl/photo1.jpg
 hasRights downloadonly
 dctype: &quot;zwartwit&quot;</documentation>
         </element>
-        <element xsi:type="archimate:DataObject" name="na_beeld:Record01" id="113f77d1-583d-43c2-bc0a-ae7587f4f3fe">
-          <documentation>na_beeld:Record01 a def:GraphicalRecord;
+        <element xsi:type="archimate:DataObject" name="na_beeld:PhotoRecord01" id="113f77d1-583d-43c2-bc0a-ae7587f4f3fe">
+          <documentation>na_beeld:PhotoRecord01 a def:GraphicalRecord;
 edm:aggregatedCHO  na_beeld:Photo1;
 //dct:creator [a def:PersonReference ;
 //	def:fullNameDesignation &quot;Willem vd Poll&quot;^^xsd:string] ;
@@ -1196,7 +1200,7 @@ dcat:record rdf:type owl:ObjectProperty ;
             rdfs:label &quot;record&quot;@en
 </documentation>
     </element>
-    <element xsi:type="archimate:DataObject" name="na_persoon:Person1" id="39efc361-5543-4397-b776-22885f7574a4">
+    <element xsi:type="archimate:DataObject" name="na_persoon:Willem_vd_Poll" id="39efc361-5543-4397-b776-22885f7574a4">
       <documentation>###  http://www.w3.org/2000/01/rdf-schema#Resource
 rdfs:Resource rdf:type owl:Class ;
               rdfs:comment &quot;The class resource, everything.&quot; ;
@@ -1897,7 +1901,7 @@ ds:FotoCollectieRecord-DVLCI is optioneel, alle datasets zouden ook onder na_col
           <sourceConnection xsi:type="archimate:Connection" id="7c676499-9aef-474a-a2b5-49ce6557d72c" lineColor="#000000" source="c113aa45-f096-4a8f-9d8b-e57436eead44" target="880307c9-1ab5-4240-a661-07d4be947274" archimateRelationship="0ac8a455-edf3-45f1-913b-413852f32e3e"/>
         </child>
         <child xsi:type="archimate:DiagramObject" id="52968592-bb8a-422f-9266-a2a27cb0ed45" lineColor="#5c5c5c" fillColor="#b5ffff" archimateElement="39efc361-5543-4397-b776-22885f7574a4">
-          <bounds x="588" y="390" width="120" height="55"/>
+          <bounds x="396" y="447" width="120" height="55"/>
         </child>
         <child xsi:type="archimate:DiagramObject" id="8dcf4ae1-d7c9-4b47-bb07-8f05396773cc" lineColor="#5c5c5c" fillColor="#7980ff" archimateElement="113f77d1-583d-43c2-bc0a-ae7587f4f3fe">
           <bounds x="144" y="360" width="120" height="55"/>
