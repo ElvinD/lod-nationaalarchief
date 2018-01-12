@@ -472,6 +472,16 @@ dcat:themeTaxonomy rdf:type owl:ObjectProperty ;
                               &quot;theme taxonomy&quot;@en ,
 </documentation>
           </element>
+          <element xsi:type="archimate:DataObject" name="dcat:record" id="5b2f2e6e-4eed-4bc3-8020-3c0a657e17e1">
+            <documentation>###  http://www.w3.org/ns/dcat#record
+dcat:record rdf:type owl:ObjectProperty ;
+            rdfs:domain dcat:Catalog ;
+            rdfs:range dcat:CatalogRecord ;
+            rdfs:comment &quot;Links a catalog to its records.&quot;@en ,
+            rdfs:isDefinedBy &lt;http://www.w3.org/TR/vocab-dcat/> ;
+            rdfs:label &quot;record&quot;@en
+</documentation>
+          </element>
         </folder>
         <folder name="bgn (BiographyNet)" id="d28d0a6c-fd11-465b-8645-4b29ba9fe231">
           <element xsi:type="archimate:DataObject" name="bgn:Person" id="3b4aa45f-cff7-49ca-a2b1-a468ffdb37c8">
@@ -766,17 +776,69 @@ owl:ObjectProperty rdf:type owl:Class ;
 disjointWith	…the first class and second class have no members in common	:Man    owl:disjointWith    :Woman</documentation>
           </element>
           <element xsi:type="archimate:DataObject" name="owl:equivalentClass" id="7eb0d744-e8e7-457a-b658-6e47f5a97bdd">
-            <documentation>http://www.w3.org/2002/07/owl#equivalentClass
-
-https://www.w3.org/TR/owl-ref/#equivalentClass-def
-
-
-owl:equivalentClass rdf:type owl:ObjectProperty ;
+            <documentation>owl:equivalentClass rdf:type owl:ObjectProperty ;
                     rdfs:domain rdfs:Class ;
                     rdfs:range rdfs:Class ;
                     rdfs:comment &quot;The property that determines that two given classes are equivalent, and that is used to specify datatype definitions.&quot; ;
                     rdfs:isDefinedBy owl: ;
-                    rdfs:label &quot;equivalentClass&quot; .</documentation>
+                    rdfs:label &quot;equivalentClass&quot; .
+
+http://www.w3.org/2002/07/owl#equivalentClass
+https://www.w3.org/TR/owl-ref/#equivalentClass-def
+
+3.2.2 owl:equivalentClass
+
+AXIOM SCHEMA: class description owl:equivalentClass class description
+
+A class axiom may contain (multiple) owl:equivalentClass statements. owl:equivalentClass is a built-in property that links a class description to another class description. The meaning of such a class axiom is that the two class descriptions involved have the same class extension (i.e., both class extensions contain exactly the same set of individuals).
+
+In its simplest form, an equivalentClass axiom states the equivalence (in terms of their class extension) of two named classes. An example:
+
+&lt;owl:Class rdf:about=&quot;#US_President&quot;>
+  &lt;equivalentClass rdf:resource=&quot;#PrincipalResidentOfWhiteHouse&quot;/>
+&lt;/owl:Class>
+NOTE: The use of owl:equivalentClass does not imply class equality. Class equality means that the classes have the same intensional meaning (denote the same concept). In the example above, the concept of &quot;President of the US&quot; is related to, but not equal to the concept of the principal resident of a certain estate. Real class equality can only be expressed with the owl:sameAs construct. As this requires treating classes as individuals, class equality can only be expressed in OWL Full.
+
+Axioms with owl:equivalentClass can also be used to define an enumerated class by linking a type 1 class description (a class identifier) to a type 2 class description (an enumeration). An example:
+
+&lt;owl:Class rdf:ID=&quot;DaPonteOperaOfMozart&quot;>
+  &lt;owl:equivalentClass>
+    &lt;owl:Class>
+      &lt;owl:oneOf rdf:parseType=&quot;Collection&quot;>
+        &lt;Opera rdf:about=&quot;#Nozze_di_Figaro&quot;/>
+        &lt;Opera rdf:about=&quot;#Don_Giovanni&quot;/>
+        &lt;Opera rdf:about=&quot;#Cosi_fan_tutte&quot;/>
+      &lt;/owl:oneOf>
+    &lt;/owl:Class>
+  &lt;/owl:equivalentClass>
+&lt;/owl:Class>
+This class axiom defines the class of operas that together represent the &quot;Da Ponte operas of Mozart&quot; (a popular subject in musicology). By using the equivalentClass construct we can state necessary and sufficient conditions for class membership, in this case consisting of an enumeration of three individuals, no less, no more.
+
+NOTE: OWL DL does not put any constraints on the types of class descriptions that can be used as subject and object of an owl:equivalentClass statement. In OWL Lite the subject must be a class name and the object must be either a class name or a property restriction.
+
+NOTE: Although in principle different types of class descriptions are allowed as the subject of an equivalentClass statement, in practice it usually is some class identifier. This is also true for the examples in this section.
+
+It is possible to have multiple equivalentClass axioms about the same class. However, this requires care. Both axioms must lead to the same outcome, i.e. exactly the same class extension. For example, an alternate equivalentClass axiom for Mozart's &quot;Da Ponte operas&quot; could be the following one:
+
+&lt;owl:Class rdf:about=&quot;#DaPonteOperaOfMozart&quot;>
+  &lt;owl:equivalentClass>
+    &lt;owl:Class>
+      &lt;owl:intersectionOf rdf:parseType=&quot;Collection&quot;>
+        &lt;owl:Restriction>
+          &lt;owl:onProperty rdf:resource=&quot;#hasComposer&quot;/>
+          &lt;owl:hasValue rdf:resource=&quot;#Wolfgang_Amadeus_Mozart&quot;/>
+        &lt;/owl:Restriction>
+        &lt;owl:Restriction>
+          &lt;owl:onProperty rdf:resource=&quot;#hasLibrettist&quot;/>
+          &lt;owl:hasValue rdf:resource=&quot;#Lorenzo_Da_Ponte&quot;/>
+        &lt;/owl:Restriction>
+      &lt;/owl:intersectionOf>
+    &lt;/owl:Class>
+  &lt;/owl:equivalentClass>
+&lt;/owl:Class>
+This states that the class extension of the Da Ponte operas of Mozart corresponds exactly to those operas which are composed by Mozart and for which the libretto is written by Da Ponte (note: intersection = &quot;and&quot;). This axiom indeed defines a class with exactly the same instances as the previous axiom.
+
+NOTE: If we wanted to &quot;upgrade&quot; an axiom of the form &quot;A subClassOf B&quot; to &quot;A equivalentClass B&quot; (meaning that the class extension of A is not just any subset, but in fact the same set as the class extension of B), we could add a second subClassOf axiom of the form (B subClassOf A), which by definition makes the two class extensions equivalent (and thus has the same meaning as &quot;A equivalentClass B&quot;). Such subClassOf &quot;cycles&quot; are explicitly allowed. As OWL is usable in a distributed environment, this can be a useful feature.</documentation>
           </element>
           <element xsi:type="archimate:DataObject" name="owl:Thing" id="9d87336b-b21b-45d8-a69b-9492d087f9a9">
             <documentation>###  http://www.w3.org/2002/07/owl#Thing
@@ -1031,6 +1093,32 @@ The void:uriSpace property can be used to state that all entity URIs in a datase
 Note: The value of void:uriSpace is an RDF literal. That is, in Turtle it is written like &quot;http://dbpedia.org/resource/&quot;, not &lt;http://dbpedia.org/resource/>.</documentation>
           </element>
         </folder>
+        <folder name="na (Nationaal Archief)" id="2fd20e51-95e1-449d-a5cd-b5d93573e160">
+          <element xsi:type="archimate:DataObject" name="na_collecties:FotoCollectie" id="74599d56-79b2-4f2b-9c8a-cea0466e9d14">
+            <documentation>na_collecties:FotoCollectie a dcat:Catalog;
+rdfs:label &quot;Catalogus van de fotocollecties van het NA&quot;^^xsd:string ;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="na_persoon:Willem_vd_Poll" id="39efc361-5543-4397-b776-22885f7574a4">
+            <documentation>###  http://www.w3.org/2000/01/rdf-schema#Resource
+rdfs:Resource rdf:type owl:Class ;
+              rdfs:comment &quot;The class resource, everything.&quot; ;
+              rdfs:isDefinedBy &lt;http://www.w3.org/2000/01/rdf-schema#> ;
+              rdfs:label &quot;Resource&quot; .</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="na_beeld:Photo1" id="32c7fce5-baf9-4a7a-b17f-0261b2ef573e">
+            <documentation>na_beeld:Photo1 a def:Photograph;
+edm:hasView https://files.nationaalarchief.nl/photo1.jpg
+hasRights downloadonly
+dctype: &quot;zwartwit&quot;</documentation>
+          </element>
+          <element xsi:type="archimate:DataObject" name="na_beeld:PhotoRecord01" id="113f77d1-583d-43c2-bc0a-ae7587f4f3fe">
+            <documentation>na_beeld:PhotoRecord01 a def:GraphicalRecord;
+edm:aggregatedCHO  na_beeld:Photo1;
+//dct:creator [a def:PersonReference ;
+//	def:fullNameDesignation &quot;Willem vd Poll&quot;^^xsd:string] ;
+dct:creator &quot;Willem vd Poll&quot;^^xsd:string ;</documentation>
+          </element>
+        </folder>
         <element xsi:type="archimate:DataObject" name="url: .../sparql" id="c96899c4-843b-4d8d-a6bf-d433b9a27c0d">
           <documentation>http://gaf.nationaalarchief.nl/sparql/</documentation>
           <property key="data" value="&lt;http://na.metamatter.nl/sparql>;"/>
@@ -1057,23 +1145,6 @@ Note: The value of void:uriSpace is an RDF literal. That is, in Turtle it is wri
           <documentation>&quot;Commissaris van de Monstering&quot;^^xsd:string ;</documentation>
         </element>
         <element xsi:type="archimate:DataObject" name="Linked Metada" id="bf3f377c-fa5f-4d00-99b3-bafafc8bf786"/>
-        <element xsi:type="archimate:DataObject" name="dvl:Photo1" id="8bb4d2cb-44de-43e3-9c3b-bbe7e8269cf7">
-          <documentation>dvl:Photo1 a def:Photograph;
-edm:hasView </documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="na_beeld:Photo1" id="32c7fce5-baf9-4a7a-b17f-0261b2ef573e">
-          <documentation>na_beeld:Photo1 a def:Photograph;
-edm:hasView https://files.nationaalarchief.nl/photo1.jpg
-hasRights downloadonly
-dctype: &quot;zwartwit&quot;</documentation>
-        </element>
-        <element xsi:type="archimate:DataObject" name="na_beeld:PhotoRecord01" id="113f77d1-583d-43c2-bc0a-ae7587f4f3fe">
-          <documentation>na_beeld:PhotoRecord01 a def:GraphicalRecord;
-edm:aggregatedCHO  na_beeld:Photo1;
-//dct:creator [a def:PersonReference ;
-//	def:fullNameDesignation &quot;Willem vd Poll&quot;^^xsd:string] ;
-dct:creator &quot;Willem vd Poll&quot;^^xsd:string ;</documentation>
-        </element>
       </folder>
       <folder name="Anders" id="3b795398-588e-4ecc-9da6-66157e8f23a7">
         <element xsi:type="archimate:DataObject" name="Beeldcollecties" id="49a6616d-37c0-471b-bc41-a40e77d8440b"/>
@@ -1186,27 +1257,6 @@ https://github.com/OpenRefine/OpenRefine/wiki</documentation>
       <element xsi:type="archimate:ApplicationProcess" name="Zoeken Vinden Tonen Resultaten in beeldcollecties" id="fa1b3c23-6260-4f4c-8152-0a4f211c52cb"/>
       <element xsi:type="archimate:ApplicationProcess" name="ZoekenVindenTonen in archieven" id="ea1c1b8d-5b9f-41e5-9ab2-db745b8bfffd"/>
     </folder>
-    <element xsi:type="archimate:DataObject" name="na_collecties:FotoCollectie" id="74599d56-79b2-4f2b-9c8a-cea0466e9d14">
-      <documentation>na_collecties:FotoCollectie a dcat:Catalog;
-rdfs:label &quot;Catalogus van de fotocollecties van het NA&quot;^^xsd:string ;</documentation>
-    </element>
-    <element xsi:type="archimate:DataObject" name="dcat:record" id="5b2f2e6e-4eed-4bc3-8020-3c0a657e17e1">
-      <documentation>###  http://www.w3.org/ns/dcat#record
-dcat:record rdf:type owl:ObjectProperty ;
-            rdfs:domain dcat:Catalog ;
-            rdfs:range dcat:CatalogRecord ;
-            rdfs:comment &quot;Links a catalog to its records.&quot;@en ,
-            rdfs:isDefinedBy &lt;http://www.w3.org/TR/vocab-dcat/> ;
-            rdfs:label &quot;record&quot;@en
-</documentation>
-    </element>
-    <element xsi:type="archimate:DataObject" name="na_persoon:Willem_vd_Poll" id="39efc361-5543-4397-b776-22885f7574a4">
-      <documentation>###  http://www.w3.org/2000/01/rdf-schema#Resource
-rdfs:Resource rdf:type owl:Class ;
-              rdfs:comment &quot;The class resource, everything.&quot; ;
-              rdfs:isDefinedBy &lt;http://www.w3.org/2000/01/rdf-schema#> ;
-              rdfs:label &quot;Resource&quot; .</documentation>
-    </element>
   </folder>
   <folder name="Technology &amp; Physical" id="61545d0e-7d10-4010-95d7-8dfca0130293" type="technology">
     <element xsi:type="archimate:Node" name="Hub3" id="2c87ad78-9c86-423b-9db1-14006d8a7ee6"/>
@@ -1574,8 +1624,6 @@ disjointWith	…the first class and second class have no members in common	:Man 
     <element xsi:type="archimate:SpecializationRelationship" name="rdfs:type (a)" id="1932d112-dc0a-4722-a12e-d43a2fe0cf0a" source="113f77d1-583d-43c2-bc0a-ae7587f4f3fe" target="2bf47a43-f35f-484f-a2fe-407e6d0fdb56"/>
     <element xsi:type="archimate:SpecializationRelationship" name="rdfs:type (a)" id="682e7fe1-97a9-40cc-b1b7-1f248f79198e" source="32c7fce5-baf9-4a7a-b17f-0261b2ef573e" target="faafe8fd-a58f-468a-bb6f-53bda8d1fa62"/>
     <element xsi:type="archimate:AggregationRelationship" name="edm:aggregatedCHO" id="2ea78f8c-1fdc-472a-a807-b6d7d603067a" source="113f77d1-583d-43c2-bc0a-ae7587f4f3fe" target="32c7fce5-baf9-4a7a-b17f-0261b2ef573e"/>
-    <element xsi:type="archimate:SpecializationRelationship" name="rdfs:type (a)" id="1c2a0cf7-18d5-4d13-a44a-b60b8626dd8e" source="8bb4d2cb-44de-43e3-9c3b-bbe7e8269cf7" target="faafe8fd-a58f-468a-bb6f-53bda8d1fa62"/>
-    <element xsi:type="archimate:AggregationRelationship" id="58d76bba-c684-4d68-8f69-16fbf07ccc51" source="113f77d1-583d-43c2-bc0a-ae7587f4f3fe" target="8bb4d2cb-44de-43e3-9c3b-bbe7e8269cf7"/>
     <element xsi:type="archimate:AggregationRelationship" name="owl:equivalentClass" id="8e29e1de-344d-4985-9349-698042a4701d" source="3b4aa45f-cff7-49ca-a2b1-a468ffdb37c8" target="e80f443b-0e8e-4bf4-b718-cb2547e9f285"/>
     <element xsi:type="archimate:SpecializationRelationship" name="rdf:type (a)" id="bd43a69e-dd99-4e8d-b91d-df77218cbf87" source="84f3fe0a-6acf-4925-b003-dbbf4195c9b5" target="b64a1f66-9f6a-46fd-a0b6-00d137f06d02"/>
     <element xsi:type="archimate:AggregationRelationship" name="foaf:primaryTopic" id="8c466656-13d0-4a80-a05a-c65de6fbe98c" source="84f3fe0a-6acf-4925-b003-dbbf4195c9b5" target="07d5564d-cc10-4773-8e9f-5351cf643d24"/>
