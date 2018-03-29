@@ -1,2 +1,0 @@
-#SIPCreator - facts
-pockets=true
